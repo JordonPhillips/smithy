@@ -1,0 +1,324 @@
+{
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.forecastquery#AmazonForecastRuntime": {
+            "operations": [
+                {
+                    "target": "com.amazonaws.forecastquery#QueryForecast"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "arnNamespace": "forecast",
+                    "cloudFormationName": "Forecastquery",
+                    "cloudTrailEventSource": "queryservice.seer.amazonaws.com",
+                    "sdkId": "forecastquery"
+                },
+                "aws.auth#sigv4": {
+                    "name": "forecast"
+                },
+                "aws.protocols#awsJson1_1": {},
+                "smithy.api#documentation": "<p>Provides APIs for creating and managing Amazon Forecast resources.</p>",
+                "smithy.api#title": "Amazon Forecast Query Service"
+            },
+            "type": "service",
+            "version": "2018-06-26"
+        },
+        "com.amazonaws.forecastquery#Arn": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256,
+                    "min": 0
+                },
+                "smithy.api#pattern": "arn:([a-z\\d-]+):forecast:.*:.*:.+"
+            },
+            "type": "string"
+        },
+        "com.amazonaws.forecastquery#AttributeName": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256,
+                    "min": 0
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9\\_\\-]+$"
+            },
+            "type": "string"
+        },
+        "com.amazonaws.forecastquery#AttributeValue": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256,
+                    "min": 0
+                }
+            },
+            "type": "string"
+        },
+        "com.amazonaws.forecastquery#DataPoint": {
+            "members": {
+                "Timestamp": {
+                    "target": "com.amazonaws.forecastquery#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp of the specific forecast.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.forecastquery#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forecast value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The forecast value for a specific date. Part of the <a>Forecast</a>\n      object.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.forecastquery#DateTime": {
+            "type": "string"
+        },
+        "com.amazonaws.forecastquery#Double": {
+            "traits": {
+                "smithy.api#box": {}
+            },
+            "type": "double"
+        },
+        "com.amazonaws.forecastquery#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.forecastquery#Filters": {
+            "key": {
+                "target": "com.amazonaws.forecastquery#AttributeName"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 50,
+                    "min": 1
+                }
+            },
+            "type": "map",
+            "value": {
+                "target": "com.amazonaws.forecastquery#AttributeValue"
+            }
+        },
+        "com.amazonaws.forecastquery#Forecast": {
+            "members": {
+                "Predictions": {
+                    "target": "com.amazonaws.forecastquery#Predictions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forecast.</p>\n         <p>The <i>string</i> of the string-to-array map is one of the following\n      values:</p>\n         <ul>\n            <li>\n               <p>p10</p>\n            </li>\n            <li>\n               <p>p50</p>\n            </li>\n            <li>\n               <p>p90</p>\n            </li>\n         </ul>\n         <p>The default setting is <code>[\"0.1\", \"0.5\", \"0.9\"]</code>. Use the optional <code>ForecastTypes</code> parameter of the <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/API_CreateForecast.html\">CreateForecast</a> operation to change the values. The values will vary depending on how this is set, with a minimum of <code>1</code> and a maximum of <code>5.</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about a forecast. Returned as part of the <a>QueryForecast</a> response.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.forecastquery#InvalidInputException": {
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.forecastquery#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The value is invalid or is too long.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.forecastquery#InvalidNextTokenException": {
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.forecastquery#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The token is not valid. Tokens expire after 24 hours.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.forecastquery#LimitExceededException": {
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.forecastquery#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The limit on the number of requests per second has been exceeded.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.forecastquery#NextToken": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 3000,
+                    "min": 1
+                }
+            },
+            "type": "string"
+        },
+        "com.amazonaws.forecastquery#Predictions": {
+            "key": {
+                "target": "com.amazonaws.forecastquery#Statistic"
+            },
+            "type": "map",
+            "value": {
+                "target": "com.amazonaws.forecastquery#TimeSeries"
+            }
+        },
+        "com.amazonaws.forecastquery#QueryForecast": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.forecastquery#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.forecastquery#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.forecastquery#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.forecastquery#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.forecastquery#ResourceNotFoundException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.forecastquery#QueryForecastRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.forecastquery#QueryForecastResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves a forecast for a single item, filtered by the supplied criteria.</p>\n         <p>The criteria is a key-value pair. The key is either <code>item_id</code> (or the\n      equivalent non-timestamp, non-target field) from the <code>TARGET_TIME_SERIES</code> dataset,\n      or one of the forecast dimensions specified as part of the <code>FeaturizationConfig</code>\n      object.</p>\n         <p>By default, <code>QueryForecast</code> returns the complete date range for the filtered\n      forecast. You can request a specific date range.</p>\n         <p>To get the full forecast, use the <a href=\"https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html\">CreateForecastExportJob</a> operation.</p>\n         <note>\n            <p>The forecasts generated by Amazon Forecast are in the same timezone as the dataset that was\n        used to create the predictor.</p>\n         </note>"
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.forecastquery#QueryForecastRequest": {
+            "members": {
+                "EndDate": {
+                    "target": "com.amazonaws.forecastquery#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end date for the forecast. Specify the date using this format: yyyy-MM-dd'T'HH:mm:ss\n      (ISO 8601 format). For example, 2015-01-01T20:00:00. </p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.forecastquery#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filtering criteria to apply when retrieving the forecast. For example, to get the\n      forecast for <code>client_21</code> in the electricity usage dataset, specify the\n      following:</p>\n         <p>\n            <code>{\"item_id\" : \"client_21\"}</code>\n         </p>\n      \n      \n         <p>To get the full forecast, use the <a href=\"https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateForecastExportJob.html\">CreateForecastExportJob</a> operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ForecastArn": {
+                    "target": "com.amazonaws.forecastquery#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the forecast to query.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.forecastquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result of the previous request was truncated, the response includes a\n        <code>NextToken</code>. To retrieve the next set of results, use the token in the next\n      request. Tokens expire after 24 hours.</p>"
+                    }
+                },
+                "StartDate": {
+                    "target": "com.amazonaws.forecastquery#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start date for the forecast. Specify the date using this format: yyyy-MM-dd'T'HH:mm:ss\n      (ISO 8601 format). For example, 2015-01-01T08:00:00.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.forecastquery#QueryForecastResponse": {
+            "members": {
+                "Forecast": {
+                    "target": "com.amazonaws.forecastquery#Forecast",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The forecast.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.forecastquery#ResourceInUseException": {
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.forecastquery#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The specified resource is in use.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.forecastquery#ResourceNotFoundException": {
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.forecastquery#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>We can't find that resource. Check the information that you've provided and try\n      again.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.forecastquery#Statistic": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 4,
+                    "min": 0
+                }
+            },
+            "type": "string"
+        },
+        "com.amazonaws.forecastquery#TimeSeries": {
+            "member": {
+                "target": "com.amazonaws.forecastquery#DataPoint"
+            },
+            "type": "list"
+        },
+        "com.amazonaws.forecastquery#Timestamp": {
+            "type": "string"
+        }
+    },
+    "smithy": "1.0"
+}

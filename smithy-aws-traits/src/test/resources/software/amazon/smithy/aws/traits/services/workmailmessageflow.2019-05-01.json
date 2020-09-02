@@ -1,0 +1,136 @@
+{
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.workmailmessageflow#GetRawMessageContent": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.workmailmessageflow#ResourceNotFoundException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.workmailmessageflow#GetRawMessageContentRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.workmailmessageflow#GetRawMessageContentResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the raw content of an in-transit email message, in MIME format. </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/messages/{messageId}"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.workmailmessageflow#GetRawMessageContentRequest": {
+            "members": {
+                "messageId": {
+                    "target": "com.amazonaws.workmailmessageflow#messageIdType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the email message to retrieve.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.workmailmessageflow#GetRawMessageContentResponse": {
+            "members": {
+                "messageContent": {
+                    "target": "com.amazonaws.workmailmessageflow#messageContentBlob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The raw content of the email message, in MIME format.</p>",
+                        "smithy.api#httpPayload": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.workmailmessageflow#GiraffeMessageInTransitService": {
+            "operations": [
+                {
+                    "target": "com.amazonaws.workmailmessageflow#GetRawMessageContent"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "arnNamespace": "workmailmessageflow",
+                    "cloudFormationName": "WorkMailMessageFlow",
+                    "cloudTrailEventSource": "service.workmailmessageflow.amazonaws.com",
+                    "sdkId": "WorkMailMessageFlow"
+                },
+                "aws.auth#sigv4": {
+                    "name": "workmailmessageflow"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The WorkMail Message Flow API provides access to email messages as they are\n      being\n      sent and received by\n      a\n      WorkMail organization.</p>",
+                "smithy.api#title": "Amazon WorkMail Message Flow"
+            },
+            "type": "service",
+            "version": "2019-05-01"
+        },
+        "com.amazonaws.workmailmessageflow#ResourceNotFoundException": {
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.workmailmessageflow#errorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested email message is not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.workmailmessageflow#errorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.workmailmessageflow#messageContentBlob": {
+            "traits": {
+                "smithy.api#streaming": {}
+            },
+            "type": "blob"
+        },
+        "com.amazonaws.workmailmessageflow#messageIdType": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 120,
+                    "min": 1
+                },
+                "smithy.api#pattern": "[a-z0-9\\-]*"
+            },
+            "type": "string"
+        }
+    },
+    "smithy": "1.0"
+}
