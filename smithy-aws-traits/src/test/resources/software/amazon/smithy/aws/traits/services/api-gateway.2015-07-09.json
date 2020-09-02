@@ -4772,6 +4772,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/apikeys"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -5056,6 +5062,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/domainnames/{domainName}/basepathmappings"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -5182,6 +5194,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/clientcertificates"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -5321,6 +5339,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/restapis/{restApiId}/deployments"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -5748,6 +5772,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/domainnames"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -6471,6 +6501,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/restapis/{restApiId}/models"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -6752,6 +6788,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/restapis/{restApiId}/resources"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -6885,6 +6927,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/restapis"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -7338,6 +7386,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/usageplans/{usagePlanId}/usage"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -7467,6 +7521,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/usageplans/{usagePlanId}/keys"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -7578,6 +7638,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/usageplans"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"
@@ -7768,6 +7834,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/vpclinks"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "position",
+                    "items": "items",
+                    "outputToken": "position",
+                    "pageSize": "limit"
                 }
             },
             "type": "operation"

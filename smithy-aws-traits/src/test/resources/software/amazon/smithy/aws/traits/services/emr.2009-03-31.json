@@ -1521,6 +1521,49 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.emr#DescribeNotebookExecution": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.emr#DescribeNotebookExecutionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#DescribeNotebookExecutionOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides details of a notebook execution.</p>"
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.emr#DescribeNotebookExecutionInput": {
+            "members": {
+                "NotebookExecutionId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the notebook execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.emr#DescribeNotebookExecutionOutput": {
+            "members": {
+                "NotebookExecution": {
+                    "target": "com.amazonaws.emr#NotebookExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Properties of the notebook execution.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
         "com.amazonaws.emr#DescribeSecurityConfiguration": {
             "errors": [
                 {
@@ -1847,6 +1890,9 @@
                     "target": "com.amazonaws.emr#DescribeJobFlows"
                 },
                 {
+                    "target": "com.amazonaws.emr#DescribeNotebookExecution"
+                },
+                {
                     "target": "com.amazonaws.emr#DescribeSecurityConfiguration"
                 },
                 {
@@ -1872,6 +1918,9 @@
                 },
                 {
                     "target": "com.amazonaws.emr#ListInstances"
+                },
+                {
+                    "target": "com.amazonaws.emr#ListNotebookExecutions"
                 },
                 {
                     "target": "com.amazonaws.emr#ListSecurityConfigurations"
@@ -1916,6 +1965,12 @@
                     "target": "com.amazonaws.emr#SetVisibleToAllUsers"
                 },
                 {
+                    "target": "com.amazonaws.emr#StartNotebookExecution"
+                },
+                {
+                    "target": "com.amazonaws.emr#StopNotebookExecution"
+                },
+                {
                     "target": "com.amazonaws.emr#TerminateJobFlows"
                 }
             ],
@@ -1949,6 +2004,44 @@
             "type": "string"
         },
         "com.amazonaws.emr#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.emr#ExecutionEngineConfig": {
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the execution engine. For an EMR cluster, this is the cluster ID.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MasterInstanceSecurityGroupId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional unique ID of an EC2 security group to associate with the master instance of the EMR cluster for this notebook execution. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html\">Specifying EC2 Security Groups for EMR Notebooks</a> in the <i>EMR Management Guide</i>.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.emr#ExecutionEngineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of execution engine. A value of <code>EMR</code> specifies an EMR cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the execution engine (cluster) to run the notebook and perform the notebook execution, for example, an EMR cluster.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.emr#ExecutionEngineType": {
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "EMR",
+                        "value": "EMR"
+                    }
+                ]
+            },
             "type": "string"
         },
         "com.amazonaws.emr#FailureDetails": {
@@ -4237,6 +4330,83 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.emr#ListNotebookExecutions": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.emr#ListNotebookExecutionsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#ListNotebookExecutionsOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summaries of all notebook executions. You can filter the list based on multiple criteria such as status, time range, and editor id. Returns a maximum of 50 notebook executions and a marker to track the paging of a longer notebook execution list across multiple <code>ListNotebookExecution</code> calls.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "items": "NotebookExecutions",
+                    "outputToken": "Marker"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.emr#ListNotebookExecutionsInput": {
+            "members": {
+                "EditorId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique ID of the editor associated with the notebook execution.</p>"
+                    }
+                },
+                "From": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The beginning of time range filter for listing notebook executions. The default is the timestamp of 30 days ago.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.emr#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token, returned by a previous <code>ListNotebookExecutions</code> call, that indicates the start of the list for this <code>ListNotebookExecutions</code> call.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.emr#NotebookExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status filter for listing notebook executions.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>START_PENDING</code> indicates that the cluster has received the execution request but execution has not begun.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> indicates that the execution is starting on the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> indicates that the execution is being processed by the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FINISHING</code> indicates that execution processing is in the final stages.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FINISHED</code> indicates that the execution has completed without error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILING</code> indicates that the execution is failing and will not finish successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> indicates that the execution failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOP_PENDING</code> indicates that the cluster has received a <code>StopNotebookExecution</code> request and the stop is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code> indicates that the cluster is in the process of stopping the execution as a result of a <code>StopNotebookExecution</code> request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code> indicates that the execution stopped because of a <code>StopNotebookExecution</code> request.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "To": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The end of time range filter for listing notebook executions. The default is the current timestamp.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.emr#ListNotebookExecutionsOutput": {
+            "members": {
+                "Marker": {
+                    "target": "com.amazonaws.emr#Marker",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A pagination token that a subsequent <code>ListNotebookExecutions</code> can use to determine the next set of results to retrieve.</p>"
+                    }
+                },
+                "NotebookExecutions": {
+                    "target": "com.amazonaws.emr#NotebookExecutionSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of notebook executions.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
         "com.amazonaws.emr#ListSecurityConfigurations": {
             "errors": [
                 {
@@ -4376,7 +4546,7 @@
                 "ComputeLimits": {
                     "target": "com.amazonaws.emr#ComputeLimits",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration.\n      </p>"
+                        "smithy.api#documentation": "<p>The EC2 unit limits for a managed scaling policy. The managed scaling activity of a cluster is not allowed to go above or below these limits. The limit only applies to the core and task nodes. The master node cannot be scaled after initial configuration.</p>"
                     }
                 }
             },
@@ -4563,6 +4733,189 @@
             },
             "type": "double"
         },
+        "com.amazonaws.emr#NotebookExecution": {
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the notebook execution.</p>"
+                    }
+                },
+                "EditorId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the EMR Notebook that is used for the notebook execution.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when notebook execution ended.</p>"
+                    }
+                },
+                "ExecutionEngine": {
+                    "target": "com.amazonaws.emr#ExecutionEngineConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The execution engine, such as an EMR cluster, used to run the EMR notebook and perform the notebook execution.</p>"
+                    }
+                },
+                "LastStateChangeReason": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the latest status change of the notebook execution.</p>"
+                    }
+                },
+                "NotebookExecutionId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of a notebook execution.</p>"
+                    }
+                },
+                "NotebookExecutionName": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A name for the notebook execution.</p>"
+                    }
+                },
+                "NotebookInstanceSecurityGroupId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the EC2 security group associated with the EMR Notebook instance. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-managed-notebooks-security-groups.html\">Specifying EC2 Security Groups for EMR Notebooks</a> in the <i>EMR Management Guide</i>.</p>"
+                    }
+                },
+                "NotebookParams": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input parameters in JSON format passed to the EMR Notebook at runtime for execution.</p>"
+                    }
+                },
+                "OutputNotebookURI": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the notebook execution's output file in Amazon S3.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when notebook execution started.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.emr#NotebookExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the notebook execution.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>START_PENDING</code> indicates that the cluster has received the execution request but execution has not begun.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> indicates that the execution is starting on the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> indicates that the execution is being processed by the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FINISHING</code> indicates that execution processing is in the final stages.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FINISHED</code> indicates that the execution has completed without error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILING</code> indicates that the execution is failing and will not finish successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> indicates that the execution failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOP_PENDING</code> indicates that the cluster has received a <code>StopNotebookExecution</code> request and the stop is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code> indicates that the cluster is in the process of stopping the execution as a result of a <code>StopNotebookExecution</code> request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code> indicates that the execution stopped because of a <code>StopNotebookExecution</code> request.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.emr#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with a notebook execution. Tags are user-defined key value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A notebook execution. An execution is a specific instance that an EMR Notebook is run using the <code>StartNotebookExecution</code> action.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.emr#NotebookExecutionStatus": {
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "START_PENDING",
+                        "value": "START_PENDING"
+                    },
+                    {
+                        "name": "STARTING",
+                        "value": "STARTING"
+                    },
+                    {
+                        "name": "RUNNING",
+                        "value": "RUNNING"
+                    },
+                    {
+                        "name": "FINISHING",
+                        "value": "FINISHING"
+                    },
+                    {
+                        "name": "FINISHED",
+                        "value": "FINISHED"
+                    },
+                    {
+                        "name": "FAILING",
+                        "value": "FAILING"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    },
+                    {
+                        "name": "STOP_PENDING",
+                        "value": "STOP_PENDING"
+                    },
+                    {
+                        "name": "STOPPING",
+                        "value": "STOPPING"
+                    },
+                    {
+                        "name": "STOPPED",
+                        "value": "STOPPED"
+                    }
+                ]
+            },
+            "type": "string"
+        },
+        "com.amazonaws.emr#NotebookExecutionSummary": {
+            "members": {
+                "EditorId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the editor associated with the notebook execution.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when notebook execution started.</p>"
+                    }
+                },
+                "NotebookExecutionId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the notebook execution.</p>"
+                    }
+                },
+                "NotebookExecutionName": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the notebook execution.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.emr#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp when notebook execution started.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.emr#NotebookExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the notebook execution.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>START_PENDING</code> indicates that the cluster has received the execution request but execution has not begun.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STARTING</code> indicates that the execution is starting on the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RUNNING</code> indicates that the execution is being processed by the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FINISHING</code> indicates that execution processing is in the final stages.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FINISHED</code> indicates that the execution has completed without error.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILING</code> indicates that the execution is failing and will not finish successfully.</p>\n            </li>\n            <li>\n               <p>\n                  <code>FAILED</code> indicates that the execution failed.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOP_PENDING</code> indicates that the cluster has received a <code>StopNotebookExecution</code> request and the stop is pending.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPING</code> indicates that the cluster is in the process of stopping the execution as a result of a <code>StopNotebookExecution</code> request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>STOPPED</code> indicates that the execution stopped because of a <code>StopNotebookExecution</code> request.</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p></p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.emr#NotebookExecutionSummaryList": {
+            "member": {
+                "target": "com.amazonaws.emr#NotebookExecutionSummary"
+            },
+            "type": "list"
+        },
         "com.amazonaws.emr#OnDemandProvisioningAllocationStrategy": {
             "traits": {
                 "smithy.api#enum": [
@@ -4623,7 +4976,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "max": 65535,
-                    "min": 0
+                    "min": -1
                 }
             },
             "type": "integer"
@@ -5470,6 +5823,94 @@
             },
             "type": "string"
         },
+        "com.amazonaws.emr#StartNotebookExecution": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.emr#StartNotebookExecutionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#StartNotebookExecutionOutput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a notebook execution.</p>"
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.emr#StartNotebookExecutionInput": {
+            "members": {
+                "EditorId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the EMR Notebook to use for notebook execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionEngine": {
+                    "target": "com.amazonaws.emr#ExecutionEngineConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the execution engine (cluster) that runs the notebook execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NotebookExecutionName": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional name for the notebook execution.</p>"
+                    }
+                },
+                "NotebookInstanceSecurityGroupId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon EC2 security group to associate with the EMR Notebook for this notebook execution.</p>"
+                    }
+                },
+                "NotebookParams": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Input parameters in JSON format passed to the EMR Notebook at runtime for execution.</p>"
+                    }
+                },
+                "RelativePath": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The path and file name of the notebook file for this execution, relative to the path specified for the EMR Notebook. For example, if you specify a path of <code>s3://MyBucket/MyNotebooks</code> when you create an EMR Notebook for a notebook with an ID of <code>e-ABCDEFGHIJK1234567890ABCD</code> (the <code>EditorID</code> of this request), and you specify a <code>RelativePath</code> of <code>my_notebook_executions/notebook_execution.ipynb</code>, the location of the file for the notebook execution is <code>s3://MyBucket/MyNotebooks/e-ABCDEFGHIJK1234567890ABCD/my_notebook_executions/notebook_execution.ipynb</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServiceRole": {
+                    "target": "com.amazonaws.emr#XmlString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or ARN of the IAM role that is used as the service role for Amazon EMR (the EMR role) for the notebook execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.emr#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags associated with a notebook execution. Tags are user-defined key value pairs that consist of a required key string with a maximum of 128 characters and an optional value string with a maximum of 256 characters.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.emr#StartNotebookExecutionOutput": {
+            "members": {
+                "NotebookExecutionId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the notebook execution.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
         "com.amazonaws.emr#Statistic": {
             "traits": {
                 "smithy.api#enum": [
@@ -5857,6 +6298,35 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The timeline of the cluster step lifecycle.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.emr#StopNotebookExecution": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerError"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.emr#StopNotebookExecutionInput"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Stops a notebook execution.</p>"
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.emr#StopNotebookExecutionInput": {
+            "members": {
+                "NotebookExecutionId": {
+                    "target": "com.amazonaws.emr#XmlStringMaxLen256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the notebook execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
             },
             "type": "structure"
         },

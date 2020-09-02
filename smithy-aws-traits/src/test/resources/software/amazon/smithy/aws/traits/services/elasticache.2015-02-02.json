@@ -3469,7 +3469,13 @@
                 "target": "com.amazonaws.elasticache#DescribeEngineDefaultParametersResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the default engine and\n            system parameter information for the specified cache engine.</p>"
+                "smithy.api#documentation": "<p>Returns the default engine and\n            system parameter information for the specified cache engine.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "items": "EngineDefaults.Parameters",
+                    "outputToken": "EngineDefaults.Marker",
+                    "pageSize": "MaxRecords"
+                }
             },
             "type": "operation"
         },

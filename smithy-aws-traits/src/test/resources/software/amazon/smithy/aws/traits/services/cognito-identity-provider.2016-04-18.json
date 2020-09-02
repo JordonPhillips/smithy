@@ -354,6 +354,16 @@
             "type": "service",
             "version": "2016-04-18"
         },
+        "com.amazonaws.cognitoidentityprovider#AccessTokenValidityType": {
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "max": 86400,
+                    "min": 1
+                }
+            },
+            "type": "integer"
+        },
         "com.amazonaws.cognitoidentityprovider#AccountRecoverySettingType": {
             "members": {
                 "RecoveryMechanisms": {
@@ -719,7 +729,7 @@
                 "target": "com.amazonaws.cognitoidentityprovider#AdminCreateUserResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new user in the specified user pool.</p>\n        <p>If <code>MessageAction</code> is not set, the default is to send a welcome message via\n            email or phone (SMS).</p>\n        <note>\n            <p>This message is based on a template that you configured in your call to  or . This\n                template includes your custom sign-up instructions and placeholders for user name\n                and temporary password.</p>\n        </note>\n        <p>Alternatively, you can call AdminCreateUser with \u201cSUPPRESS\u201d for the\n                <code>MessageAction</code> parameter, and Amazon Cognito will not send any email. </p>\n        <p>In either case, the user will be in the <code>FORCE_CHANGE_PASSWORD</code> state until\n            they sign in and change their password.</p>\n        <p>AdminCreateUser requires developer credentials.</p>"
+                "smithy.api#documentation": "<p>Creates a new user in the specified user pool.</p>\n        <p>If <code>MessageAction</code> is not set, the default is to send a welcome message via\n            email or phone (SMS).</p>\n        <p>This message is based on a template that you configured in your call to create or\n            update a user pool. This template includes your custom sign-up instructions and placeholders \n            for user name and temporary password.</p>\n        <p>Alternatively, you can call <code>AdminCreateUser</code> with \u201cSUPPRESS\u201d for the\n                <code>MessageAction</code> parameter, and Amazon Cognito will not send any email. </p>\n        <p>In either case, the user will be in the <code>FORCE_CHANGE_PASSWORD</code> state until\n            they sign in and change their password.</p>\n        <p>\n            <code>AdminCreateUser</code> requires developer credentials.</p>"
             },
             "type": "operation"
         },
@@ -784,7 +794,7 @@
                 "UserAttributes": {
                     "target": "com.amazonaws.cognitoidentityprovider#AttributeListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of name-value pairs that contain user attributes and attribute values to be\n            set for the user to be created. You can create a user without specifying any attributes\n            other than <code>Username</code>. However, any attributes that you specify as required\n            (in  or in the <b>Attributes</b> tab of the console) must be supplied either by you (in your\n            call to <code>AdminCreateUser</code>) or by the user (when he or she signs up in\n            response to your welcome message).</p>\n        <p>For custom attributes, you must prepend the <code>custom:</code> prefix to the\n            attribute name.</p>\n        <p>To send a message inviting the user to sign up, you must specify the user's email\n            address or phone number. This can be done in your call to AdminCreateUser or in the\n                <b>Users</b> tab of the Amazon Cognito console for\n            managing your user pools.</p>\n        <p>In your call to <code>AdminCreateUser</code>, you can set the\n                <code>email_verified</code> attribute to <code>True</code>, and you can set the\n                <code>phone_number_verified</code> attribute to <code>True</code>. (You can also do\n            this by calling .)</p>\n        <ul>\n            <li>\n                <p>\n                  <b>email</b>: The email address of the user to whom\n                    the message that contains the code and username will be sent. Required if the\n                        <code>email_verified</code> attribute is set to <code>True</code>, or if\n                        <code>\"EMAIL\"</code> is specified in the <code>DesiredDeliveryMediums</code>\n                    parameter.</p>\n            </li>\n            <li>\n                <p>\n                  <b>phone_number</b>: The phone number of the user to\n                    whom the message that contains the code and username will be sent. Required if\n                    the <code>phone_number_verified</code> attribute is set to <code>True</code>, or\n                    if <code>\"SMS\"</code> is specified in the <code>DesiredDeliveryMediums</code>\n                    parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of name-value pairs that contain user attributes and attribute values to be\n            set for the user to be created. You can create a user without specifying any attributes\n            other than <code>Username</code>. However, any attributes that you specify as required\n            (when creating a user pool or in the <b>Attributes</b> tab of the console) must be supplied either by you (in your\n            call to <code>AdminCreateUser</code>) or by the user (when he or she signs up in\n            response to your welcome message).</p>\n        <p>For custom attributes, you must prepend the <code>custom:</code> prefix to the\n            attribute name.</p>\n        <p>To send a message inviting the user to sign up, you must specify the user's email\n            address or phone number. This can be done in your call to AdminCreateUser or in the\n                <b>Users</b> tab of the Amazon Cognito console for\n            managing your user pools.</p>\n        <p>In your call to <code>AdminCreateUser</code>, you can set the\n                <code>email_verified</code> attribute to <code>True</code>, and you can set the\n                <code>phone_number_verified</code> attribute to <code>True</code>. (You can also do\n            this by calling <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminUpdateUserAttributes.html\">AdminUpdateUserAttributes</a>.)</p>\n        <ul>\n            <li>\n                <p>\n                  <b>email</b>: The email address of the user to whom\n                    the message that contains the code and username will be sent. Required if the\n                        <code>email_verified</code> attribute is set to <code>True</code>, or if\n                        <code>\"EMAIL\"</code> is specified in the <code>DesiredDeliveryMediums</code>\n                    parameter.</p>\n            </li>\n            <li>\n                <p>\n                  <b>phone_number</b>: The phone number of the user to\n                    whom the message that contains the code and username will be sent. Required if\n                    the <code>phone_number_verified</code> attribute is set to <code>True</code>, or\n                    if <code>\"SMS\"</code> is specified in the <code>DesiredDeliveryMediums</code>\n                    parameter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "UserPoolId": {
@@ -986,7 +996,7 @@
                 "target": "com.amazonaws.cognitoidentityprovider#AdminDisableProviderForUserResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Disables the user from signing in with the specified external (SAML or social)\n            identity provider. If the user to disable is a Cognito User Pools native username +\n            password user, they are not permitted to use their password to sign-in. If the user to\n            disable is a linked external IdP user, any link between that user and an existing user\n            is removed. The next time the external user (no longer attached to the previously linked\n                <code>DestinationUser</code>) signs in, they must create a new user account. See\n                .</p>\n        <p>This action is enabled only for admin access and requires developer\n            credentials.</p>\n        <p>The <code>ProviderName</code> must match the value specified when creating an IdP for\n            the pool. </p>\n        <p>To disable a native username + password user, the <code>ProviderName</code> value must\n            be <code>Cognito</code> and the <code>ProviderAttributeName</code> must be\n                <code>Cognito_Subject</code>, with the <code>ProviderAttributeValue</code> being the\n            name that is used in the user pool for the user.</p>\n        <p>The <code>ProviderAttributeName</code> must always be <code>Cognito_Subject</code> for\n            social identity providers. The <code>ProviderAttributeValue</code> must always be the\n            exact subject that was used when the user was originally linked as a source user.</p>\n        <p>For de-linking a SAML identity, there are two scenarios. If the linked identity has\n            not yet been used to sign-in, the <code>ProviderAttributeName</code> and\n                <code>ProviderAttributeValue</code> must be the same values that were used for the\n                <code>SourceUser</code> when the identities were originally linked in the  call. (If the linking was done with\n                <code>ProviderAttributeName</code> set to <code>Cognito_Subject</code>, the same\n            applies here). However, if the user has already signed in, the\n                <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code> and\n                <code>ProviderAttributeValue</code> must be the subject of the SAML\n            assertion.</p>"
+                "smithy.api#documentation": "<p>Disables the user from signing in with the specified external (SAML or social)\n            identity provider. If the user to disable is a Cognito User Pools native username +\n            password user, they are not permitted to use their password to sign-in. If the user to\n            disable is a linked external IdP user, any link between that user and an existing user\n            is removed. The next time the external user (no longer attached to the previously linked\n                <code>DestinationUser</code>) signs in, they must create a new user account. See\n            <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminLinkProviderForUser.html\">AdminLinkProviderForUser</a>.</p>\n        <p>This action is enabled only for admin access and requires developer\n            credentials.</p>\n        <p>The <code>ProviderName</code> must match the value specified when creating an IdP for\n            the pool. </p>\n        <p>To disable a native username + password user, the <code>ProviderName</code> value must\n            be <code>Cognito</code> and the <code>ProviderAttributeName</code> must be\n                <code>Cognito_Subject</code>, with the <code>ProviderAttributeValue</code> being the\n            name that is used in the user pool for the user.</p>\n        <p>The <code>ProviderAttributeName</code> must always be <code>Cognito_Subject</code> for\n            social identity providers. The <code>ProviderAttributeValue</code> must always be the\n            exact subject that was used when the user was originally linked as a source user.</p>\n        <p>For de-linking a SAML identity, there are two scenarios. If the linked identity has\n            not yet been used to sign-in, the <code>ProviderAttributeName</code> and\n                <code>ProviderAttributeValue</code> must be the same values that were used for the\n                <code>SourceUser</code> when the identities were originally linked using  <code>\n                AdminLinkProviderForUser</code> call. (If the linking was done with\n                <code>ProviderAttributeName</code> set to <code>Cognito_Subject</code>, the same\n            applies here). However, if the user has already signed in, the\n                <code>ProviderAttributeName</code> must be <code>Cognito_Subject</code> and\n                <code>ProviderAttributeValue</code> must be the subject of the SAML\n            assertion.</p>"
             },
             "type": "operation"
         },
@@ -1337,7 +1347,7 @@
                 "MFAOptions": {
                     "target": "com.amazonaws.cognitoidentityprovider#MFAOptionListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <i>This response parameter is no longer supported.</i> It provides\n            information only about SMS MFA configurations. It doesn't provide information about TOTP\n            software token MFA configurations. To look up information about either type of MFA\n            configuration, use the <a>AdminGetUserResponse$UserMFASettingList</a>\n            response instead.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>This response parameter is no longer supported.</i> It provides\n            information only about SMS MFA configurations. It doesn't provide information about TOTP\n            software token MFA configurations. To look up information about either type of MFA\n            configuration, use UserMFASettingList instead.</p>"
                     }
                 },
                 "PreferredMfaSetting": {
@@ -1466,7 +1476,7 @@
                 "AuthParameters": {
                     "target": "com.amazonaws.cognitoidentityprovider#AuthParametersType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication parameters. These are inputs corresponding to the\n                <code>AuthFlow</code> that you are invoking. The required values depend on the value\n            of <code>AuthFlow</code>:</p>\n        <ul>\n            <li>\n                <p>For <code>USER_SRP_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SRP_A</code> (required), <code>SECRET_HASH</code> (required if the app\n                    client is configured with a client secret), <code>DEVICE_KEY</code>\n               </p>\n            </li>\n            <li>\n                <p>For <code>REFRESH_TOKEN_AUTH/REFRESH_TOKEN</code>: <code>REFRESH_TOKEN</code>\n                    (required), <code>SECRET_HASH</code> (required if the app client is configured\n                    with a client secret), <code>DEVICE_KEY</code>\n               </p>\n            </li>\n            <li>\n                <p>For <code>ADMIN_NO_SRP_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SECRET_HASH</code> (if app client is configured with client secret),\n                        <code>PASSWORD</code> (required), <code>DEVICE_KEY</code>\n               </p>\n            </li>\n            <li>\n                <p>For <code>CUSTOM_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SECRET_HASH</code> (if app client is configured with client secret),\n                        <code>DEVICE_KEY</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The authentication parameters. These are inputs corresponding to the\n                <code>AuthFlow</code> that you are invoking. The required values depend on the value\n            of <code>AuthFlow</code>:</p>\n        <ul>\n            <li>\n                <p>For <code>USER_SRP_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SRP_A</code> (required), <code>SECRET_HASH</code> (required if the app\n                    client is configured with a client secret), <code>DEVICE_KEY</code>.</p>\n            </li>\n            <li>\n                <p>For <code>REFRESH_TOKEN_AUTH/REFRESH_TOKEN</code>: <code>REFRESH_TOKEN</code>\n                    (required), <code>SECRET_HASH</code> (required if the app client is configured\n                    with a client secret), <code>DEVICE_KEY</code>.</p>\n            </li>\n            <li>\n                <p>For <code>ADMIN_NO_SRP_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SECRET_HASH</code> (if app client is configured with client secret),\n                        <code>PASSWORD</code> (required), <code>DEVICE_KEY</code>.</p>\n            </li>\n            <li>\n                <p>For <code>CUSTOM_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SECRET_HASH</code> (if app client is configured with client secret),\n                        <code>DEVICE_KEY</code>. To start the authentication flow with password\n                    verification, include <code>ChallengeName: SRP_A</code> and <code>SRP_A: (The\n                        SRP_A Value)</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClientId": {
@@ -1567,7 +1577,7 @@
                 "target": "com.amazonaws.cognitoidentityprovider#AdminLinkProviderForUserResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Links an existing user account in a user pool (<code>DestinationUser</code>) to an\n            identity from an external identity provider (<code>SourceUser</code>) based on a\n            specified attribute name and value from the external identity provider. This allows you\n            to create a link from the existing user account to an external federated user identity\n            that has not yet been used to sign in, so that the federated user identity can be used\n            to sign in as the existing user account. </p>\n        <p> For example, if there is an existing user with a username and password, this API\n            links that user to a federated user identity, so that when the federated user identity\n            is used, the user signs in as the existing user account. </p>\n        <important>\n            <p>Because this API allows a user with an external federated identity to sign in as\n                an existing user in the user pool, it is critical that it only be used with external\n                identity providers and provider attributes that have been trusted by the application\n                owner.</p>\n        </important>\n        <p>See also .</p>\n        <p>This action is enabled only for admin access and requires developer\n            credentials.</p>"
+                "smithy.api#documentation": "<p>Links an existing user account in a user pool (<code>DestinationUser</code>) to an\n            identity from an external identity provider (<code>SourceUser</code>) based on a\n            specified attribute name and value from the external identity provider. This allows you\n            to create a link from the existing user account to an external federated user identity\n            that has not yet been used to sign in, so that the federated user identity can be used\n            to sign in as the existing user account. </p>\n        <p> For example, if there is an existing user with a username and password, this API\n            links that user to a federated user identity, so that when the federated user identity\n            is used, the user signs in as the existing user account. </p>\n        <note>\n            <p>The maximum number of federated identities linked to a user is 5.</p>\n         </note>\n        <important>\n            <p>Because this API allows a user with an external federated identity to sign in as\n                an existing user in the user pool, it is critical that it only be used with external\n                identity providers and provider attributes that have been trusted by the application\n                owner.</p>\n        </important>\n        \n        <p>This action is enabled only for admin access and requires developer\n            credentials.</p>"
             },
             "type": "operation"
         },
@@ -2090,7 +2100,7 @@
                 "ChallengeName": {
                     "target": "com.amazonaws.cognitoidentityprovider#ChallengeNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The challenge name. For more information, see .</p>",
+                        "smithy.api#documentation": "<p>The challenge name. For more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html\">AdminInitiateAuth</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2149,19 +2159,19 @@
                 "ChallengeName": {
                     "target": "com.amazonaws.cognitoidentityprovider#ChallengeNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the challenge. For more information, see .</p>"
+                        "smithy.api#documentation": "<p>The name of the challenge. For more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html\">AdminInitiateAuth</a>.</p>"
                     }
                 },
                 "ChallengeParameters": {
                     "target": "com.amazonaws.cognitoidentityprovider#ChallengeParametersType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The challenge parameters. For more information, see .</p>"
+                        "smithy.api#documentation": "<p>The challenge parameters. For more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminInitiateAuth.html\">AdminInitiateAuth</a>.</p>"
                     }
                 },
                 "Session": {
                     "target": "com.amazonaws.cognitoidentityprovider#SessionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session which should be passed both ways in challenge-response calls to the\n            service. If the  or  API call determines that the caller needs to\n            go through another challenge, they return a session with other challenge parameters.\n            This session should be passed as it is to the next <code>RespondToAuthChallenge</code>\n            API call.</p>"
+                        "smithy.api#documentation": "<p>The session which should be passed both ways in challenge-response calls to the\n            service. If the caller needs to\n            go through another challenge, they return a session with other challenge parameters.\n            This session should be passed as it is to the next <code>RespondToAuthChallenge</code>\n            API call.</p>"
                     }
                 }
             },
@@ -2336,7 +2346,7 @@
                 "target": "com.amazonaws.cognitoidentityprovider#AdminSetUserSettingsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <i>This action is no longer supported.</i> You can use it to configure\n            only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either\n            type of MFA, use the <a>AdminSetUserMFAPreference</a> action instead.</p>"
+                "smithy.api#documentation": "<p>\n            <i>This action is no longer supported.</i> You can use it to configure\n            only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either\n            type of MFA, use <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserMFAPreference.html\">AdminSetUserMFAPreference</a> instead.</p>"
             },
             "type": "operation"
         },
@@ -2743,25 +2753,28 @@
         },
         "com.amazonaws.cognitoidentityprovider#AnalyticsConfigurationType": {
             "members": {
+                "ApplicationArn": {
+                    "target": "com.amazonaws.cognitoidentityprovider#ArnType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Pinpoint project. You can use the Amazon Pinpoint \n        project for Pinpoint integration with the chosen User Pool Client. \n        Amazon Cognito publishes events to the pinpoint project declared by the app ARN.</p>"
+                    }
+                },
                 "ApplicationId": {
                     "target": "com.amazonaws.cognitoidentityprovider#HexStringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The application ID for an Amazon Pinpoint application.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The application ID for an Amazon Pinpoint application.</p>"
                     }
                 },
                 "ExternalId": {
                     "target": "com.amazonaws.cognitoidentityprovider#StringType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The external ID.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The external ID.</p>"
                     }
                 },
                 "RoleArn": {
                     "target": "com.amazonaws.cognitoidentityprovider#ArnType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon\n            Pinpoint analytics.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The ARN of an IAM role that authorizes Amazon Cognito to publish events to Amazon\n            Pinpoint analytics.</p>"
                     }
                 },
                 "UserDataShared": {
@@ -2772,7 +2785,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Pinpoint analytics configuration for collecting metrics for a user\n            pool.</p>\n        <note>\n            <p>Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia) us-east-1 Region, regardless of the region in which the user pool resides.</p>\n        </note>"
+                "smithy.api#documentation": "<p>The Amazon Pinpoint analytics configuration for collecting metrics for a user\n            pool.</p>\n        <note>\n            <p>In regions where Pinpoint is not available, Cognito User Pools only supports sending events to Amazon Pinpoint projects in us-east-1.\n                In regions where Pinpoint is available, Cognito User Pools will \n                support sending events to Amazon Pinpoint projects within that same region. \n            </p>\n        </note>"
             },
             "type": "structure"
         },
@@ -2802,6 +2815,9 @@
         },
         "com.amazonaws.cognitoidentityprovider#AssociateSoftwareToken": {
             "errors": [
+                {
+                    "target": "com.amazonaws.cognitoidentityprovider#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.cognitoidentityprovider#InternalErrorException"
                 },
@@ -3726,7 +3742,7 @@
                 "ConfirmationCode": {
                     "target": "com.amazonaws.cognitoidentityprovider#ConfirmationCodeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The confirmation code sent by a user's request to retrieve a forgotten password. For\n            more information, see </p>",
+                        "smithy.api#documentation": "<p>The confirmation code sent by a user's request to retrieve a forgotten password. For\n            more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html\">ForgotPassword</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4080,7 +4096,7 @@
                 "ProviderDetails": {
                     "target": "com.amazonaws.cognitoidentityprovider#ProviderDetailsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys\n            for each identity provider type.</p>\n        <ul>\n            <li>\n                <p>For Google, Facebook and Login with Amazon:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For Sign in with Apple:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>team_id</p>\n                    </li>\n                  <li>\n                        <p>key_id</p>\n                    </li>\n                  <li>\n                        <p>private_key</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For OIDC providers:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>attributes_request_method</p>\n                    </li>\n                  <li>\n                        <p>oidc_issuer</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n                  <li>\n                        <p>authorize_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>token_url <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>attributes_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>jwks_uri <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For SAML providers:</p>\n                <ul>\n                  <li>\n                        <p>MetadataFile OR MetadataURL</p>\n                    </li>\n                  <li>\n                        <p>IDPSignout <i>optional</i>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys\n            for each identity provider type.</p>\n        <ul>\n            <li>\n                <p>For Google and Login with Amazon:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                    <p>For Facebook:</p>\n                    <ul>\n                  <li>\n                            <p>client_id</p>\n                        </li>\n                  <li>\n                            <p>client_secret</p>\n                        </li>\n                  <li>\n                            <p>authorize_scopes</p>\n                        </li>\n                  <li>\n                            <p>api_version</p>\n                        </li>\n               </ul>\n                </li>\n            <li>\n                <p>For Sign in with Apple:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>team_id</p>\n                    </li>\n                  <li>\n                        <p>key_id</p>\n                    </li>\n                  <li>\n                        <p>private_key</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For OIDC providers:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>attributes_request_method</p>\n                    </li>\n                  <li>\n                        <p>oidc_issuer</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n                  <li>\n                        <p>authorize_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>token_url <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>attributes_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>jwks_uri <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For SAML providers:</p>\n                <ul>\n                  <li>\n                        <p>MetadataFile OR MetadataURL</p>\n                    </li>\n                  <li>\n                        <p>IDPSignout <i>optional</i>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4355,6 +4371,12 @@
         },
         "com.amazonaws.cognitoidentityprovider#CreateUserPoolClientRequest": {
             "members": {
+                "AccessTokenValidity": {
+                    "target": "com.amazonaws.cognitoidentityprovider#AccessTokenValidityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time limit, between 5 minutes and 1 day, after which the access token is no longer valid and cannot be used. This value will be overridden if\n            you have entered a value in TokenValidityUnits.</p>"
+                    }
+                },
                 "AllowedOAuthFlows": {
                     "target": "com.amazonaws.cognitoidentityprovider#OAuthFlowsType",
                     "traits": {
@@ -4376,7 +4398,7 @@
                 "AnalyticsConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#AnalyticsConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Pinpoint analytics configuration for collecting metrics for this user\n            pool.</p>\n        <note>\n            <p>Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia) us-east-1 Region, regardless of the region in which the user pool resides.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The Amazon Pinpoint analytics configuration for collecting metrics for this user\n            pool.</p>\n        <note>\n            <p>In regions where Pinpoint is not available, Cognito User Pools only supports sending events to Amazon Pinpoint projects in us-east-1.\n                In regions where Pinpoint is available, Cognito User Pools will \n                support sending events to Amazon Pinpoint projects within that same region. \n            </p>\n        </note>"
                     }
                 },
                 "CallbackURLs": {
@@ -4410,6 +4432,12 @@
                         "smithy.api#documentation": "<p>Boolean to specify whether you want to generate a secret for the user pool client\n            being created.</p>"
                     }
                 },
+                "IdTokenValidity": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IdTokenValidityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time limit, between 5 minutes and 1 day, after which the ID token is no longer valid and cannot be used. This value will be overridden if\n            you have entered a value in TokenValidityUnits.</p>"
+                    }
+                },
                 "LogoutURLs": {
                     "target": "com.amazonaws.cognitoidentityprovider#LogoutURLsListType",
                     "traits": {
@@ -4419,7 +4447,7 @@
                 "PreventUserExistenceErrors": {
                     "target": "com.amazonaws.cognitoidentityprovider#PreventUserExistenceErrorTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this setting to choose which errors and responses are returned by Cognito APIs\n            during authentication, account confirmation, and password recovery when the user does\n            not exist in the user pool. When set to <code>ENABLED</code> and the user does not\n            exist, authentication returns an error indicating either the username or password was\n            incorrect, and account confirmation and password recovery return a response indicating a\n            code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs\n            will return a <code>UserNotFoundException</code> exception if the user does not exist in\n            the user pool.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LEGACY</code> - This represents the old behavior of Cognito where user\n                    existence related errors are not prevented.</p>\n            </li>\n         </ul>\n        <p>This setting affects the behavior of following APIs:</p>\n        <ul>\n            <li>\n                <p>\n                  <a>AdminInitiateAuth</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>AdminRespondToAuthChallenge</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>InitiateAuth</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>RespondToAuthChallenge</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ForgotPassword</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ConfirmForgotPassword</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ConfirmSignUp</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ResendConfirmationCode</a>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>After February 15th 2020, the value of <code>PreventUserExistenceErrors</code>\n                will default to <code>ENABLED</code> for newly created user pool clients if no value\n                is provided.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Use this setting to choose which errors and responses are returned by Cognito APIs\n            during authentication, account confirmation, and password recovery when the user does\n            not exist in the user pool. When set to <code>ENABLED</code> and the user does not\n            exist, authentication returns an error indicating either the username or password was\n            incorrect, and account confirmation and password recovery return a response indicating a\n            code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs\n            will return a <code>UserNotFoundException</code> exception if the user does not exist in\n            the user pool.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LEGACY</code> - This represents the old behavior of Cognito where user\n                    existence related errors are not prevented.</p>\n            </li>\n         </ul>\n        \n        \n        <note>\n            <p>After February 15th 2020, the value of <code>PreventUserExistenceErrors</code>\n                will default to <code>ENABLED</code> for newly created user pool clients if no value\n                is provided.</p>\n        </note>"
                     }
                 },
                 "ReadAttributes": {
@@ -4438,6 +4466,12 @@
                     "target": "com.amazonaws.cognitoidentityprovider#SupportedIdentityProvidersListType",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of provider names for the identity providers that are supported on this client.\n            The following are supported: <code>COGNITO</code>, <code>Facebook</code>,\n                <code>Google</code> and <code>LoginWithAmazon</code>.</p>"
+                    }
+                },
+                "TokenValidityUnits": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenValidityUnitsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The units in which the validity times are represented in. Default for RefreshToken is days, and default for ID and access tokens are hours.</p>"
                     }
                 },
                 "UserPoolId": {
@@ -4543,7 +4577,7 @@
                 "AccountRecoverySetting": {
                     "target": "com.amazonaws.cognitoidentityprovider#AccountRecoverySettingType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this setting to define which verified available method a user can use to recover\n            their password when they call <code>ForgotPassword</code>. It allows you to define a\n            preferred method when a user has more than one method available. With this setting, SMS\n            does not qualify for a valid password recovery mechanism if the user also has SMS MFA\n            enabled. In the absence of this setting, Cognito uses the legacy behavior to determine\n            the recovery method where SMS is preferred over email.</p>\n        <note>\n            <p>Starting February 1, 2020, the value of <code>AccountRecoverySetting</code> will\n                default to <code>verified_email</code> first and <code>verified_phone_number</code>\n                as the second option for newly created user pools if no value is provided.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Use this setting to define which verified available method a user can use to recover\n            their password when they call <code>ForgotPassword</code>. It allows you to define a\n            preferred method when a user has more than one method available. With this setting, SMS\n            does not qualify for a valid password recovery mechanism if the user also has SMS MFA\n            enabled. In the absence of this setting, Cognito uses the legacy behavior to determine\n            the recovery method where SMS is preferred over email.</p>"
                     }
                 },
                 "AdminCreateUserConfig": {
@@ -4658,7 +4692,7 @@
                 "UsernameConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can choose to set case sensitivity on the username input for the selected sign-in\n            option. For example, when this is set to <code>False</code>, users will be able to sign\n            in using either \"username\" or \"Username\". This configuration is immutable once it has\n            been set. For more information, see .</p>"
+                        "smithy.api#documentation": "<p>You can choose to set case sensitivity on the username input for the selected sign-in\n            option. For example, when this is set to <code>False</code>, users will be able to sign\n            in using either \"username\" or \"Username\". This configuration is immutable once it has\n            been set. For more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html\">UsernameConfigurationType</a>.</p>"
                     }
                 },
                 "VerificationMessageTemplate": {
@@ -6314,7 +6348,7 @@
             },
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>Calling this API causes a message to be sent to the end user with a confirmation code\n            that is required to change the user's password. For the <code>Username</code> parameter,\n            you can use the username or user alias. The method used to send the confirmation code is\n            sent according to the specified AccountRecoverySetting. For more information, see <a href=\"\">Recovering User Accounts</a> in the <i>Amazon Cognito Developer\n                Guide</i>. If neither a verified phone number nor a verified email exists, an\n                <code>InvalidParameterException</code> is thrown. To use the confirmation code for\n            resetting the password, call .</p>",
+                "smithy.api#documentation": "<p>Calling this API causes a message to be sent to the end user with a confirmation code\n            that is required to change the user's password. For the <code>Username</code> parameter,\n            you can use the username or user alias. The method used to send the confirmation code is\n            sent according to the specified AccountRecoverySetting. For more information, see <a href=\"https://docs.aws.amazon.com/cognito/latest/developerguide/how-to-recover-a-user-account.html\">Recovering User Accounts</a> in the <i>Amazon Cognito Developer Guide</i>. \n            If neither a verified phone number nor a verified email exists, an\n                <code>InvalidParameterException</code> is thrown. To use the confirmation code for\n        resetting the password, call <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ConfirmForgotPassword.html\">ConfirmForgotPassword</a>.</p>",
                 "smithy.api#optionalAuth": {}
             },
             "type": "operation"
@@ -6983,7 +7017,7 @@
                 "MFAOptions": {
                     "target": "com.amazonaws.cognitoidentityprovider#MFAOptionListType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            <i>This response parameter is no longer supported.</i> It provides\n            information only about SMS MFA configurations. It doesn't provide information about TOTP\n            software token MFA configurations. To look up information about either type of MFA\n            configuration, use the use the <a>GetUserResponse$UserMFASettingList</a>\n            response instead.</p>"
+                        "smithy.api#documentation": "<p>\n            <i>This response parameter is no longer supported.</i> It provides\n            information only about SMS MFA configurations. It doesn't provide information about TOTP\n            software token MFA configurations. To look up information about either type of MFA\n            configuration, use UserMFASettingList instead.</p>"
                     }
                 },
                 "PreferredMfaSetting": {
@@ -7186,6 +7220,16 @@
             },
             "type": "list"
         },
+        "com.amazonaws.cognitoidentityprovider#IdTokenValidityType": {
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "max": 86400,
+                    "min": 1
+                }
+            },
+            "type": "integer"
+        },
         "com.amazonaws.cognitoidentityprovider#IdentityProviderType": {
             "members": {
                 "AttributeMapping": {
@@ -7215,7 +7259,7 @@
                 "ProviderDetails": {
                     "target": "com.amazonaws.cognitoidentityprovider#ProviderDetailsType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys\n            for each identity provider type.</p>\n        <ul>\n            <li>\n                <p>For Google, Facebook and Login with Amazon:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For Sign in with Apple:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>team_id</p>\n                    </li>\n                  <li>\n                        <p>key_id</p>\n                    </li>\n                  <li>\n                        <p>private_key</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For OIDC providers:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>attributes_request_method</p>\n                    </li>\n                  <li>\n                        <p>oidc_issuer</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n                  <li>\n                        <p>authorize_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>token_url <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>attributes_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>jwks_uri <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For SAML providers:</p>\n                <ul>\n                  <li>\n                        <p>MetadataFile OR MetadataURL</p>\n                    </li>\n                  <li>\n                        <p>IDPSignOut <i>optional</i>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identity provider details. The following list describes the provider detail keys\n            for each identity provider type.</p>\n        <ul>\n            <li>\n                <p>For Google and Login with Amazon:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For Facebook:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n                  <li>\n                        <p>api_version</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For Sign in with Apple:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>team_id</p>\n                    </li>\n                  <li>\n                        <p>key_id</p>\n                    </li>\n                  <li>\n                        <p>private_key</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For OIDC providers:</p>\n                <ul>\n                  <li>\n                        <p>client_id</p>\n                    </li>\n                  <li>\n                        <p>client_secret</p>\n                    </li>\n                  <li>\n                        <p>attributes_request_method</p>\n                    </li>\n                  <li>\n                        <p>oidc_issuer</p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n                  <li>\n                        <p>authorize_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>token_url <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>attributes_url <i>if not available from discovery URL specified\n                                by oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>jwks_uri <i>if not available from discovery URL specified by\n                                oidc_issuer key</i>\n                     </p>\n                    </li>\n                  <li>\n                        <p>authorize_scopes</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>For SAML providers:</p>\n                <ul>\n                  <li>\n                        <p>MetadataFile OR MetadataURL</p>\n                    </li>\n                  <li>\n                        <p>IDPSignOut <i>optional</i>\n                     </p>\n                    </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 },
                 "ProviderName": {
@@ -7377,7 +7421,7 @@
                 "AuthParameters": {
                     "target": "com.amazonaws.cognitoidentityprovider#AuthParametersType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication parameters. These are inputs corresponding to the\n                <code>AuthFlow</code> that you are invoking. The required values depend on the value\n            of <code>AuthFlow</code>:</p>\n        <ul>\n            <li>\n                <p>For <code>USER_SRP_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SRP_A</code> (required), <code>SECRET_HASH</code> (required if the app\n                    client is configured with a client secret), <code>DEVICE_KEY</code>\n               </p>\n            </li>\n            <li>\n                <p>For <code>REFRESH_TOKEN_AUTH/REFRESH_TOKEN</code>: <code>REFRESH_TOKEN</code>\n                    (required), <code>SECRET_HASH</code> (required if the app client is configured\n                    with a client secret), <code>DEVICE_KEY</code>\n               </p>\n            </li>\n            <li>\n                <p>For <code>CUSTOM_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SECRET_HASH</code> (if app client is configured with client secret),\n                        <code>DEVICE_KEY</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The authentication parameters. These are inputs corresponding to the\n                <code>AuthFlow</code> that you are invoking. The required values depend on the value\n            of <code>AuthFlow</code>:</p>\n        <ul>\n            <li>\n                <p>For <code>USER_SRP_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SRP_A</code> (required), <code>SECRET_HASH</code> (required if the app\n                    client is configured with a client secret), <code>DEVICE_KEY</code>.</p>\n            </li>\n            <li>\n                <p>For <code>REFRESH_TOKEN_AUTH/REFRESH_TOKEN</code>: <code>REFRESH_TOKEN</code>\n                    (required), <code>SECRET_HASH</code> (required if the app client is configured\n                    with a client secret), <code>DEVICE_KEY</code>.</p>\n            </li>\n            <li>\n                <p>For <code>CUSTOM_AUTH</code>: <code>USERNAME</code> (required),\n                        <code>SECRET_HASH</code> (if app client is configured with client secret),\n                    <code>DEVICE_KEY</code>. To start the authentication flow with password verification, include <code>ChallengeName: SRP_A</code> and <code>SRP_A: (The SRP_A Value)</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "ClientId": {
@@ -7428,7 +7472,7 @@
                 "Session": {
                     "target": "com.amazonaws.cognitoidentityprovider#SessionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session which should be passed both ways in challenge-response calls to the\n            service. If the  or  API call determines that the caller needs to\n            go through another challenge, they return a session with other challenge parameters.\n            This session should be passed as it is to the next <code>RespondToAuthChallenge</code>\n            API call.</p>"
+                        "smithy.api#documentation": "<p>The session which should be passed both ways in challenge-response calls to the\n            service. If the caller needs to\n            go through another challenge, they return a session with other challenge parameters.\n            This session should be passed as it is to the next <code>RespondToAuthChallenge</code>\n            API call.</p>"
                     }
                 }
             },
@@ -8515,7 +8559,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n            <i>This data type is no longer supported.</i> You can use it only for\n            SMS MFA configurations. You can't use it for TOTP software token MFA\n            configurations.</p>\n        <p>To set either type of MFA configuration, use the <a>AdminSetUserMFAPreference</a> or <a>SetUserMFAPreference</a>\n            actions.</p>\n        <p>To look up information about either type of MFA configuration, use the <a>AdminGetUserResponse$UserMFASettingList</a> or <a>GetUserResponse$UserMFASettingList</a> responses.</p>"
+                "smithy.api#documentation": "<p>\n            <i>This data type is no longer supported.</i> You can use it only for\n            SMS MFA configurations. You can't use it for TOTP software token MFA\n            configurations.</p>"
             },
             "type": "structure"
         },
@@ -9071,7 +9115,7 @@
         "com.amazonaws.cognitoidentityprovider#RefreshTokenValidityType": {
             "traits": {
                 "smithy.api#range": {
-                    "max": 3650,
+                    "max": 315360000,
                     "min": 0
                 }
             },
@@ -9409,7 +9453,7 @@
                 "ChallengeName": {
                     "target": "com.amazonaws.cognitoidentityprovider#ChallengeNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The challenge name. For more information, see .</p>\n        <p>\n            <code>ADMIN_NO_SRP_AUTH</code> is not a valid value.</p>",
+                        "smithy.api#documentation": "<p>The challenge name. For more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html\">InitiateAuth</a>.</p>\n        <p>\n            <code>ADMIN_NO_SRP_AUTH</code> is not a valid value.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -9461,19 +9505,19 @@
                 "ChallengeName": {
                     "target": "com.amazonaws.cognitoidentityprovider#ChallengeNameType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The challenge name. For more information, see .</p>"
+                        "smithy.api#documentation": "<p>The challenge name. For more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html\">InitiateAuth</a>.</p>"
                     }
                 },
                 "ChallengeParameters": {
                     "target": "com.amazonaws.cognitoidentityprovider#ChallengeParametersType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The challenge parameters. For more information, see .</p>"
+                        "smithy.api#documentation": "<p>The challenge parameters. For more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_InitiateAuth.html\">InitiateAuth</a>.</p>"
                     }
                 },
                 "Session": {
                     "target": "com.amazonaws.cognitoidentityprovider#SessionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The session which should be passed both ways in challenge-response calls to the\n            service. If the  or  API call determines that the caller needs to\n            go through another challenge, they return a session with other challenge parameters.\n            This session should be passed as it is to the next <code>RespondToAuthChallenge</code>\n            API call.</p>"
+                        "smithy.api#documentation": "<p>The session which should be passed both ways in challenge-response calls to the\n            service. If the caller needs to\n            go through another challenge, they return a session with other challenge parameters.\n            This session should be passed as it is to the next <code>RespondToAuthChallenge</code>\n            API call.</p>"
                     }
                 }
             },
@@ -9636,7 +9680,7 @@
                     "target": "com.amazonaws.cognitoidentityprovider#BooleanType",
                     "traits": {
                         "smithy.api#box": {},
-                        "smithy.api#documentation": "<note>\n            <p>We recommend that you use <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolClientType.html#CognitoUserPools-Type-UserPoolClientType-WriteAttributes\">WriteAttributes</a> in the user pool client to control how attributes can\n                be mutated for new use cases instead of using\n                <code>DeveloperOnlyAttribute</code>.</p>\n        </note>\n        <p>Specifies whether the attribute type is developer only. This attribute can only be\n            modified by an administrator. Users will not be able to modify this attribute using\n            their access token. For example, <code>DeveloperOnlyAttribute</code> can be modified\n            using the  API but cannot be updated\n            using the  API.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>We recommend that you use <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UserPoolClientType.html#CognitoUserPools-Type-UserPoolClientType-WriteAttributes\">WriteAttributes</a> in the user pool client to control how attributes can\n                be mutated for new use cases instead of using\n                <code>DeveloperOnlyAttribute</code>.</p>\n        </note>\n        <p>Specifies whether the attribute type is developer only. This attribute can only be\n            modified by an administrator. Users will not be able to modify this attribute using\n            their access token. For example, <code>DeveloperOnlyAttribute</code> can be modified\n            using AdminUpdateUserAttributes but cannot be updated\n            using UpdateUserAttributes.</p>"
                     }
                 },
                 "Mutable": {
@@ -9803,7 +9847,7 @@
                 "target": "com.amazonaws.cognitoidentityprovider#SetRiskConfigurationResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Configures actions on detected risks. To delete the risk configuration for\n                <code>UserPoolId</code> or <code>ClientId</code>, pass null values for all four\n            configuration types.</p>\n        <p>To enable Amazon Cognito advanced security features, update the user pool to include\n            the <code>UserPoolAddOns</code> key<code>AdvancedSecurityMode</code>.</p>\n        <p>See .</p>"
+                "smithy.api#documentation": "<p>Configures actions on detected risks. To delete the risk configuration for\n                <code>UserPoolId</code> or <code>ClientId</code>, pass null values for all four\n            configuration types.</p>\n        <p>To enable Amazon Cognito advanced security features, update the user pool to include\n            the <code>UserPoolAddOns</code> key<code>AdvancedSecurityMode</code>.</p>"
             },
             "type": "operation"
         },
@@ -10109,7 +10153,7 @@
             },
             "traits": {
                 "smithy.api#auth": [],
-                "smithy.api#documentation": "<p>\n            <i>This action is no longer supported.</i> You can use it to configure\n            only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either\n            type of MFA, use the <a>SetUserMFAPreference</a> action instead.</p>",
+                "smithy.api#documentation": "<p>\n            <i>This action is no longer supported.</i> You can use it to configure\n            only SMS MFA. You can't use it to configure TOTP software token MFA. To configure either\n            type of MFA, use <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserMFAPreference.html\">SetUserMFAPreference</a> instead.</p>",
                 "smithy.api#optionalAuth": {}
             },
             "type": "operation"
@@ -10673,12 +10717,61 @@
             },
             "type": "integer"
         },
+        "com.amazonaws.cognitoidentityprovider#TimeUnitsType": {
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "SECONDS",
+                        "value": "seconds"
+                    },
+                    {
+                        "name": "MINUTES",
+                        "value": "minutes"
+                    },
+                    {
+                        "name": "HOURS",
+                        "value": "hours"
+                    },
+                    {
+                        "name": "DAYS",
+                        "value": "days"
+                    }
+                ]
+            },
+            "type": "string"
+        },
         "com.amazonaws.cognitoidentityprovider#TokenModelType": {
             "traits": {
                 "smithy.api#pattern": "[A-Za-z0-9-_=.]+",
                 "smithy.api#sensitive": {}
             },
             "type": "string"
+        },
+        "com.amazonaws.cognitoidentityprovider#TokenValidityUnitsType": {
+            "members": {
+                "AccessToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TimeUnitsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p> A time unit in \u201cseconds\u201d, \u201cminutes\u201d, \u201chours\u201d or \u201cdays\u201d for the value in AccessTokenValidity, defaults to hours.</p>"
+                    }
+                },
+                "IdToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TimeUnitsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A time unit in \u201cseconds\u201d, \u201cminutes\u201d, \u201chours\u201d or \u201cdays\u201d for the value in IdTokenValidity, defaults to hours.</p>"
+                    }
+                },
+                "RefreshToken": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TimeUnitsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A time unit in \u201cseconds\u201d, \u201cminutes\u201d, \u201chours\u201d or \u201cdays\u201d for the value in RefreshTokenValidity, defaults to days.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The data type for TokenValidityUnits that specifics the time measurements for token validity.</p>"
+            },
+            "type": "structure"
         },
         "com.amazonaws.cognitoidentityprovider#TooManyFailedAttemptsException": {
             "members": {
@@ -11061,7 +11154,7 @@
                 "Precedence": {
                     "target": "com.amazonaws.cognitoidentityprovider#PrecedenceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new precedence value for the group. For more information about this parameter, see\n                .</p>"
+                        "smithy.api#documentation": "<p>The new precedence value for the group. For more information about this parameter, see\n            <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_CreateGroup.html\">CreateGroup</a>.</p>"
                     }
                 },
                 "RoleArn": {
@@ -11400,7 +11493,7 @@
                 "target": "com.amazonaws.cognitoidentityprovider#UpdateUserPoolResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified user pool with the specified attributes. You can get a list of\n            the current user pool settings with .</p>\n        <important>\n            <p>If you don't provide a value for an attribute, it will be set to the default\n                value.</p>\n        </important>"
+                "smithy.api#documentation": "<p>Updates the specified user pool with the specified attributes. You can get a list of\n            the current user pool settings using <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPool.html\">DescribeUserPool</a>.</p>\n        <important>\n            <p>If you don't provide a value for an attribute, it will be set to the default\n                value.</p>\n        </important>"
             },
             "type": "operation"
         },
@@ -11438,12 +11531,18 @@
                 "target": "com.amazonaws.cognitoidentityprovider#UpdateUserPoolClientResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates the specified user pool app client with the specified attributes. You can get\n            a list of the current user pool app client settings with .</p>\n        <important>\n            <p>If you don't provide a value for an attribute, it will be set to the default\n                value.</p>\n        </important>"
+                "smithy.api#documentation": "<p>Updates the specified user pool app client with the specified attributes. You can get\n            a list of the current user pool app client settings using <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_DescribeUserPoolClient.html\">DescribeUserPoolClient</a>.</p>\n        <important>\n            <p>If you don't provide a value for an attribute, it will be set to the default\n                value.</p>\n        </important>"
             },
             "type": "operation"
         },
         "com.amazonaws.cognitoidentityprovider#UpdateUserPoolClientRequest": {
             "members": {
+                "AccessTokenValidity": {
+                    "target": "com.amazonaws.cognitoidentityprovider#AccessTokenValidityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time limit, after which the access token is no longer valid and cannot be used.</p>"
+                    }
+                },
                 "AllowedOAuthFlows": {
                     "target": "com.amazonaws.cognitoidentityprovider#OAuthFlowsType",
                     "traits": {
@@ -11465,7 +11564,7 @@
                 "AnalyticsConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#AnalyticsConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Pinpoint analytics configuration for collecting metrics for this user\n            pool.</p>        \n        <note>\n            <p>Cognito User Pools only supports sending events to Amazon Pinpoint projects in the US East (N. Virginia) us-east-1 Region, regardless of the region in which the user pool resides.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>The Amazon Pinpoint analytics configuration for collecting metrics for this user\n            pool.</p>        \n        <note>\n            <p>In regions where Pinpoint is not available, Cognito User Pools only supports sending events to Amazon Pinpoint projects in us-east-1.\n                In regions where Pinpoint is available, Cognito User Pools will \n                support sending events to Amazon Pinpoint projects within that same region.\n            </p>\n        </note>"
                     }
                 },
                 "CallbackURLs": {
@@ -11499,6 +11598,12 @@
                         "smithy.api#documentation": "<p>The authentication flows that are supported by the user pool clients. Flow names\n            without the <code>ALLOW_</code> prefix are deprecated in favor of new names with the\n                <code>ALLOW_</code> prefix. Note that values with <code>ALLOW_</code> prefix cannot\n            be used along with values without <code>ALLOW_</code> prefix.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password\n                    authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n                    the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow,\n                    Cognito receives the password in the request instead of using the SRP (Secure\n                    Remote Password protocol) protocol to verify passwords.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based\n                    authentication.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based\n                    authentication. In this flow, Cognito receives the password in the request\n                    instead of using the SRP protocol to verify passwords.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh\n                    tokens.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "IdTokenValidity": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IdTokenValidityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time limit, after which the ID token is no longer valid and cannot be used.</p>"
+                    }
+                },
                 "LogoutURLs": {
                     "target": "com.amazonaws.cognitoidentityprovider#LogoutURLsListType",
                     "traits": {
@@ -11508,7 +11613,7 @@
                 "PreventUserExistenceErrors": {
                     "target": "com.amazonaws.cognitoidentityprovider#PreventUserExistenceErrorTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this setting to choose which errors and responses are returned by Cognito APIs\n            during authentication, account confirmation, and password recovery when the user does\n            not exist in the user pool. When set to <code>ENABLED</code> and the user does not\n            exist, authentication returns an error indicating either the username or password was\n            incorrect, and account confirmation and password recovery return a response indicating a\n            code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs\n            will return a <code>UserNotFoundException</code> exception if the user does not exist in\n            the user pool.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LEGACY</code> - This represents the old behavior of Cognito where user\n                    existence related errors are not prevented.</p>\n            </li>\n         </ul>\n        <p>This setting affects the behavior of following APIs:</p>\n        <ul>\n            <li>\n                <p>\n                  <a>AdminInitiateAuth</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>AdminRespondToAuthChallenge</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>InitiateAuth</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>RespondToAuthChallenge</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ForgotPassword</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ConfirmForgotPassword</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ConfirmSignUp</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ResendConfirmationCode</a>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>After February 15th 2020, the value of <code>PreventUserExistenceErrors</code>\n                will default to <code>ENABLED</code> for newly created user pool clients if no value\n                is provided.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Use this setting to choose which errors and responses are returned by Cognito APIs\n            during authentication, account confirmation, and password recovery when the user does\n            not exist in the user pool. When set to <code>ENABLED</code> and the user does not\n            exist, authentication returns an error indicating either the username or password was\n            incorrect, and account confirmation and password recovery return a response indicating a\n            code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs\n            will return a <code>UserNotFoundException</code> exception if the user does not exist in\n            the user pool.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LEGACY</code> - This represents the old behavior of Cognito where user\n                    existence related errors are not prevented.</p>\n            </li>\n         </ul>\n        \n        \n        <note>\n            <p>After February 15th 2020, the value of <code>PreventUserExistenceErrors</code>\n                will default to <code>ENABLED</code> for newly created user pool clients if no value\n                is provided.</p>\n        </note>"
                     }
                 },
                 "ReadAttributes": {
@@ -11527,6 +11632,12 @@
                     "target": "com.amazonaws.cognitoidentityprovider#SupportedIdentityProvidersListType",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of provider names for the identity providers that are supported on this\n            client.</p>"
+                    }
+                },
+                "TokenValidityUnits": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenValidityUnitsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The units in which the validity times are represented in. Default for RefreshToken is days, and default for ID and access tokens are hours.</p>"
                     }
                 },
                 "UserPoolId": {
@@ -12064,6 +12175,12 @@
         },
         "com.amazonaws.cognitoidentityprovider#UserPoolClientType": {
             "members": {
+                "AccessTokenValidity": {
+                    "target": "com.amazonaws.cognitoidentityprovider#AccessTokenValidityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time limit, specified by tokenValidityUnits, defaulting to hours, after which the access token is no longer valid and cannot be used.</p>"
+                    }
+                },
                 "AllowedOAuthFlows": {
                     "target": "com.amazonaws.cognitoidentityprovider#OAuthFlowsType",
                     "traits": {
@@ -12131,6 +12248,12 @@
                         "smithy.api#documentation": "<p>The authentication flows that are supported by the user pool clients. Flow names\n            without the <code>ALLOW_</code> prefix are deprecated in favor of new names with the\n                <code>ALLOW_</code> prefix. Note that values with <code>ALLOW_</code> prefix cannot\n            be used along with values without <code>ALLOW_</code> prefix.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ALLOW_ADMIN_USER_PASSWORD_AUTH</code>: Enable admin based user password\n                    authentication flow <code>ADMIN_USER_PASSWORD_AUTH</code>. This setting replaces\n                    the <code>ADMIN_NO_SRP_AUTH</code> setting. With this authentication flow,\n                    Cognito receives the password in the request instead of using the SRP (Secure\n                    Remote Password protocol) protocol to verify passwords.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_CUSTOM_AUTH</code>: Enable Lambda trigger based\n                    authentication.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_USER_PASSWORD_AUTH</code>: Enable user password-based\n                    authentication. In this flow, Cognito receives the password in the request\n                    instead of using the SRP protocol to verify passwords.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_USER_SRP_AUTH</code>: Enable SRP based authentication.</p>\n            </li>\n            <li>\n                <p>\n                  <code>ALLOW_REFRESH_TOKEN_AUTH</code>: Enable authflow to refresh\n                    tokens.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "IdTokenValidity": {
+                    "target": "com.amazonaws.cognitoidentityprovider#IdTokenValidityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time limit, specified by tokenValidityUnits, defaulting to hours, after which the refresh token is no longer valid and cannot be used.</p>"
+                    }
+                },
                 "LastModifiedDate": {
                     "target": "com.amazonaws.cognitoidentityprovider#DateType",
                     "traits": {
@@ -12146,7 +12269,7 @@
                 "PreventUserExistenceErrors": {
                     "target": "com.amazonaws.cognitoidentityprovider#PreventUserExistenceErrorTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this setting to choose which errors and responses are returned by Cognito APIs\n            during authentication, account confirmation, and password recovery when the user does\n            not exist in the user pool. When set to <code>ENABLED</code> and the user does not\n            exist, authentication returns an error indicating either the username or password was\n            incorrect, and account confirmation and password recovery return a response indicating a\n            code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs\n            will return a <code>UserNotFoundException</code> exception if the user does not exist in\n            the user pool.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LEGACY</code> - This represents the old behavior of Cognito where user\n                    existence related errors are not prevented.</p>\n            </li>\n         </ul>\n        <p>This setting affects the behavior of following APIs:</p>\n        <ul>\n            <li>\n                <p>\n                  <a>AdminInitiateAuth</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>AdminRespondToAuthChallenge</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>InitiateAuth</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>RespondToAuthChallenge</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ForgotPassword</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ConfirmForgotPassword</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ConfirmSignUp</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a>ResendConfirmationCode</a>\n               </p>\n            </li>\n         </ul>\n        <note>\n            <p>After February 15th 2020, the value of <code>PreventUserExistenceErrors</code>\n                will default to <code>ENABLED</code> for newly created user pool clients if no value\n                is provided.</p>\n        </note>"
+                        "smithy.api#documentation": "<p>Use this setting to choose which errors and responses are returned by Cognito APIs\n            during authentication, account confirmation, and password recovery when the user does\n            not exist in the user pool. When set to <code>ENABLED</code> and the user does not\n            exist, authentication returns an error indicating either the username or password was\n            incorrect, and account confirmation and password recovery return a response indicating a\n            code was sent to a simulated destination. When set to <code>LEGACY</code>, those APIs\n            will return a <code>UserNotFoundException</code> exception if the user does not exist in\n            the user pool.</p>\n        <p>Valid values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>ENABLED</code> - This prevents user existence-related errors.</p>\n            </li>\n            <li>\n                <p>\n                  <code>LEGACY</code> - This represents the old behavior of Cognito where user\n                    existence related errors are not prevented.</p>\n            </li>\n         </ul>\n        \n        \n        <note>\n            <p>After February 15th 2020, the value of <code>PreventUserExistenceErrors</code>\n                will default to <code>ENABLED</code> for newly created user pool clients if no value\n                is provided.</p>\n        </note>"
                     }
                 },
                 "ReadAttributes": {
@@ -12165,6 +12288,12 @@
                     "target": "com.amazonaws.cognitoidentityprovider#SupportedIdentityProvidersListType",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of provider names for the identity providers that are supported on this\n            client.</p>"
+                    }
+                },
+                "TokenValidityUnits": {
+                    "target": "com.amazonaws.cognitoidentityprovider#TokenValidityUnitsType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time units used to specify the token validity times of their respective token.</p>"
                     }
                 },
                 "UserPoolId": {
@@ -12495,7 +12624,7 @@
                 "UsernameConfiguration": {
                     "target": "com.amazonaws.cognitoidentityprovider#UsernameConfigurationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can choose to enable case sensitivity on the username input for the selected\n            sign-in option. For example, when this is set to <code>False</code>, users will be able\n            to sign in using either \"username\" or \"Username\". This configuration is immutable once\n            it has been set. For more information, see .</p>"
+                        "smithy.api#documentation": "<p>You can choose to enable case sensitivity on the username input for the selected\n            sign-in option. For example, when this is set to <code>False</code>, users will be able\n            to sign in using either \"username\" or \"Username\". This configuration is immutable once\n            it has been set. For more information, see <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_UsernameConfigurationType.html\">UsernameConfigurationType</a>.</p>"
                     }
                 },
                 "VerificationMessageTemplate": {
@@ -12802,7 +12931,7 @@
                 "UserCode": {
                     "target": "com.amazonaws.cognitoidentityprovider#SoftwareTokenMFAUserCodeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The one time password computed using the secret code returned by </p>",
+                        "smithy.api#documentation": "<p>The one time password computed using the secret code returned by <a href=\"https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html\">AssociateSoftwareToken\"</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }

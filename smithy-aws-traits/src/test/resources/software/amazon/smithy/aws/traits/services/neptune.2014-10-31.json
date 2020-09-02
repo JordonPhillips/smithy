@@ -4284,7 +4284,13 @@
                 "target": "com.amazonaws.neptune#DescribeEngineDefaultParametersResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the default engine and system parameter information for the specified database\n      engine.</p>"
+                "smithy.api#documentation": "<p>Returns the default engine and system parameter information for the specified database\n      engine.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "items": "EngineDefaults.Parameters",
+                    "outputToken": "EngineDefaults.Marker",
+                    "pageSize": "MaxRecords"
+                }
             },
             "type": "operation"
         },

@@ -4818,14 +4818,14 @@
                 "target": "com.amazonaws.ssm#DeleteInventoryResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Delete a custom inventory type, or the data associated with a custom Inventory type.\n   Deleting a custom inventory type is also referred to as deleting a custom inventory\n   schema.</p>"
+                "smithy.api#documentation": "<p>Delete a custom inventory type or the data associated with a custom Inventory type.\n   Deleting a custom inventory type is also referred to as deleting a custom inventory\n   schema.</p>"
             },
             "type": "operation"
         },
         "com.amazonaws.ssm#DeleteInventoryRequest": {
             "members": {
                 "ClientToken": {
-                    "target": "com.amazonaws.ssm#ClientToken",
+                    "target": "com.amazonaws.ssm#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>User-provided idempotency token.</p>",
                         "smithy.api#idempotencyToken": {}
@@ -4846,7 +4846,7 @@
                 "TypeName": {
                     "target": "com.amazonaws.ssm#InventoryItemTypeName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the custom inventory type for which you want to delete either all previously\n   collected data, or the inventory type itself. </p>",
+                        "smithy.api#documentation": "<p>The name of the custom inventory type for which you want to delete either all previously\n   collected data or the inventory type itself. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4856,7 +4856,7 @@
         "com.amazonaws.ssm#DeleteInventoryResult": {
             "members": {
                 "DeletionId": {
-                    "target": "com.amazonaws.ssm#InventoryDeletionId",
+                    "target": "com.amazonaws.ssm#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>Every <code>DeleteInventory</code> action is assigned a unique ID. This option returns a\n   unique ID. You can use this ID to query the status of a delete operation. This option is useful\n   for ensuring that a delete operation has completed before you begin other actions. </p>"
                     }
@@ -5469,7 +5469,13 @@
                 "target": "com.amazonaws.ssm#DescribeAssociationExecutionTargetsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this API action to view information about a specific execution of a specific\n   association.</p>"
+                "smithy.api#documentation": "<p>Use this API action to view information about a specific execution of a specific\n   association.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "AssociationExecutionTargets",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -5547,7 +5553,13 @@
                 "target": "com.amazonaws.ssm#DescribeAssociationExecutionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Use this API action to view all executions for a specific association ID. </p>"
+                "smithy.api#documentation": "<p>Use this API action to view all executions for a specific association ID. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "AssociationExecutions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -5661,7 +5673,13 @@
                 "target": "com.amazonaws.ssm#DescribeAutomationExecutionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides details about all active and terminated Automation executions.</p>"
+                "smithy.api#documentation": "<p>Provides details about all active and terminated Automation executions.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "AutomationExecutionMetadataList",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -5731,7 +5749,13 @@
                 "target": "com.amazonaws.ssm#DescribeAutomationStepExecutionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about all active and terminated step executions in an Automation\n   workflow.</p>"
+                "smithy.api#documentation": "<p>Information about all active and terminated step executions in an Automation\n   workflow.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "StepExecutions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -5803,7 +5827,13 @@
                 "target": "com.amazonaws.ssm#DescribeAvailablePatchesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists all patches eligible to be included in a patch baseline.</p>"
+                "smithy.api#documentation": "<p>Lists all patches eligible to be included in a patch baseline.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Patches",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -5984,7 +6014,13 @@
                 "target": "com.amazonaws.ssm#DescribeEffectiveInstanceAssociationsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>All associations for the instance(s).</p>"
+                "smithy.api#documentation": "<p>All associations for the instance(s).</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Associations",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6052,7 +6088,13 @@
                 "target": "com.amazonaws.ssm#DescribeEffectivePatchesForPatchBaselineResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current effective patches (the patch and the approval state) for the specified\n   patch baseline. Note that this API applies only to Windows patch baselines.</p>"
+                "smithy.api#documentation": "<p>Retrieves the current effective patches (the patch and the approval state) for the specified\n   patch baseline. Note that this API applies only to Windows patch baselines.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "EffectivePatches",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6117,7 +6159,13 @@
                 "target": "com.amazonaws.ssm#DescribeInstanceAssociationsStatusResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>The status of the associations for the instance(s).</p>"
+                "smithy.api#documentation": "<p>The status of the associations for the instance(s).</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "InstanceAssociationStatusInfos",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6261,7 +6309,13 @@
                 "target": "com.amazonaws.ssm#DescribeInstancePatchStatesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the high-level patch state of one or more instances.</p>"
+                "smithy.api#documentation": "<p>Retrieves the high-level patch state of one or more instances.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "InstancePatchStates",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6284,7 +6338,13 @@
                 "target": "com.amazonaws.ssm#DescribeInstancePatchStatesForPatchGroupResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the high-level patch state for the instances in the specified patch group.</p>"
+                "smithy.api#documentation": "<p>Retrieves the high-level patch state for the instances in the specified patch group.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "InstancePatchStates",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6400,7 +6460,13 @@
                 "target": "com.amazonaws.ssm#DescribeInstancePatchesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the patches on the specified instance and their state relative\n   to the patch baseline being used for the instance.</p>"
+                "smithy.api#documentation": "<p>Retrieves information about the patches on the specified instance and their state relative\n   to the patch baseline being used for the instance.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Patches",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6471,14 +6537,20 @@
                 "target": "com.amazonaws.ssm#DescribeInventoryDeletionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a specific delete inventory operation.</p>"
+                "smithy.api#documentation": "<p>Describes a specific delete inventory operation.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "InventoryDeletions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
         "com.amazonaws.ssm#DescribeInventoryDeletionsRequest": {
             "members": {
                 "DeletionId": {
-                    "target": "com.amazonaws.ssm#InventoryDeletionId",
+                    "target": "com.amazonaws.ssm#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>Specify the delete inventory ID for which you want information. This ID was returned by the\n    <code>DeleteInventory</code> action.</p>"
                     }
@@ -6532,7 +6604,13 @@
                 "target": "com.amazonaws.ssm#DescribeMaintenanceWindowExecutionTaskInvocationsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the individual task executions (one per target) for a particular task run as part\n   of a maintenance window execution.</p>"
+                "smithy.api#documentation": "<p>Retrieves the individual task executions (one per target) for a particular task run as part\n   of a maintenance window execution.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "WindowExecutionTaskInvocationIdentities",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6607,7 +6685,13 @@
                 "target": "com.amazonaws.ssm#DescribeMaintenanceWindowExecutionTasksResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>For a given maintenance window execution, lists the tasks that were run.</p>"
+                "smithy.api#documentation": "<p>For a given maintenance window execution, lists the tasks that were run.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "WindowExecutionTaskIdentities",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6672,7 +6756,13 @@
                 "target": "com.amazonaws.ssm#DescribeMaintenanceWindowExecutionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists the executions of a maintenance window. This includes information about when the\n   maintenance window was scheduled to be active, and information about tasks registered and run\n   with the maintenance window.</p>"
+                "smithy.api#documentation": "<p>Lists the executions of a maintenance window. This includes information about when the\n   maintenance window was scheduled to be active, and information about tasks registered and run\n   with the maintenance window.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "WindowExecutions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6740,7 +6830,13 @@
                 "target": "com.amazonaws.ssm#DescribeMaintenanceWindowScheduleResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about upcoming executions of a maintenance window.</p>"
+                "smithy.api#documentation": "<p>Retrieves information about upcoming executions of a maintenance window.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "ScheduledWindowExecutions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6819,7 +6915,13 @@
                 "target": "com.amazonaws.ssm#DescribeMaintenanceWindowTargetsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists the targets registered with the maintenance window.</p>"
+                "smithy.api#documentation": "<p>Lists the targets registered with the maintenance window.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Targets",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6887,7 +6989,13 @@
                 "target": "com.amazonaws.ssm#DescribeMaintenanceWindowTasksResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists the tasks in a maintenance window.</p>"
+                "smithy.api#documentation": "<p>Lists the tasks in a maintenance window.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Tasks",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6952,7 +7060,13 @@
                 "target": "com.amazonaws.ssm#DescribeMaintenanceWindowsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the maintenance windows in an AWS account.</p>"
+                "smithy.api#documentation": "<p>Retrieves the maintenance windows in an AWS account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "WindowIdentities",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -6969,7 +7083,13 @@
                 "target": "com.amazonaws.ssm#DescribeMaintenanceWindowsForTargetResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the maintenance window targets or tasks that an instance is\n   associated with.</p>"
+                "smithy.api#documentation": "<p>Retrieves information about the maintenance window targets or tasks that an instance is\n   associated with.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "WindowIdentities",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -7076,7 +7196,13 @@
                 "target": "com.amazonaws.ssm#DescribeOpsItemsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Query a set of OpsItems. You must have permission in AWS Identity and Access Management\n   (IAM) to query a list of OpsItems. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with\n    OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate\n   operational issues impacting the performance and health of their AWS resources. For more\n   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the\n    <i>AWS Systems Manager User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Query a set of OpsItems. You must have permission in AWS Identity and Access Management\n   (IAM) to query a list of OpsItems. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter-getting-started.html\">Getting started with\n    OpsCenter</a> in the <i>AWS Systems Manager User Guide</i>.</p>\n         <p>Operations engineers and IT professionals use OpsCenter to view, investigate, and remediate\n   operational issues impacting the performance and health of their AWS resources. For more\n   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">AWS Systems Manager OpsCenter</a> in the\n    <i>AWS Systems Manager User Guide</i>. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "OpsItemSummaries",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -7214,7 +7340,13 @@
                 "target": "com.amazonaws.ssm#DescribePatchBaselinesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists the patch baselines in your AWS account.</p>"
+                "smithy.api#documentation": "<p>Lists the patch baselines in your AWS account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "BaselineIdentities",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -7366,7 +7498,13 @@
                 "target": "com.amazonaws.ssm#DescribePatchGroupsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists all patch groups that have been registered with patch baselines.</p>"
+                "smithy.api#documentation": "<p>Lists all patch groups that have been registered with patch baselines.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Mappings",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -7424,7 +7562,13 @@
                 "target": "com.amazonaws.ssm#DescribePatchPropertiesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists the properties of available patches organized by product, product family,\n   classification, severity, and other properties of available patches. You can use the reported\n   properties in the filters you specify in requests for actions such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p>\n         <p>The following section lists the properties that can be used in filters for each major\n   operating system type:</p>\n         <dl>\n            <dt>WINDOWS</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY</p>\n            </dd>\n            <dt>AMAZON_LINUX</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n            <dt>AMAZON_LINUX_2</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n            <dt>UBUNTU </dt>\n            <dd>\n               <p>Valid properties: PRODUCT, PRIORITY</p>\n            </dd>\n            <dt>REDHAT_ENTERPRISE_LINUX</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n            <dt>SUSE</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n            <dt>CENTOS</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n         </dl>"
+                "smithy.api#documentation": "<p>Lists the properties of available patches organized by product, product family,\n   classification, severity, and other properties of available patches. You can use the reported\n   properties in the filters you specify in requests for actions such as <a>CreatePatchBaseline</a>, <a>UpdatePatchBaseline</a>, <a>DescribeAvailablePatches</a>, and <a>DescribePatchBaselines</a>.</p>\n         <p>The following section lists the properties that can be used in filters for each major\n   operating system type:</p>\n         <dl>\n            <dt>WINDOWS</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, PRODUCT_FAMILY, CLASSIFICATION, MSRC_SEVERITY</p>\n            </dd>\n            <dt>AMAZON_LINUX</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n            <dt>AMAZON_LINUX_2</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n            <dt>UBUNTU </dt>\n            <dd>\n               <p>Valid properties: PRODUCT, PRIORITY</p>\n            </dd>\n            <dt>REDHAT_ENTERPRISE_LINUX</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n            <dt>SUSE</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n            <dt>CENTOS</dt>\n            <dd>\n               <p>Valid properties: PRODUCT, CLASSIFICATION, SEVERITY</p>\n            </dd>\n         </dl>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Properties",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -7502,7 +7646,13 @@
                 "target": "com.amazonaws.ssm#DescribeSessionsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of all active sessions (both connected and disconnected) or terminated\n   sessions from the past 30 days.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of all active sessions (both connected and disconnected) or terminated\n   sessions from the past 30 days.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Sessions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -8583,7 +8733,7 @@
                 "target": "com.amazonaws.ssm#GetCalendarStateResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you\n   specify a time, <code>GetCalendarState</code> returns the state of the calendar at a specific\n   time, and returns the next time that the Change Calendar state will transition. If you do not\n   specify a time, <code>GetCalendarState</code> assumes the current time. Change Calendar entries\n   have two possible states: <code>OPEN</code> or <code>CLOSED</code>. For more information about\n   Systems Manager Change Calendar, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html\">AWS Systems Manager Change\n    Calendar</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Gets the state of the AWS Systems Manager Change Calendar at an optional, specified time. If you\n   specify a time, <code>GetCalendarState</code> returns the state of the calendar at a specific\n   time, and returns the next time that the Change Calendar state will transition. If you do not\n   specify a time, <code>GetCalendarState</code> assumes the current time. Change Calendar entries\n   have two possible states: <code>OPEN</code> or <code>CLOSED</code>.</p>\n         <p>If you specify more than one calendar in a request, the command returns the status of\n    <code>OPEN</code> only if all calendars in the request are open. If one or more calendars in the\n   request are closed, the status returned is <code>CLOSED</code>.</p>\n         <p>For more information about Systems Manager Change Calendar, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-change-calendar.html\">AWS Systems Manager Change\n    Calendar</a> in the <i>AWS Systems Manager User Guide</i>.</p>"
             },
             "type": "operation"
         },
@@ -9100,7 +9250,13 @@
                 "target": "com.amazonaws.ssm#GetInventoryResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Query inventory information.</p>"
+                "smithy.api#documentation": "<p>Query inventory information.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Entities",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -9176,7 +9332,13 @@
                 "target": "com.amazonaws.ssm#GetInventorySchemaResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Return a list of inventory type names for the account, or return a list of attribute names\n   for a specific Inventory item type.</p>"
+                "smithy.api#documentation": "<p>Return a list of inventory type names for the account, or return a list of attribute names\n   for a specific Inventory item type.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Schemas",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -9888,7 +10050,13 @@
                 "target": "com.amazonaws.ssm#GetOpsSummaryResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>View a summary of OpsItems based on specified filters and aggregators.</p>"
+                "smithy.api#documentation": "<p>View a summary of OpsItems based on specified filters and aggregators.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Entities",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -11948,9 +12116,6 @@
             },
             "type": "string"
         },
-        "com.amazonaws.ssm#InventoryDeletionId": {
-            "type": "string"
-        },
         "com.amazonaws.ssm#InventoryDeletionLastStatusMessage": {
             "type": "string"
         },
@@ -11978,7 +12143,7 @@
         "com.amazonaws.ssm#InventoryDeletionStatusItem": {
             "members": {
                 "DeletionId": {
-                    "target": "com.amazonaws.ssm#InventoryDeletionId",
+                    "target": "com.amazonaws.ssm#UUID",
                     "traits": {
                         "smithy.api#documentation": "<p>The deletion ID returned by the <code>DeleteInventory</code> action.</p>"
                     }
@@ -12738,7 +12903,13 @@
                 "target": "com.amazonaws.ssm#ListAssociationVersionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves all versions of an association for a specific association ID.</p>"
+                "smithy.api#documentation": "<p>Retrieves all versions of an association for a specific association ID.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "AssociationVersions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -13058,7 +13229,13 @@
                 "target": "com.amazonaws.ssm#ListComplianceItemsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>For a specified resource ID, this API action returns a list of compliance statuses for\n   different resource types. Currently, you can only specify one resource ID per call. List results\n   depend on the criteria specified in the filter.</p>"
+                "smithy.api#documentation": "<p>For a specified resource ID, this API action returns a list of compliance statuses for\n   different resource types. Currently, you can only specify one resource ID per call. List results\n   depend on the criteria specified in the filter.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "ComplianceItems",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -13134,7 +13311,13 @@
                 "target": "com.amazonaws.ssm#ListComplianceSummariesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a summary count of compliant and non-compliant resources for a compliance type. For\n   example, this call can return State Manager associations, patches, or custom compliance types\n   according to the filter criteria that you specify.</p>"
+                "smithy.api#documentation": "<p>Returns a summary count of compliant and non-compliant resources for a compliance type. For\n   example, this call can return State Manager associations, patches, or custom compliance types\n   according to the filter criteria that you specify.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "ComplianceSummaryItems",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -13198,7 +13381,13 @@
                 "target": "com.amazonaws.ssm#ListDocumentVersionsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>List all versions for a document.</p>"
+                "smithy.api#documentation": "<p>List all versions for a document.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "DocumentVersions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -13447,7 +13636,13 @@
                 "target": "com.amazonaws.ssm#ListResourceComplianceSummariesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a resource-level summary count. The summary includes information about compliant and\n   non-compliant statuses and detailed compliance-item severity counts, according to the filter\n   criteria you specify.</p>"
+                "smithy.api#documentation": "<p>Returns a resource-level summary count. The summary includes information about compliant and\n   non-compliant statuses and detailed compliance-item severity counts, according to the filter\n   criteria you specify.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "ResourceComplianceSummaryItems",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -13511,7 +13706,13 @@
                 "target": "com.amazonaws.ssm#ListResourceDataSyncResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists your resource data sync configurations. Includes information about the last time a\n   sync attempted to start, the last sync status, and the last time a sync successfully\n   completed.</p>\n         <p>The number of sync configurations might be too large to return using a single call to\n    <code>ListResourceDataSync</code>. You can limit the number of sync configurations returned by\n   using the <code>MaxResults</code> parameter. To determine whether there are more sync\n   configurations to list, check the value of <code>NextToken</code> in the output. If there are\n   more sync configurations to list, you can request them by specifying the <code>NextToken</code>\n   returned in the call to the parameter of a subsequent call. </p>"
+                "smithy.api#documentation": "<p>Lists your resource data sync configurations. Includes information about the last time a\n   sync attempted to start, the last sync status, and the last time a sync successfully\n   completed.</p>\n         <p>The number of sync configurations might be too large to return using a single call to\n    <code>ListResourceDataSync</code>. You can limit the number of sync configurations returned by\n   using the <code>MaxResults</code> parameter. To determine whether there are more sync\n   configurations to list, check the value of <code>NextToken</code> in the output. If there are\n   more sync configurations to list, you can request them by specifying the <code>NextToken</code>\n   returned in the call to the parameter of a subsequent call. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "ResourceDataSyncItems",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -15093,6 +15294,12 @@
             }
         },
         "com.amazonaws.ssm#OpsDataAttributeName": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 128,
+                    "min": 1
+                }
+            },
             "type": "string"
         },
         "com.amazonaws.ssm#OpsDataTypeName": {
@@ -15286,6 +15493,12 @@
             "type": "string"
         },
         "com.amazonaws.ssm#OpsFilterValue": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 256,
+                    "min": 0
+                }
+            },
             "type": "string"
         },
         "com.amazonaws.ssm#OpsFilterValueList": {
@@ -17851,7 +18064,7 @@
                 "Value": {
                     "target": "com.amazonaws.ssm#PSParameterValue",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter value that you want to add to the system. Standard parameters have a value\n   limit of 4 KB. Advanced parameters have a value limit of 8 KB.</p>",
+                        "smithy.api#documentation": "<p>The parameter value that you want to add to the system. Standard parameters have a value\n   limit of 4 KB. Advanced parameters have a value limit of 8 KB.</p>\n         <note>\n            <p>Parameters can't be referenced or nested in the values of other parameters. You can't\n    include <code>{{}}</code> or <code>{{ssm:<i>parameter-name</i>}}</code> in a\n    parameter value.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -20873,6 +21086,12 @@
                 "smithy.api#error": "client"
             },
             "type": "structure"
+        },
+        "com.amazonaws.ssm#UUID": {
+            "traits": {
+                "smithy.api#pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+            },
+            "type": "string"
         },
         "com.amazonaws.ssm#UnsupportedCalendarException": {
             "members": {

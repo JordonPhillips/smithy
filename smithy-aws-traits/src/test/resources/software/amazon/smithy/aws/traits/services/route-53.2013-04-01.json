@@ -369,7 +369,7 @@
                 "target": "com.amazonaws.route53#AssociateVPCWithHostedZoneResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Associates an Amazon VPC with a private hosted zone. </p>\n\t\t\n\t\t       <note>\n            <p>To perform the association, the VPC and the private hosted zone must already exist. \n\t\t\tAlso, you can't convert a public hosted zone into a private hosted zone.</p>\n\t\t       </note>\n\t\t\n\t\t       <p>If you want to associate a VPC that was created by one AWS account with a private hosted zone that was created \n\t\t\tby a different account, do one of the following:</p>\n\t\t       <ul>\n            <li>\n               <p>Use the AWS account that created the private hosted zone to submit a \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_CreateVPCAssociationAuthorization.html\">CreateVPCAssociationAuthorization</a>\n\t\t\t\trequest. Then use the account that created the VPC to submit an <code>AssociateVPCWithHostedZone</code> request.</p>\n            </li>\n            <li>\n               <p>If a subnet in the VPC was shared with another account, you can use the account that the subnet was shared with \n\t\t\t\tto submit an <code>AssociateVPCWithHostedZone</code> request. For more information about sharing subnets, see \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/vpc-sharing.html\">Working with Shared VPCs</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Associates an Amazon VPC with a private hosted zone. </p>\n\t\t       <important>\n            <p>To perform the association, the VPC and the private hosted zone must already exist. \n\t\t\tYou can't convert a public hosted zone into a private hosted zone.</p>\n         </important>\n\t\t       <note>\n            <p>If you want to associate a VPC that was created by using one AWS account with a private hosted zone that was created \n\t\t\tby using a different account, the AWS account that created the private hosted zone must first submit a \n\t\t\t<code>CreateVPCAssociationAuthorization</code> request. Then the account that created the VPC must submit an \n\t\t\t<code>AssociateVPCWithHostedZone</code> request.</p>\n         </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2011,7 +2011,7 @@
                 "target": "com.amazonaws.route53#DeleteTrafficPolicyResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a traffic policy.</p>",
+                "smithy.api#documentation": "<p>Deletes a traffic policy.</p>\n\t\t       <p>When you delete a traffic policy, Route 53 sets a flag on the policy to indicate that it has been deleted. However, Route 53 never fully deletes \n\t\t\tthe traffic policy. Note the following:</p>\n\t\t       <ul>\n            <li>\n               <p>Deleted traffic policies aren't listed if you run <a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListTrafficPolicies.html\">ListTrafficPolicies</a>.</p>\n            </li>\n            <li>\n               <p>\tThere's no way to get a list of deleted policies.</p>\n            </li>\n            <li>\n               <p>If you retain the ID of the policy, you can get information about the policy, including the traffic policy document, by running \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetTrafficPolicy.html\">GetTrafficPolicy</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "DELETE",
@@ -3294,7 +3294,7 @@
                 "target": "com.amazonaws.route53#GetTrafficPolicyResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a specific traffic policy version.</p>",
+                "smithy.api#documentation": "<p>Gets information about a specific traffic policy version.</p>\n\t\t       <p>For information about how of deleting a traffic policy affects the response from <code>GetTrafficPolicy</code>, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html\">DeleteTrafficPolicy</a>.\n\t\t</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
@@ -4658,7 +4658,7 @@
                 "MaxItems": {
                     "target": "com.amazonaws.route53#PageMaxItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Optional) The maximum number of hosted zones that you want Amazon Route 53 to return. If the specified VPC is associated with \n\t\t\tmore than <code>MaxItems</code> hosted zones, the response includes a <code>NextToken</code> element. <code>NextToken</code> contains \n\t\t\tthe hosted zone ID of the first hosted zone that Route 53 will return if you submit another request.</p>",
+                        "smithy.api#documentation": "<p>(Optional) The maximum number of hosted zones that you want Amazon Route 53 to return. If the specified VPC is associated with \n\t\t\tmore than <code>MaxItems</code> hosted zones, the response includes a <code>NextToken</code> element. <code>NextToken</code> contains \n\t\t\tan encrypted token that identifies the first hosted zone that Route 53 will return if you submit another request.</p>",
                         "smithy.api#httpQuery": "maxitems"
                     }
                 },
@@ -5216,7 +5216,7 @@
                 "target": "com.amazonaws.route53#ListTrafficPoliciesResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about the latest version for every traffic policy that is associated with the current AWS account. \n\t\t\tPolicies are listed in the order that they were created in. </p>",
+                "smithy.api#documentation": "<p>Gets information about the latest version for every traffic policy that is associated with the current AWS account. \n\t\t\tPolicies are listed in the order that they were created in. </p>\n\t\t\n\t\t       <p>For information about how of deleting a traffic policy affects the response from <code>ListTrafficPolicies</code>, see \n\t\t\t<a href=\"https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html\">DeleteTrafficPolicy</a>.\n\n\t\t</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",

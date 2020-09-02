@@ -69,6 +69,57 @@
             },
             "type": "list"
         },
+        "com.amazonaws.robomaker#BatchDeleteWorlds": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#BatchDeleteWorldsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#BatchDeleteWorldsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes one or more worlds in a batch operation.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/batchDeleteWorlds"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#BatchDeleteWorldsRequest": {
+            "members": {
+                "worlds": {
+                    "target": "com.amazonaws.robomaker#Arns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Resource Names (arns) that correspond to worlds to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#BatchDeleteWorldsResponse": {
+            "members": {
+                "unprocessedWorlds": {
+                    "target": "com.amazonaws.robomaker#Arns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of unprocessed worlds associated with the call. These worlds were not deleted.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
         "com.amazonaws.robomaker#BatchDescribeSimulationJob": {
             "errors": [
                 {
@@ -305,6 +356,100 @@
             "members": {},
             "type": "structure"
         },
+        "com.amazonaws.robomaker#CancelWorldExportJob": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#CancelWorldExportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#CancelWorldExportJobResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels the specified export job.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cancelWorldExportJob"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#CancelWorldExportJobRequest": {
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world export job to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#CancelWorldExportJobResponse": {
+            "members": {},
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#CancelWorldGenerationJob": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#CancelWorldGenerationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#CancelWorldGenerationJobResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Cancels the specified world generator job.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/cancelWorldGenerationJob"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#CancelWorldGenerationJobRequest": {
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world generator job to cancel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#CancelWorldGenerationJobResponse": {
+            "members": {},
+            "type": "structure"
+        },
         "com.amazonaws.robomaker#ClientRequestToken": {
             "traits": {
                 "smithy.api#length": {
@@ -330,7 +475,7 @@
                 "simulationUnitLimit": {
                     "target": "com.amazonaws.robomaker#SimulationUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory \n        proportional to the supplied simulation unit limit. A simulation\n        unit is 1 vcpu and 2GB of memory. You are only billed\n        for the SU utilization you consume up to the maximim value provided.\n        </p>"
+                        "smithy.api#documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory \n        proportional to the supplied simulation unit limit. A simulation\n        unit is 1 vcpu and 2GB of memory. You are only billed\n        for the SU utilization you consume up to the maximim value provided. \n        The default is 15.\n        </p>"
                     }
                 }
             },
@@ -344,7 +489,7 @@
                 "simulationUnitLimit": {
                     "target": "com.amazonaws.robomaker#SimulationUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory \n        proportional to the supplied simulation unit limit. A simulation\n        unit is 1 vcpu and 2GB of memory. You are only billed\n        for the SU utilization you consume up to the maximim value provided.\n        </p>"
+                        "smithy.api#documentation": "<p>The simulation unit limit. Your simulation is allocated CPU and memory \n        proportional to the supplied simulation unit limit. A simulation\n        unit is 1 vcpu and 2GB of memory. You are only billed\n        for the SU utilization you consume up to the maximim value provided. \n        The default is 15.\n        </p>"
                     }
                 }
             },
@@ -474,7 +619,7 @@
                 "failureCode": {
                     "target": "com.amazonaws.robomaker#DeploymentJobErrorCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The failure code of the simulation job if it failed:</p>\n         <dl>\n            <dt>BadPermissionError</dt>\n            <dd>\n\n               <p>AWS Greengrass requires a service-level role permission to access\n                  other services. The role must include the \n                  <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor\">\n                     <code>AWSGreengrassResourceAccessRolePolicy</code> \n                     managed policy</a>.\n               </p>\n            </dd>\n            <dt>ExtractingBundleFailure</dt>\n            <dd>\n               <p>The robot application could not be extracted from the bundle.</p>\n            </dd>\n            <dt>FailureThresholdBreached</dt>\n            <dd>\n               <p>The percentage of robots that could not be updated exceeded the percentage\n                  set for the deployment.</p>\n            </dd>\n            <dt>GreengrassDeploymentFailed</dt>\n            <dd>\n               <p>The robot application could not be deployed to the robot.</p>\n            </dd>\n            <dt>GreengrassGroupVersionDoesNotExist</dt>\n            <dd>\n               <p>The AWS Greengrass group or version associated with a robot is missing.</p>\n            </dd>\n            <dt>InternalServerError</dt>\n            <dd>\n               <p>An internal error has occurred. Retry your request, but if the problem persists, \n                  contact us with details.</p>\n            </dd>\n            <dt>MissingRobotApplicationArchitecture</dt>\n            <dd>\n               <p>The robot application does not have a source that matches the architecture of the robot.</p>\n            </dd>\n            <dt>MissingRobotDeploymentResource</dt>\n            <dd>\n               <p>One or more of the resources specified for the robot application are missing. For\n               example, does the robot application have the correct launch package and launch file?</p>\n            </dd>\n            <dt>PostLaunchFileFailure</dt>\n            <dd>\n               <p>The post-launch script failed.</p>\n            </dd>\n            <dt>PreLaunchFileFailure</dt>\n            <dd>\n               <p>The pre-launch script failed.</p>\n            </dd>\n            <dt>ResourceNotFound</dt>\n            <dd>\n               <p>One or more deployment resources are missing. For example, do robot application \n                  source bundles still exist? </p>\n            </dd>\n            <dt>RobotDeploymentNoResponse</dt>\n            <dd>\n               <p>There is no response from the robot. It might not be powered on or \n               connected to the internet.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The failure code of the simulation job if it failed:</p>\n         <dl>\n            <dt>BadPermissionError</dt>\n            <dd>\n               <p>AWS Greengrass requires a service-level role permission to access\n                  other services. The role must include the \n                  <a href=\"https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor\">\n                     <code>AWSGreengrassResourceAccessRolePolicy</code> \n                     managed policy</a>.\n               </p>\n            </dd>\n            <dt>ExtractingBundleFailure</dt>\n            <dd>\n               <p>The robot application could not be extracted from the bundle.</p>\n            </dd>\n            <dt>FailureThresholdBreached</dt>\n            <dd>\n               <p>The percentage of robots that could not be updated exceeded the percentage\n                  set for the deployment.</p>\n            </dd>\n            <dt>GreengrassDeploymentFailed</dt>\n            <dd>\n               <p>The robot application could not be deployed to the robot.</p>\n            </dd>\n            <dt>GreengrassGroupVersionDoesNotExist</dt>\n            <dd>\n               <p>The AWS Greengrass group or version associated with a robot is missing.</p>\n            </dd>\n            <dt>InternalServerError</dt>\n            <dd>\n               <p>An internal error has occurred. Retry your request, but if the problem persists, \n                  contact us with details.</p>\n            </dd>\n            <dt>MissingRobotApplicationArchitecture</dt>\n            <dd>\n               <p>The robot application does not have a source that matches the architecture of the robot.</p>\n            </dd>\n            <dt>MissingRobotDeploymentResource</dt>\n            <dd>\n               <p>One or more of the resources specified for the robot application are missing. For\n               example, does the robot application have the correct launch package and launch file?</p>\n            </dd>\n            <dt>PostLaunchFileFailure</dt>\n            <dd>\n               <p>The post-launch script failed.</p>\n            </dd>\n            <dt>PreLaunchFileFailure</dt>\n            <dd>\n               <p>The pre-launch script failed.</p>\n            </dd>\n            <dt>ResourceNotFound</dt>\n            <dd>\n               <p>One or more deployment resources are missing. For example, do robot application \n                  source bundles still exist? </p>\n            </dd>\n            <dt>RobotDeploymentNoResponse</dt>\n            <dd>\n               <p>There is no response from the robot. It might not be powered on or \n               connected to the internet.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "failureReason": {
@@ -1294,6 +1439,7 @@
             },
             "traits": {
                 "smithy.api#length": {
+                    "max": 1000,
                     "min": 1
                 }
             },
@@ -1407,6 +1553,363 @@
                     "target": "com.amazonaws.robomaker#VPCConfigResponse",
                     "traits": {
                         "smithy.api#documentation": "<p>Information about the vpc configuration.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#CreateWorldExportJob": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#CreateWorldExportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#CreateWorldExportJobResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a world export job.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/createWorldExportJob"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#CreateWorldExportJobRequest": {
+            "members": {
+                "clientRequestToken": {
+                    "target": "com.amazonaws.robomaker#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "iamRole": {
+                    "target": "com.amazonaws.robomaker#IamRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "outputLocation": {
+                    "target": "com.amazonaws.robomaker#OutputLocation",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world export job.</p>"
+                    }
+                },
+                "worlds": {
+                    "target": "com.amazonaws.robomaker#Arns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Resource Names (arns) that correspond to worlds to export.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#CreateWorldExportJobResponse": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the world export job.</p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.robomaker#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world export job was created.</p>"
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.robomaker#WorldExportJobErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code of the world export job if it failed:</p>\n         <dl>\n            <dt>InternalServiceError</dt>\n            <dd>\n               <p>Internal service error.</p>\n            </dd>\n            <dt>LimitExceeded</dt>\n            <dd>\n                <p>The requested resource exceeds the maximum number allowed, or the number of concurrent \n                      stream requests exceeds the maximum number allowed. \n                </p>\n            </dd>\n            <dt>ResourceNotFound</dt>\n            <dd>\n                <p>The specified resource could not be found. \n                </p>\n            </dd>\n            <dt>RequestThrottled</dt>\n            <dd>\n               <p>The request was throttled.</p>\n            </dd>\n            <dt>InvalidInput</dt>\n            <dd>\n               <p>An input parameter in the request is not valid.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "iamRole": {
+                    "target": "com.amazonaws.robomaker#IamRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that the world export process uses to access the Amazon S3 bucket and\n        put the export.\n      </p>"
+                    }
+                },
+                "outputLocation": {
+                    "target": "com.amazonaws.robomaker#OutputLocation"
+                },
+                "status": {
+                    "target": "com.amazonaws.robomaker#WorldExportJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the world export job.</p>\n         <dl>\n            <dt>Pending</dt>\n            <dd>\n               <p>The world export job request is pending.</p>\n            </dd>\n            <dt>Running</dt>\n            <dd>\n               <p>The world export job is running. </p>\n            </dd>\n            <dt>Completed</dt>\n            <dd>\n               <p>The world export job completed.\n               </p>\n            </dd>\n            <dt>Failed</dt>\n            <dd>\n               <p>The world export job failed. See <code>failureCode</code> for more information.\n               </p>\n            </dd>\n            <dt>Canceled</dt>\n            <dd>\n               <p>The world export job was cancelled.</p>\n            </dd>\n            <dt>Canceling</dt>\n            <dd>\n               <p>The world export job is being cancelled.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world export job.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#CreateWorldGenerationJob": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#IdempotentParameterMismatchException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#CreateWorldGenerationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#CreateWorldGenerationJobResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates worlds using the specified template.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/createWorldGenerationJob"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#CreateWorldGenerationJobRequest": {
+            "members": {
+                "clientRequestToken": {
+                    "target": "com.amazonaws.robomaker#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world generator job.</p>"
+                    }
+                },
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template describing the worlds you want to create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "worldCount": {
+                    "target": "com.amazonaws.robomaker#WorldCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the world count.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#CreateWorldGenerationJobResponse": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the world generator job.</p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.robomaker#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world generator job was created.</p>"
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.robomaker#WorldGenerationJobErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code of the world generator job if it failed:</p>\n         <dl>\n            <dt>InternalServiceError</dt>\n            <dd>\n               <p>Internal service error.</p>\n            </dd>\n            <dt>LimitExceeded</dt>\n            <dd>\n                <p>The requested resource exceeds the maximum number allowed, or the number of concurrent \n                      stream requests exceeds the maximum number allowed. \n                </p>\n            </dd>\n            <dt>ResourceNotFound</dt>\n            <dd>\n                <p>The specified resource could not be found. \n                </p>\n            </dd>\n            <dt>RequestThrottled</dt>\n            <dd>\n               <p>The request was throttled.</p>\n            </dd>\n            <dt>InvalidInput</dt>\n            <dd>\n               <p>An input parameter in the request is not valid.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.robomaker#WorldGenerationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the world generator job.</p>\n         <dl>\n            <dt>Pending</dt>\n            <dd>\n               <p>The world generator job request is pending.</p>\n            </dd>\n            <dt>Running</dt>\n            <dd>\n               <p>The world generator job is running. </p>\n            </dd>\n            <dt>Completed</dt>\n            <dd>\n               <p>The world generator job completed.\n               </p>\n            </dd>\n            <dt>Failed</dt>\n            <dd>\n               <p>The world generator job failed. See <code>failureCode</code> for more information.\n               </p>\n            </dd>\n            <dt>PartialFailed</dt>\n            <dd>\n               <p>Some worlds did not generate.</p>\n            </dd>\n            <dt>Canceled</dt>\n            <dd>\n               <p>The world generator job was cancelled.</p>\n            </dd>\n            <dt>Canceling</dt>\n            <dd>\n               <p>The world generator job is being cancelled.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world generator job.</p>"
+                    }
+                },
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+                    }
+                },
+                "worldCount": {
+                    "target": "com.amazonaws.robomaker#WorldCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the world count. </p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#CreateWorldTemplate": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#CreateWorldTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#CreateWorldTemplateResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a world template.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/createWorldTemplate"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#CreateWorldTemplateRequest": {
+            "members": {
+                "clientRequestToken": {
+                    "target": "com.amazonaws.robomaker#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.robomaker#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the world template.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world template.</p>"
+                    }
+                },
+                "templateBody": {
+                    "target": "com.amazonaws.robomaker#Json",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The world template body.</p>"
+                    }
+                },
+                "templateLocation": {
+                    "target": "com.amazonaws.robomaker#TemplateLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the world template.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#CreateWorldTemplateResponse": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the world template.</p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.robomaker#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world template was created.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.robomaker#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the world template.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world template.</p>"
                     }
                 }
             },
@@ -1679,6 +2182,53 @@
             "type": "structure"
         },
         "com.amazonaws.robomaker#DeleteSimulationApplicationResponse": {
+            "members": {},
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#DeleteWorldTemplate": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#DeleteWorldTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#DeleteWorldTemplateResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a world template.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/deleteWorldTemplate"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#DeleteWorldTemplateRequest": {
+            "members": {
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template you want to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#DeleteWorldTemplateResponse": {
             "members": {},
             "type": "structure"
         },
@@ -2883,6 +3433,381 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.robomaker#DescribeWorld": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#DescribeWorldRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#DescribeWorldResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a world.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/describeWorld"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#DescribeWorldExportJob": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#DescribeWorldExportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#DescribeWorldExportJobResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a world export job.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/describeWorldExportJob"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#DescribeWorldExportJobRequest": {
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world export job to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#DescribeWorldExportJobResponse": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the world export job.</p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.robomaker#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world export job was created.</p>"
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.robomaker#WorldExportJobErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code of the world export job if it failed:</p>\n         <dl>\n            <dt>InternalServiceError</dt>\n            <dd>\n               <p>Internal service error.</p>\n            </dd>\n            <dt>LimitExceeded</dt>\n            <dd>\n                <p>The requested resource exceeds the maximum number allowed, or the number of concurrent \n                      stream requests exceeds the maximum number allowed. \n                </p>\n            </dd>\n            <dt>ResourceNotFound</dt>\n            <dd>\n                <p>The specified resource could not be found. \n                </p>\n            </dd>\n            <dt>RequestThrottled</dt>\n            <dd>\n               <p>The request was throttled.</p>\n            </dd>\n            <dt>InvalidInput</dt>\n            <dd>\n               <p>An input parameter in the request is not valid.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.robomaker#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the world export job failed.</p>"
+                    }
+                },
+                "iamRole": {
+                    "target": "com.amazonaws.robomaker#IamRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role that the world export process uses to access the Amazon S3 bucket and put the export.</p>"
+                    }
+                },
+                "outputLocation": {
+                    "target": "com.amazonaws.robomaker#OutputLocation"
+                },
+                "status": {
+                    "target": "com.amazonaws.robomaker#WorldExportJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the world export job.</p>\n         <dl>\n            <dt>Pending</dt>\n            <dd>\n               <p>The world export job request is pending.</p>\n            </dd>\n            <dt>Running</dt>\n            <dd>\n               <p>The world export job is running. </p>\n            </dd>\n            <dt>Completed</dt>\n            <dd>\n               <p>The world export job completed.\n               </p>\n            </dd>\n            <dt>Failed</dt>\n            <dd>\n               <p>The world export job failed. See <code>failureCode</code> and <code>failureReason</code>\n                for more information.\n               </p>\n            </dd>\n            <dt>Canceled</dt>\n            <dd>\n               <p>The world export job was cancelled.</p>\n            </dd>\n            <dt>Canceling</dt>\n            <dd>\n               <p>The world export job is being cancelled.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world export job.</p>"
+                    }
+                },
+                "worlds": {
+                    "target": "com.amazonaws.robomaker#Arns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Resource Names (arns) that correspond to worlds to be exported.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#DescribeWorldGenerationJob": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#DescribeWorldGenerationJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#DescribeWorldGenerationJobResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a world generation job.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/describeWorldGenerationJob"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#DescribeWorldGenerationJobRequest": {
+            "members": {
+                "job": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world generation job to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#DescribeWorldGenerationJobResponse": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the world generation job.</p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.robomaker#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world generation job was created.</p>"
+                    }
+                },
+                "failureCode": {
+                    "target": "com.amazonaws.robomaker#WorldGenerationJobErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code of the world generation job if it failed:</p>\n         <dl>\n            <dt>InternalServiceError</dt>\n            <dd>\n               <p>Internal service error.</p>\n            </dd>\n            <dt>LimitExceeded</dt>\n            <dd>\n                <p>The requested resource exceeds the maximum number allowed, or the number of concurrent \n                      stream requests exceeds the maximum number allowed. \n                </p>\n            </dd>\n            <dt>ResourceNotFound</dt>\n            <dd>\n                <p>The specified resource could not be found. \n                </p>\n            </dd>\n            <dt>RequestThrottled</dt>\n            <dd>\n               <p>The request was throttled.</p>\n            </dd>\n            <dt>InvalidInput</dt>\n            <dd>\n               <p>An input parameter in the request is not valid.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.robomaker#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason why the world generation job failed.</p>"
+                    }
+                },
+                "finishedWorldsSummary": {
+                    "target": "com.amazonaws.robomaker#FinishedWorldsSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information about finished worlds.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.robomaker#WorldGenerationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the world generation job:</p>\n         <dl>\n            <dt>Pending</dt>\n            <dd>\n               <p>The world generation job request is pending.</p>\n            </dd>\n            <dt>Running</dt>\n            <dd>\n               <p>The world generation job is running. </p>\n            </dd>\n            <dt>Completed</dt>\n            <dd>\n               <p>The world generation job completed.\n               </p>\n            </dd>\n            <dt>Failed</dt>\n            <dd>\n               <p>The world generation job failed. See <code>failureCode</code> for more information.\n               </p>\n            </dd>\n            <dt>PartialFailed</dt>\n            <dd>\n               <p>Some worlds did not generate.</p>\n            </dd>\n            <dt>Canceled</dt>\n            <dd>\n               <p>The world generation job was cancelled.</p>\n            </dd>\n            <dt>Canceling</dt>\n            <dd>\n               <p>The world generation job is being cancelled.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world generation job.</p>"
+                    }
+                },
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+                    }
+                },
+                "worldCount": {
+                    "target": "com.amazonaws.robomaker#WorldCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the world count.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#DescribeWorldRequest": {
+            "members": {
+                "world": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world you want to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#DescribeWorldResponse": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world was created.</p>"
+                    }
+                },
+                "generationJob": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world generation job that generated the world.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world.</p>"
+                    }
+                },
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The world template.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#DescribeWorldTemplate": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#DescribeWorldTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#DescribeWorldTemplateResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a world template.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/describeWorldTemplate"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#DescribeWorldTemplateRequest": {
+            "members": {
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template you want to describe.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#DescribeWorldTemplateResponse": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the world template.</p>"
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.robomaker#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world template was created.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.robomaker#LastUpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world template was last updated.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.robomaker#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the world template.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.robomaker#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world template.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
         "com.amazonaws.robomaker#EnvironmentVariableKey": {
             "traits": {
                 "smithy.api#length": {
@@ -2974,6 +3899,26 @@
             },
             "type": "string"
         },
+        "com.amazonaws.robomaker#FailureSummary": {
+            "members": {
+                "failures": {
+                    "target": "com.amazonaws.robomaker#WorldFailures",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The worlds that failed.</p>"
+                    }
+                },
+                "totalFailureCount": {
+                    "target": "com.amazonaws.robomaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of failures.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about worlds that failed.</p>"
+            },
+            "type": "structure"
+        },
         "com.amazonaws.robomaker#Filter": {
             "members": {
                 "name": {
@@ -3017,6 +3962,32 @@
                 }
             },
             "type": "list"
+        },
+        "com.amazonaws.robomaker#FinishedWorldsSummary": {
+            "members": {
+                "failureSummary": {
+                    "target": "com.amazonaws.robomaker#FailureSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about worlds that failed.</p>"
+                    }
+                },
+                "finishedCount": {
+                    "target": "com.amazonaws.robomaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The total number of finished worlds.</p>"
+                    }
+                },
+                "succeededWorlds": {
+                    "target": "com.amazonaws.robomaker#Arns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of worlds that succeeded.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about worlds that finished.</p>"
+            },
+            "type": "structure"
         },
         "com.amazonaws.robomaker#Fleet": {
             "members": {
@@ -3074,6 +4045,12 @@
             },
             "type": "list"
         },
+        "com.amazonaws.robomaker#FloorplanCount": {
+            "traits": {
+                "smithy.api#box": {}
+            },
+            "type": "integer"
+        },
         "com.amazonaws.robomaker#GenericInteger": {
             "traits": {
                 "smithy.api#box": {}
@@ -3089,6 +4066,65 @@
                 "smithy.api#pattern": ".*"
             },
             "type": "string"
+        },
+        "com.amazonaws.robomaker#GetWorldTemplateBody": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#GetWorldTemplateBodyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#GetWorldTemplateBodyResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the world template body.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/getWorldTemplateBody"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#GetWorldTemplateBodyRequest": {
+            "members": {
+                "generationJob": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world generator job.</p>"
+                    }
+                },
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#GetWorldTemplateBodyResponse": {
+            "members": {
+                "templateBody": {
+                    "target": "com.amazonaws.robomaker#Json",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The world template body.</p>"
+                    }
+                }
+            },
+            "type": "structure"
         },
         "com.amazonaws.robomaker#IamRole": {
             "traits": {
@@ -3126,6 +4162,12 @@
         "com.amazonaws.robomaker#Integer": {
             "type": "integer"
         },
+        "com.amazonaws.robomaker#InteriorCountPerFloorplan": {
+            "traits": {
+                "smithy.api#box": {}
+            },
+            "type": "integer"
+        },
         "com.amazonaws.robomaker#InternalServerException": {
             "members": {
                 "message": {
@@ -3154,6 +4196,16 @@
         },
         "com.amazonaws.robomaker#JobDuration": {
             "type": "long"
+        },
+        "com.amazonaws.robomaker#Json": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 262144,
+                    "min": 1
+                },
+                "smithy.api#pattern": "[\\S\\s]+"
+            },
+            "type": "string"
         },
         "com.amazonaws.robomaker#LastStartedAt": {
             "type": "timestamp"
@@ -3267,7 +4319,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated \n         <code>ListDeploymentJobs</code> request where <code>maxResults</code> was used and the results \n         exceeded the value of that parameter. Pagination continues from the end of the previous results \n         that returned the <code>nextToken</code> value. \n      </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListDeploymentJobs</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 }
             },
@@ -3284,7 +4336,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. \n         When the results of a <code>ListDeploymentJobs</code> request exceed <code>maxResults</code>, this \n         value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more \n         results to return. </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListDeploymentJobs</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 }
             },
@@ -3343,7 +4395,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated \n         <code>ListFleets</code> request where <code>maxResults</code> was used and the results \n         exceeded the value of that parameter. Pagination continues from the end of the previous results \n         that returned the <code>nextToken</code> value. \n      </p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to retrieve \n         the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListFleets</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to retrieve \n         the next items in a list and not for other programmatic purposes.</p>\n         </note>"
                     }
                 }
             },
@@ -3360,7 +4412,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListDeploymentJobs</code> request. \n         When the results of a <code>ListFleets</code> request exceed <code>maxResults</code>, this \n         value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more \n         results to return. </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListFleets</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 }
             },
@@ -3416,7 +4468,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated \n         <code>ListRobotApplications</code> request where <code>maxResults</code> was used and the results \n         exceeded the value of that parameter. Pagination continues from the end of the previous results \n         that returned the <code>nextToken</code> value. \n      </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListRobotApplications</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 },
                 "versionQualifier": {
@@ -3433,7 +4485,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListRobotApplications</code> request. \n         When the results of a <code>ListRobotApplications</code> request exceed <code>maxResults</code>, this \n         value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more \n         results to return. </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListRobotApplications</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 },
                 "robotApplicationSummaries": {
@@ -3498,7 +4550,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated \n         <code>ListRobots</code> request where <code>maxResults</code> was used and the results \n         exceeded the value of that parameter. Pagination continues from the end of the previous results \n         that returned the <code>nextToken</code> value. \n      </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListRobots</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 }
             },
@@ -3509,7 +4561,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListRobots</code> request. \n         When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this \n         value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more \n         results to return. </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListRobots</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 },
                 "robots": {
@@ -3571,7 +4623,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated \n         <code>ListSimulationApplications</code> request where <code>maxResults</code> was used and the results \n         exceeded the value of that parameter. Pagination continues from the end of the previous results \n         that returned the <code>nextToken</code> value. \n      </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListSimulationApplications</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 },
                 "versionQualifier": {
@@ -3588,7 +4640,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListSimulationApplications</code> request. \n         When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this \n         value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more \n         results to return. </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListSimulationApplications</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 },
                 "simulationApplicationSummaries": {
@@ -3647,7 +4699,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated \n         <code>ListSimulationJobBatches</code> request where <code>maxResults</code> was used and the results \n         exceeded the value of that parameter. Pagination continues from the end of the previous results \n         that returned the <code>nextToken</code> value. \n      </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListSimulationJobBatches</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 }
             },
@@ -3658,7 +4710,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListSimulationJobBatches</code> request. \n         When the results of a <code>ListSimulationJobBatches</code> request exceed <code>maxResults</code>, this \n         value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more \n         results to return. \n      </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListSimulationJobBatches</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 },
                 "simulationJobBatchSummaries": {
@@ -3720,7 +4772,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated \n         <code>ListSimulationJobs</code> request where <code>maxResults</code> was used and the results \n         exceeded the value of that parameter. Pagination continues from the end of the previous results \n         that returned the <code>nextToken</code> value. \n      </p>\n         <note>\n            <p>This token should be treated as an opaque identifier that is only used to retrieve \n         the next items in a list and not for other programmatic purposes.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListSimulationJobs</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 }
             },
@@ -3731,7 +4783,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.robomaker#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>nextToken</code> value to include in a future <code>ListSimulationJobs</code> request. \n         When the results of a <code>ListRobot</code> request exceed <code>maxResults</code>, this \n         value can be used to retrieve the next page of results. This value is <code>null</code> when there are no more \n         results to return. </p>"
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListSimulationJobs</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
                     }
                 },
                 "simulationJobSummaries": {
@@ -3794,6 +4846,294 @@
                     "target": "com.amazonaws.robomaker#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of all tags added to the specified resource.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#ListWorldExportJobs": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#ListWorldExportJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#ListWorldExportJobsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists world export jobs.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listWorldExportJobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#ListWorldExportJobsRequest": {
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.robomaker#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filters to limit results. You can use <code>generationJobId</code> and <code>templateId</code>.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.robomaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this parameter is used, <code>ListWorldExportJobs</code> only returns \n         <code>maxResults</code> results in a single page along with a <code>nextToken</code> response \n         element. The remaining results of the initial request \n         can be seen by sending another <code>ListWorldExportJobs</code> request with the returned \n         <code>nextToken</code> value. \n         This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldExportJobs</code>\n         returns up to 100 results and a <code>nextToken</code> value if applicable. \n      </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.robomaker#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListWorldExportJobs</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#ListWorldExportJobsResponse": {
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.robomaker#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListWorldExportJobsRequest</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
+                    }
+                },
+                "worldExportJobSummaries": {
+                    "target": "com.amazonaws.robomaker#WorldExportJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information for world export jobs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#ListWorldGenerationJobs": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#ListWorldGenerationJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#ListWorldGenerationJobsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists world generator jobs.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listWorldGenerationJobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#ListWorldGenerationJobsRequest": {
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.robomaker#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filters to limit results. You can use <code>status</code> and <code>templateId</code>.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.robomaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this parameter is used, <code>ListWorldGeneratorJobs</code> only returns \n         <code>maxResults</code> results in a single page along with a <code>nextToken</code> response \n         element. The remaining results of the initial request \n         can be seen by sending another <code>ListWorldGeneratorJobs</code> request with the returned \n         <code>nextToken</code> value. \n         This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldGeneratorJobs</code>\n         returns up to 100 results and a <code>nextToken</code> value if applicable. \n      </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.robomaker#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListWorldGenerationJobsRequest</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#ListWorldGenerationJobsResponse": {
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.robomaker#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListWorldGeneratorJobsRequest</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
+                    }
+                },
+                "worldGenerationJobSummaries": {
+                    "target": "com.amazonaws.robomaker#WorldGenerationJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information for world generator jobs.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#ListWorldTemplates": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#ListWorldTemplatesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#ListWorldTemplatesResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists world templates.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listWorldTemplates"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#ListWorldTemplatesRequest": {
+            "members": {
+                "maxResults": {
+                    "target": "com.amazonaws.robomaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this parameter is used, <code>ListWorldTemplates</code> only returns \n         <code>maxResults</code> results in a single page along with a <code>nextToken</code> response \n         element. The remaining results of the initial request \n         can be seen by sending another <code>ListWorldTemplates</code> request with the returned \n         <code>nextToken</code> value. \n         This value can be between 1 and 100. If this parameter is not used, then <code>ListWorldTemplates</code>\n         returns up to 100 results and a <code>nextToken</code> value if applicable. \n      </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.robomaker#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListWorldTemplates</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#ListWorldTemplatesResponse": {
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.robomaker#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListWorldTemplates</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
+                    }
+                },
+                "templateSummaries": {
+                    "target": "com.amazonaws.robomaker#TemplateSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information for templates.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#ListWorlds": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#ListWorldsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#ListWorldsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists worlds.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/listWorlds"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#ListWorldsRequest": {
+            "members": {
+                "filters": {
+                    "target": "com.amazonaws.robomaker#Filters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional filters to limit results. You can use <code>status</code>.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.robomaker#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this parameter is used, <code>ListWorlds</code> only returns \n         <code>maxResults</code> results in a single page along with a <code>nextToken</code> response \n         element. The remaining results of the initial request \n         can be seen by sending another <code>ListWorlds</code> request with the returned \n         <code>nextToken</code> value. \n         This value can be between 1 and 100. If this parameter is not used, then <code>ListWorlds</code>\n         returns up to 100 results and a <code>nextToken</code> value if applicable. \n      </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.robomaker#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListWorlds</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#ListWorldsResponse": {
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.robomaker#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the previous paginated request did not return all of the remaining results, \n        the response object's <code>nextToken</code> parameter value is set to a token. To retrieve \n        the next set of results, call <code>ListWorlds</code> again and assign that token \n        to the request object's <code>nextToken</code> parameter. If there are no remaining results, \n        the previous response object's NextToken parameter is set to null. \n      </p>"
+                    }
+                },
+                "worldSummaries": {
+                    "target": "com.amazonaws.robomaker#WorldSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary information for worlds.</p>"
                     }
                 }
             },
@@ -4717,6 +6057,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The launch configuration for the simulation application.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "worldConfigs": {
+                    "target": "com.amazonaws.robomaker#WorldConfigs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of world configurations.</p>"
                     }
                 }
             },
@@ -5830,6 +7176,76 @@
             },
             "type": "string"
         },
+        "com.amazonaws.robomaker#TemplateLocation": {
+            "members": {
+                "s3Bucket": {
+                    "target": "com.amazonaws.robomaker#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "s3Key": {
+                    "target": "com.amazonaws.robomaker#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of S3 keys identifying the data source files.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a template location.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#TemplateName": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 255,
+                    "min": 0
+                },
+                "smithy.api#pattern": ".*"
+            },
+            "type": "string"
+        },
+        "com.amazonaws.robomaker#TemplateSummaries": {
+            "member": {
+                "target": "com.amazonaws.robomaker#TemplateSummary"
+            },
+            "type": "list"
+        },
+        "com.amazonaws.robomaker#TemplateSummary": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the template.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the template was created.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.robomaker#LastUpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the template was last updated.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.robomaker#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information for a template.</p>"
+            },
+            "type": "structure"
+        },
         "com.amazonaws.robomaker#ThrottlingException": {
             "members": {
                 "message": {
@@ -6150,6 +7566,96 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.robomaker#UpdateWorldTemplate": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.robomaker#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.robomaker#UpdateWorldTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.robomaker#UpdateWorldTemplateResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a world template.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/updateWorldTemplate"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.robomaker#UpdateWorldTemplateRequest": {
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.robomaker#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the template.</p>"
+                    }
+                },
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template to update.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateBody": {
+                    "target": "com.amazonaws.robomaker#Json",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The world template body.</p>"
+                    }
+                },
+                "templateLocation": {
+                    "target": "com.amazonaws.robomaker#TemplateLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The location of the world template.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#UpdateWorldTemplateResponse": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world template was created.</p>"
+                    }
+                },
+                "lastUpdatedAt": {
+                    "target": "com.amazonaws.robomaker#LastUpdatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world template was last updated.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.robomaker#TemplateName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the world template.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
         "com.amazonaws.robomaker#VPCConfig": {
             "members": {
                 "assignPublicIp": {
@@ -6229,11 +7735,370 @@
             },
             "type": "string"
         },
+        "com.amazonaws.robomaker#WorldConfig": {
+            "members": {
+                "world": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The world generated by Simulation WorldForge.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration information for a world.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#WorldConfigs": {
+            "member": {
+                "target": "com.amazonaws.robomaker#WorldConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1,
+                    "min": 0
+                }
+            },
+            "type": "list"
+        },
+        "com.amazonaws.robomaker#WorldCount": {
+            "members": {
+                "floorplanCount": {
+                    "target": "com.amazonaws.robomaker#FloorplanCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of unique floorplans.</p>"
+                    }
+                },
+                "interiorCountPerFloorplan": {
+                    "target": "com.amazonaws.robomaker#InteriorCountPerFloorplan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of unique interiors per floorplan.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The number of worlds that will be created. You can configure the number\n        of unique floorplans and the number of unique interiors for each floor plan. For example,\n        if you want 1 world with 20 unique interiors, you set <code>floorplanCount = 1</code>\n        and <code>interiorCountPerFloorplan = 20</code>. This will result in 20 worlds \n        (<code>floorplanCount</code> * <code>interiorCountPerFloorplan)</code>.\n      </p>\n         <p>If you set <code>floorplanCount = 4</code> and <code>interiorCountPerFloorplan = 5</code>,\n        there will be 20 worlds with 5 unique floor plans.        \n      </p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#WorldExportJobErrorCode": {
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "InternalServiceError",
+                        "value": "InternalServiceError"
+                    },
+                    {
+                        "name": "LimitExceeded",
+                        "value": "LimitExceeded"
+                    },
+                    {
+                        "name": "ResourceNotFound",
+                        "value": "ResourceNotFound"
+                    },
+                    {
+                        "name": "RequestThrottled",
+                        "value": "RequestThrottled"
+                    },
+                    {
+                        "name": "InvalidInput",
+                        "value": "InvalidInput"
+                    },
+                    {
+                        "name": "AccessDenied",
+                        "value": "AccessDenied"
+                    }
+                ]
+            },
+            "type": "string"
+        },
+        "com.amazonaws.robomaker#WorldExportJobStatus": {
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "Pending",
+                        "value": "Pending"
+                    },
+                    {
+                        "name": "Running",
+                        "value": "Running"
+                    },
+                    {
+                        "name": "Completed",
+                        "value": "Completed"
+                    },
+                    {
+                        "name": "Failed",
+                        "value": "Failed"
+                    },
+                    {
+                        "name": "Canceling",
+                        "value": "Canceling"
+                    },
+                    {
+                        "name": "Canceled",
+                        "value": "Canceled"
+                    }
+                ]
+            },
+            "type": "string"
+        },
+        "com.amazonaws.robomaker#WorldExportJobSummaries": {
+            "member": {
+                "target": "com.amazonaws.robomaker#WorldExportJobSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100,
+                    "min": 0
+                }
+            },
+            "type": "list"
+        },
+        "com.amazonaws.robomaker#WorldExportJobSummary": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the world export job.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world export job was created.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.robomaker#WorldExportJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the world export job.</p>\n         <dl>\n            <dt>Pending</dt>\n            <dd>\n               <p>The world export job request is pending.</p>\n            </dd>\n            <dt>Running</dt>\n            <dd>\n               <p>The world export job is running. </p>\n            </dd>\n            <dt>Completed</dt>\n            <dd>\n               <p>The world export job completed.\n               </p>\n            </dd>\n            <dt>Failed</dt>\n            <dd>\n               <p>The world export job failed. See <code>failureCode</code> for more information.\n               </p>\n            </dd>\n            <dt>Canceled</dt>\n            <dd>\n               <p>The world export job was cancelled.</p>\n            </dd>\n            <dt>Canceling</dt>\n            <dd>\n               <p>The world export job is being cancelled.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "worlds": {
+                    "target": "com.amazonaws.robomaker#Arns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of worlds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a world export job.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#WorldFailure": {
+            "members": {
+                "failureCode": {
+                    "target": "com.amazonaws.robomaker#WorldGenerationJobErrorCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure code of the world export job if it failed:</p>\n         <dl>\n            <dt>InternalServiceError</dt>\n            <dd>\n               <p>Internal service error.</p>\n            </dd>\n            <dt>LimitExceeded</dt>\n            <dd>\n                <p>The requested resource exceeds the maximum number allowed, or the number of concurrent \n                      stream requests exceeds the maximum number allowed. \n                </p>\n            </dd>\n            <dt>ResourceNotFound</dt>\n            <dd>\n                <p>The specified resource could not be found. \n                </p>\n            </dd>\n            <dt>RequestThrottled</dt>\n            <dd>\n               <p>The request was throttled.</p>\n            </dd>\n            <dt>InvalidInput</dt>\n            <dd>\n               <p>An input parameter in the request is not valid.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "failureCount": {
+                    "target": "com.amazonaws.robomaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of failed worlds.</p>"
+                    }
+                },
+                "sampleFailureReason": {
+                    "target": "com.amazonaws.robomaker#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sample reason why the world failed. World errors are aggregated. A sample is used\n        as the <code>sampleFailureReason</code>.\n      </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a failed world.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#WorldFailures": {
+            "member": {
+                "target": "com.amazonaws.robomaker#WorldFailure"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100,
+                    "min": 0
+                }
+            },
+            "type": "list"
+        },
+        "com.amazonaws.robomaker#WorldGenerationJobErrorCode": {
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "InternalServiceError",
+                        "value": "InternalServiceError"
+                    },
+                    {
+                        "name": "LimitExceeded",
+                        "value": "LimitExceeded"
+                    },
+                    {
+                        "name": "ResourceNotFound",
+                        "value": "ResourceNotFound"
+                    },
+                    {
+                        "name": "RequestThrottled",
+                        "value": "RequestThrottled"
+                    },
+                    {
+                        "name": "InvalidInput",
+                        "value": "InvalidInput"
+                    },
+                    {
+                        "name": "AllWorldGenerationFailed",
+                        "value": "AllWorldGenerationFailed"
+                    }
+                ]
+            },
+            "type": "string"
+        },
+        "com.amazonaws.robomaker#WorldGenerationJobStatus": {
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "Pending",
+                        "value": "Pending"
+                    },
+                    {
+                        "name": "Running",
+                        "value": "Running"
+                    },
+                    {
+                        "name": "Completed",
+                        "value": "Completed"
+                    },
+                    {
+                        "name": "Failed",
+                        "value": "Failed"
+                    },
+                    {
+                        "name": "PartialFailed",
+                        "value": "PartialFailed"
+                    },
+                    {
+                        "name": "Canceling",
+                        "value": "Canceling"
+                    },
+                    {
+                        "name": "Canceled",
+                        "value": "Canceled"
+                    }
+                ]
+            },
+            "type": "string"
+        },
+        "com.amazonaws.robomaker#WorldGenerationJobSummaries": {
+            "member": {
+                "target": "com.amazonaws.robomaker#WorldGenerationJobSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 100,
+                    "min": 0
+                }
+            },
+            "type": "list"
+        },
+        "com.amazonaws.robomaker#WorldGenerationJobSummary": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the world generator job.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world generator job was created.</p>"
+                    }
+                },
+                "failedWorldCount": {
+                    "target": "com.amazonaws.robomaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of worlds that failed.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.robomaker#WorldGenerationJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the world generator job:</p>\n         <dl>\n            <dt>Pending</dt>\n            <dd>\n               <p>The world generator job request is pending.</p>\n            </dd>\n            <dt>Running</dt>\n            <dd>\n               <p>The world generator job is running. </p>\n            </dd>\n            <dt>Completed</dt>\n            <dd>\n               <p>The world generator job completed.\n               </p>\n            </dd>\n            <dt>Failed</dt>\n            <dd>\n               <p>The world generator job failed. See <code>failureCode</code> for more information.\n               </p>\n            </dd>\n            <dt>PartialFailed</dt>\n            <dd>\n               <p>Some worlds did not generate.</p>\n            </dd>\n            <dt>Canceled</dt>\n            <dd>\n               <p>The world generator job was cancelled.</p>\n            </dd>\n            <dt>Canceling</dt>\n            <dd>\n               <p>The world generator job is being cancelled.</p>\n            </dd>\n         </dl>"
+                    }
+                },
+                "succeededWorldCount": {
+                    "target": "com.amazonaws.robomaker#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of worlds that were generated.</p>"
+                    }
+                },
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+                    }
+                },
+                "worldCount": {
+                    "target": "com.amazonaws.robomaker#WorldCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the world count.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a world generator job.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.robomaker#WorldSummaries": {
+            "member": {
+                "target": "com.amazonaws.robomaker#WorldSummary"
+            },
+            "type": "list"
+        },
+        "com.amazonaws.robomaker#WorldSummary": {
+            "members": {
+                "arn": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the world.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.robomaker#CreatedAt",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time, in milliseconds since the epoch, when the world was created.</p>"
+                    }
+                },
+                "generationJob": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world generation job.</p>"
+                    }
+                },
+                "template": {
+                    "target": "com.amazonaws.robomaker#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (arn) of the world template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a world.</p>"
+            },
+            "type": "structure"
+        },
         "com.amazonaws.robomaker#errorMessage": {
             "type": "string"
         },
         "com.amazonaws.robomaker#robomaker": {
             "operations": [
+                {
+                    "target": "com.amazonaws.robomaker#BatchDeleteWorlds"
+                },
                 {
                     "target": "com.amazonaws.robomaker#BatchDescribeSimulationJob"
                 },
@@ -6245,6 +8110,12 @@
                 },
                 {
                     "target": "com.amazonaws.robomaker#CancelSimulationJobBatch"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#CancelWorldExportJob"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#CancelWorldGenerationJob"
                 },
                 {
                     "target": "com.amazonaws.robomaker#CreateDeploymentJob"
@@ -6271,6 +8142,15 @@
                     "target": "com.amazonaws.robomaker#CreateSimulationJob"
                 },
                 {
+                    "target": "com.amazonaws.robomaker#CreateWorldExportJob"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#CreateWorldGenerationJob"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#CreateWorldTemplate"
+                },
+                {
                     "target": "com.amazonaws.robomaker#DeleteFleet"
                 },
                 {
@@ -6281,6 +8161,9 @@
                 },
                 {
                     "target": "com.amazonaws.robomaker#DeleteSimulationApplication"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#DeleteWorldTemplate"
                 },
                 {
                     "target": "com.amazonaws.robomaker#DeregisterRobot"
@@ -6307,6 +8190,21 @@
                     "target": "com.amazonaws.robomaker#DescribeSimulationJobBatch"
                 },
                 {
+                    "target": "com.amazonaws.robomaker#DescribeWorld"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#DescribeWorldExportJob"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#DescribeWorldGenerationJob"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#DescribeWorldTemplate"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#GetWorldTemplateBody"
+                },
+                {
                     "target": "com.amazonaws.robomaker#ListDeploymentJobs"
                 },
                 {
@@ -6331,6 +8229,18 @@
                     "target": "com.amazonaws.robomaker#ListTagsForResource"
                 },
                 {
+                    "target": "com.amazonaws.robomaker#ListWorldExportJobs"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ListWorldGenerationJobs"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ListWorlds"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#ListWorldTemplates"
+                },
+                {
                     "target": "com.amazonaws.robomaker#RegisterRobot"
                 },
                 {
@@ -6353,6 +8263,9 @@
                 },
                 {
                     "target": "com.amazonaws.robomaker#UpdateSimulationApplication"
+                },
+                {
+                    "target": "com.amazonaws.robomaker#UpdateWorldTemplate"
                 }
             ],
             "traits": {

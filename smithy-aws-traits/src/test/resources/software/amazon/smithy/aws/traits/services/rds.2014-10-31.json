@@ -231,7 +231,7 @@
                 "SourceIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the event source to be added.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If the source type is a DB instance, then a <code>DBInstanceIdentifier</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB security group, a <code>DBSecurityGroupName</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB parameter group, a <code>DBParameterGroupName</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB snapshot, a <code>DBSnapshotIdentifier</code> must be supplied.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier of the event source to be added.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If the source type is a DB instance, a <code>DBInstanceIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB cluster, a <code>DBClusterIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB parameter group, a <code>DBParameterGroupName</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB security group, a <code>DBSecurityGroupName</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB snapshot, a <code>DBSnapshotIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB cluster snapshot, a <code>DBClusterSnapshotIdentifier</code> value must be supplied.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2352,7 +2352,7 @@
                 "DBName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, the default \"postgres\" database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter or an underscore. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>The Oracle System ID (SID) of the created DB instance.\n          If you specify <code>null</code>, the default value <code>ORCL</code> is used.\n          You can't specify the string NULL, or any other reserved word, for <code>DBName</code>. \n      </p>\n         <p>Default: <code>ORCL</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be longer than 8 characters</p>\n            </li>\n         </ul>\n         <p>\n            <b>SQL Server</b>\n         </p>\n         <p>Not applicable. Must be null.</p>\n         <p>\n            <b>Amazon Aurora</b>\n         </p>\n         <p>The name of the database to create when the primary instance of the DB cluster is created.\n        If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <p>\n            <b>MySQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>MariaDB</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>PostgreSQL</b>\n         </p>\n         <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, the default \"postgres\" database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n            </li>\n            <li>\n               <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>\n         <p>\n            <b>Oracle</b>\n         </p>\n         <p>The Oracle System ID (SID) of the created DB instance.\n          If you specify <code>null</code>, the default value <code>ORCL</code> is used.\n          You can't specify the string NULL, or any other reserved word, for <code>DBName</code>. \n      </p>\n         <p>Default: <code>ORCL</code>\n         </p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be longer than 8 characters</p>\n            </li>\n         </ul>\n         <p>\n            <b>SQL Server</b>\n         </p>\n         <p>Not applicable. Must be null.</p>\n         <p>\n            <b>Amazon Aurora</b>\n         </p>\n         <p>The name of the database to create when the primary instance of the DB cluster is created.\n        If this parameter isn't specified, no database is created in the DB instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain 1 to 64 letters or numbers.</p>\n            </li>\n            <li>\n               <p>Can't be a word reserved by the specified database engine</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DBParameterGroupName": {
@@ -2382,7 +2382,7 @@
                 "Domain": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Active Directory directory ID to create the DB instance in. Currently, only Microsoft SQL Server and Oracle \n            DB instances can be created in an Active Directory Domain.</p>\n         <p>For Microsoft SQL Server DB instances, Amazon RDS can use \n           Windows Authentication to authenticate users that connect to the DB instance. For more\n           information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\">\n           Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the \n           <i>Amazon RDS User Guide</i>.</p>\n         <p>For Oracle DB instances, Amazon RDS can use Kerberos Authentication to authenticate\n            users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\"> Using\n                Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon\n                RDS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Active Directory directory ID to create the DB instance in. Currently, only MySQL, Microsoft SQL \n            Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html\">\n           Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "DomainIAMRoleName": {
@@ -2703,7 +2703,7 @@
                 "Domain": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Active Directory directory ID to create the DB instance in.</p>\n        <p>For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. \n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\">\n                Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>\n        <p>For Microsoft SQL Server DB instances, Amazon RDS can use Windows Authentication to\n            authenticate users that connect to the DB instance. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\">\n                Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL\n                Server</a> in the <i>Amazon RDS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Active Directory directory ID to create the DB instance in. Currently, only MySQL, Microsoft SQL \n            Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html\">\n            Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "DomainIAMRoleName": {
@@ -2800,6 +2800,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates whether the DB instance is publicly accessible.</p>\n         <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance's VPC, \n              and to the public IP address from outside of the DB instance's VPC. Access to the DB instance is ultimately controlled by the security group it uses, \n              and that public access is not permitted if the security group assigned to the DB instance doesn't permit it.</p>\n         <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p>  \n         <p>For more information, see <a>CreateDBInstance</a>.</p>"
+                    }
+                },
+                "ReplicaMode": {
+                    "target": "com.amazonaws.rds#ReplicaMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The open mode of the replica database: mounted or read-only.</p>\n        <note>\n            <p>This parameter is only supported for Oracle DB instances.</p>\n        </note>\n        <p>Mounted DB replicas are included in Oracle Enterprise Edition. The main use case for\n            mounted replicas is cross-Region disaster recovery. The primary database doesn't use Active\n            Data Guard to transmit information to the mounted replica. Because it doesn't accept\n            user connections, a mounted replica can't serve a read-only workload.</p>\n        <p>You can create a combination of mounted and read-only DB replicas for the same primary DB instance.\n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with Oracle Read Replicas for Amazon RDS</a> \n            in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "SourceDBInstanceIdentifier": {
@@ -3237,7 +3243,7 @@
                 "target": "com.amazonaws.rds#CreateEventSubscriptionResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an RDS event notification subscription. This action requires a topic Amazon\n            Resource Name (ARN) created by either the RDS console, the SNS console, or the SNS API.\n            To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the\n            topic. The ARN is displayed in the SNS console.</p>\n         <p>You can specify the type of source (SourceType) you want to be notified of, provide a list of RDS sources \n          (SourceIds) that triggers the events, and provide a list of event categories (EventCategories) for events you want to \n          be notified of. For example, you can specify SourceType = db-instance, SourceIds = mydbinstance1, mydbinstance2 and \n          EventCategories = Availability, Backup.</p>\n\n         <p>If you specify both the SourceType and SourceIds, such as SourceType = db-instance\n          and SourceIdentifier = myDBInstance1, you are notified of all the db-instance events for\n          the specified source. If you specify a SourceType but do not specify a SourceIdentifier,\n          you receive notice of the events for that source type for all your RDS sources. If you\n          don't specify either the SourceType or the SourceIdentifier, you are notified of events\n          generated from all RDS sources belonging to your customer account.</p>\n         <note>\n            <p>RDS event notification is only available for unencrypted SNS topics. If you specify an \n              encrypted SNS topic, event notifications aren't sent for the topic.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates an RDS event notification subscription. This action requires a topic Amazon\n            Resource Name (ARN) created by either the RDS console, the SNS console, or the SNS API.\n            To obtain an ARN with SNS, you must create a topic in Amazon SNS and subscribe to the\n            topic. The ARN is displayed in the SNS console.</p>\n         <p>You can specify the type of source (<code>SourceType</code>) that you want to be\n            notified of and provide a list of RDS sources (<code>SourceIds</code>) that triggers the\n            events. You can also provide a list of event categories (<code>EventCategories</code>)\n            for events that you want to be notified of. For example, you can specify\n                <code>SourceType</code> = <code>db-instance</code>, <code>SourceIds</code> =\n                <code>mydbinstance1</code>, <code>mydbinstance2</code> and\n                <code>EventCategories</code> = <code>Availability</code>,\n            <code>Backup</code>.</p>\n\n         <p>If you specify both the <code>SourceType</code> and <code>SourceIds</code>, such as <code>SourceType</code> = <code>db-instance</code>\n          and <code>SourceIdentifier</code> = <code>myDBInstance1</code>, you are notified of all the <code>db-instance</code> events for\n          the specified source. If you specify a <code>SourceType</code> but do not specify a <code>SourceIdentifier</code>,\n          you receive notice of the events for that source type for all your RDS sources. If you\n          don't specify either the SourceType or the <code>SourceIdentifier</code>, you are notified of events\n          generated from all RDS sources belonging to your customer account.</p>\n         <note>\n            <p>RDS event notification is only available for unencrypted SNS topics. If you specify an \n              encrypted SNS topic, event notifications aren't sent for the topic.</p>\n         </note>"
             },
             "type": "operation"
         },
@@ -3252,7 +3258,7 @@
                 "EventCategories": {
                     "target": "com.amazonaws.rds#EventCategoriesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of event categories for a SourceType that you want to subscribe to. You can see a list of the categories \n            for a given SourceType \n            in the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events</a> topic \n            in the <i>Amazon RDS User Guide</i> \n            or by using the <b>DescribeEventCategories</b> action.\n        </p>"
+                        "smithy.api#documentation": "<p> A list of event categories for a particular source type (<code>SourceType</code>)\n            that you want to subscribe to. You can see a list of the categories for a given source\n            type in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events</a> in the\n                <i>Amazon RDS User Guide</i> or by using the <code>DescribeEventCategories</code> operation. </p>"
                     }
                 },
                 "SnsTopicArn": {
@@ -3265,13 +3271,13 @@
                 "SourceIds": {
                     "target": "com.amazonaws.rds#SourceIdsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. \n          An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens. It can't end with a hyphen or contain two consecutive hyphens.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If SourceIds are supplied, SourceType must also be provided.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB instance, then a <code>DBInstanceIdentifier</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB security group, a <code>DBSecurityGroupName</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB parameter group, a <code>DBParameterGroupName</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB snapshot, a <code>DBSnapshotIdentifier</code> must be supplied.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The list of identifiers of the event sources for which events are returned. If not specified, then all sources are included in the response. \n          An identifier must begin with a letter and must contain only ASCII letters, digits, and hyphens. It can't end with a hyphen or contain two consecutive hyphens.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If a <code>SourceIds</code> value is supplied, <code>SourceType</code> must also be provided.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB instance, a <code>DBInstanceIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB cluster, a <code>DBClusterIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB parameter group, a <code>DBParameterGroupName</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB security group, a <code>DBSecurityGroupName</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB snapshot, a <code>DBSnapshotIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB cluster snapshot, a <code>DBClusterSnapshotIdentifier</code> value must be supplied.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SourceType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of \n          events generated by a DB instance, you would set this parameter to db-instance. if this value isn't specified, all events are returned.</p>\n         <p>Valid values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code> \n         </p>"
+                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be\n            notified of events generated by a DB instance, you set this parameter to\n                <code>db-instance</code>. If this value isn't specified, all events are\n            returned.</p>\n         <p>Valid values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code> \n         </p>"
                     }
                 },
                 "SubscriptionName": {
@@ -4068,7 +4074,7 @@
                 "Status": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>modifying</code>.</p>"
+                        "smithy.api#documentation": "<p>The current status of the endpoint. One of: <code>creating</code>, <code>available</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>. The <code>inactive</code> state applies to an endpoint that can't be used for a certain kind of cluster,\n     such as a <code>writer</code> endpoint for a read-only secondary cluster in a global database.</p>"
                     }
                 }
             },
@@ -5126,6 +5132,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains the identifier of the source DB instance if this DB instance is a read\n            replica.</p>"
+                    }
+                },
+                "ReplicaMode": {
+                    "target": "com.amazonaws.rds#ReplicaMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The open mode of an Oracle read replica. The default is <code>open-read-only</code>. \n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with Oracle Read Replicas for Amazon RDS</a> \n            in the <i>Amazon RDS User Guide</i>.</p>\n        <note>\n            <p>This attribute is only supported in RDS for Oracle.</p>\n        </note>"
                     }
                 },
                 "SecondaryAvailabilityZone": {
@@ -7611,7 +7623,7 @@
                 "Filters": {
                     "target": "com.amazonaws.rds#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of name-value pairs that define which endpoints to include in the output.\n       The filters are specified as name-value pairs, in the format\n       <code>Name=<i>endpoint_type</i>,Values=<i>endpoint_type1</i>,<i>endpoint_type2</i>,...</code>.\n       <code>Name</code> can be one of: <code>db-cluster-endpoint-type</code>, <code>db-cluster-endpoint-custom-type</code>, <code>db-cluster-endpoint-id</code>, <code>db-cluster-endpoint-status</code>.\n         <code>Values</code> for the <code> db-cluster-endpoint-type</code> filter can be one or more of: <code>reader</code>, <code>writer</code>, <code>custom</code>.\n       <code>Values</code> for the <code>db-cluster-endpoint-custom-type</code> filter can be one or more of: <code>reader</code>, <code>any</code>.\n       <code>Values</code> for the <code>db-cluster-endpoint-status</code> filter can be one or more of: <code>available</code>, <code>creating</code>, <code>deleting</code>, <code>modifying</code>.\n     </p>"
+                        "smithy.api#documentation": "<p>A set of name-value pairs that define which endpoints to include in the output.\n       The filters are specified as name-value pairs, in the format\n       <code>Name=<i>endpoint_type</i>,Values=<i>endpoint_type1</i>,<i>endpoint_type2</i>,...</code>.\n       <code>Name</code> can be one of: <code>db-cluster-endpoint-type</code>, <code>db-cluster-endpoint-custom-type</code>, <code>db-cluster-endpoint-id</code>, <code>db-cluster-endpoint-status</code>.\n         <code>Values</code> for the <code> db-cluster-endpoint-type</code> filter can be one or more of: <code>reader</code>, <code>writer</code>, <code>custom</code>.\n       <code>Values</code> for the <code>db-cluster-endpoint-custom-type</code> filter can be one or more of: <code>reader</code>, <code>any</code>.\n       <code>Values</code> for the <code>db-cluster-endpoint-status</code> filter can be one or more of: <code>available</code>, <code>creating</code>, <code>deleting</code>, <code>inactive</code>, <code>modifying</code>.\n     </p>"
                     }
                 },
                 "Marker": {
@@ -8900,7 +8912,13 @@
                 "target": "com.amazonaws.rds#DescribeEngineDefaultParametersResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns the default engine and system parameter information for the specified database engine.</p>"
+                "smithy.api#documentation": "<p>Returns the default engine and system parameter information for the specified database engine.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "items": "EngineDefaults.Parameters",
+                    "outputToken": "EngineDefaults.Marker",
+                    "pageSize": "MaxRecords"
+                }
             },
             "type": "operation"
         },
@@ -8953,7 +8971,7 @@
                 "target": "com.amazonaws.rds#EventCategoriesMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Displays a list of categories for all event source types, or, if specified, for a specified source type.\n            You can see a list of the event categories and source types  \n            in the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">\n                Events</a> topic in the <i>Amazon RDS User Guide.</i>\n         </p>"
+                "smithy.api#documentation": "<p>Displays a list of categories for all event source types, or, if specified, for a specified source type.\n            You can see a list of the event categories and source types  \n            in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">\n                Events</a> in the <i>Amazon RDS User Guide.</i>\n         </p>"
             },
             "type": "operation"
         },
@@ -8968,7 +8986,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of source that is generating the events.</p>\n         <p>Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot</p>"
+                        "smithy.api#documentation": "<p>The type of source that is generating the events.</p>\n         <p>Valid values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code>\n         </p>"
                     }
                 }
             },
@@ -8990,7 +9008,7 @@
                 "target": "com.amazonaws.rds#EventSubscriptionsMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes SubscriptionName, SNSTopicARN, CustomerID, SourceType, SourceID, CreationTime, and Status.</p>\n         <p>If you specify a SubscriptionName, lists the description for that subscription.</p>",
+                "smithy.api#documentation": "<p>Lists all the subscription descriptions for a customer account. The description for a subscription includes \n          <code>SubscriptionName</code>, <code>SNSTopicARN</code>, <code>CustomerID</code>, <code>SourceType</code>, <code>SourceID</code>, <code>CreationTime</code>, and <code>Status</code>.</p>\n         <p>If you specify a <code>SubscriptionName</code>, lists the description for that subscription.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "items": "EventSubscriptionsList",
@@ -9040,7 +9058,7 @@
                 "target": "com.amazonaws.rds#EventsMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns events related to DB instances, DB security groups, DB snapshots, and DB parameter groups for the past 14 days. Events specific to a particular DB instance, DB security group, database snapshot, or DB parameter group can be obtained by providing the name as a parameter. By default, the past hour of events are returned.</p>",
+                "smithy.api#documentation": "<p>Returns events related to DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots for the past 14 days. \n          Events specific to a particular DB instances, DB clusters, DB parameter groups, DB security groups, DB snapshots, and DB cluster snapshots group can be \n          obtained by providing the name as a parameter. By default, the past hour of events are returned.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "items": "Events",
@@ -9091,7 +9109,7 @@
                 "SourceIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the event source for which events are returned. If not specified, then all sources are included in the response.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If SourceIdentifier is supplied, SourceType must also be provided.</p>\n            </li>\n            <li>\n               <p>If the source type is <code>DBInstance</code>, then a <code>DBInstanceIdentifier</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is <code>DBSecurityGroup</code>, a <code>DBSecurityGroupName</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is <code>DBParameterGroup</code>, a <code>DBParameterGroupName</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is <code>DBSnapshot</code>, a <code>DBSnapshotIdentifier</code> must be supplied.</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identifier of the event source for which events are returned. If not specified, then all sources are included in the response.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If <code>SourceIdentifier</code> is supplied, <code>SourceType</code> must also be provided.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB instance, a <code>DBInstanceIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB cluster, a <code>DBClusterIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB parameter group, a <code>DBParameterGroupName</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB security group, a <code>DBSecurityGroupName</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB snapshot, a <code>DBSnapshotIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>If the source type is a DB cluster snapshot, a <code>DBClusterSnapshotIdentifier</code> value must be supplied.</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "SourceType": {
@@ -10167,7 +10185,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the results of a successful invocation of the <code>DescribeEventCategories</code> action.</p>"
+                "smithy.api#documentation": "<p>Contains the results of a successful invocation of the <code>DescribeEventCategories</code> operation.</p>"
             },
             "type": "structure"
         },
@@ -10190,7 +10208,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Data returned from the <b>DescribeEventCategories</b> action.</p>"
+                "smithy.api#documentation": "<p>Data returned from the <code>DescribeEventCategories</code> operation.</p>"
             },
             "type": "structure"
         },
@@ -11763,7 +11781,7 @@
                 "Domain": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Active Directory directory ID to move the DB cluster to.  \n          Specify <code>none</code> to remove the cluster from its current domain.\n          The domain must be created prior to this operation.\n      </p>"
+                        "smithy.api#documentation": "<p>The Active Directory directory ID to move the DB cluster to.  \n          Specify <code>none</code> to remove the cluster from its current domain.\n          The domain must be created prior to this operation.\n      </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/kerberos-authentication.html\">Kerberos Authentication</a>\n            in the <i>Amazon Aurora User Guide</i>.\n      </p>"
                     }
                 },
                 "DomainIAMRoleName": {
@@ -12138,7 +12156,7 @@
                 "Domain": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Active Directory directory ID to move the DB instance to.  \n          Specify <code>none</code> to remove the instance from its current domain.\n          The domain must be created prior to this operation. Currently, only Microsoft SQL Server and  \n          Oracle DB instances can be created in an Active Directory Domain.\n      </p>\n         <p>For Microsoft SQL Server DB instances, Amazon RDS can use \n          Windows Authentication to authenticate users that connect to the DB instance. For more\n          information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\">\n              Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n         <p>For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. \n          For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\">\n              Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The Active Directory directory ID to move the DB instance to.  \n          Specify <code>none</code> to remove the instance from its current domain.\n          The domain must be created prior to this operation. Currently, only MySQL, Microsoft SQL \n          Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html\">\n          Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "DomainIAMRoleName": {
@@ -12259,6 +12277,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>A value that indicates whether the DB instance is publicly accessible.\n      </p>\n         <p>When the DB instance is publicly accessible, its DNS endpoint resolves to the private IP address from within the DB instance's VPC, \n          and to the public IP address from outside of the DB instance's VPC. Access to the DB instance is ultimately controlled by the security group it uses, \n          and that public access is not permitted if the security group assigned to the DB instance doesn't permit it.</p>\n         <p>When the DB instance isn't publicly accessible, it is an internal DB instance with a DNS name that resolves to a private IP address.</p>  \n         <p>\n            <code>PubliclyAccessible</code> only applies to DB instances in a VPC. \n      The DB instance must be part of a public subnet and \n      <code>PubliclyAccessible</code> must be enabled for it to be publicly accessible.\n      </p>\n         <p>Changes to the <code>PubliclyAccessible</code> parameter are applied immediately regardless\n      of the value of the <code>ApplyImmediately</code> parameter.</p>"
+                    }
+                },
+                "ReplicaMode": {
+                    "target": "com.amazonaws.rds#ReplicaMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that sets the open mode of a replica database to either mounted or read-only.</p>\n        <note>\n            <p>Currently, this parameter is only supported for Oracle DB instances.</p>\n        </note>\n        <p>Mounted DB replicas are included in Oracle Enterprise Edition. The main use case for \n            mounted replicas is cross-Region disaster recovery. The primary database doesn't use \n            Active Data Guard to transmit information to the mounted replica. Because it doesn't \n            accept user connections, a mounted replica can't serve a read-only workload. \n            For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-read-replicas.html\">Working with Oracle Read Replicas for Amazon RDS</a> \n            in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "StorageType": {
@@ -12707,7 +12731,7 @@
                 "target": "com.amazonaws.rds#ModifyEventSubscriptionResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Modifies an existing RDS event notification subscription. You can't modify the source identifiers using this call. To change \n        source identifiers for a subscription, use the <code>AddSourceIdentifierToSubscription</code> and <code>RemoveSourceIdentifierFromSubscription</code> calls.</p>\n         <p>You can see a list of the event categories for a given SourceType \n          in the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events</a> topic  in the <i>Amazon RDS User Guide</i> \n            or by using the <b>DescribeEventCategories</b> action.</p>"
+                "smithy.api#documentation": "<p>Modifies an existing RDS event notification subscription. You can't modify the source identifiers using this call. To change \n        source identifiers for a subscription, use the <code>AddSourceIdentifierToSubscription</code> and <code>RemoveSourceIdentifierFromSubscription</code> calls.</p>\n         <p>You can see a list of the event categories for a given source type (<code>SourceType</code>) \n          in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events</a> in the <i>Amazon RDS User Guide</i> \n            or by using the <code>DescribeEventCategories</code> operation.</p>"
             },
             "type": "operation"
         },
@@ -12722,7 +12746,7 @@
                 "EventCategories": {
                     "target": "com.amazonaws.rds#EventCategoriesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n            A list of event categories for a SourceType that you want to subscribe to. You can see a list of the categories for a given SourceType \n            in the <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events</a> topic  in the <i>Amazon RDS User Guide</i> \n            or by using the <b>DescribeEventCategories</b> action.\n        </p>"
+                        "smithy.api#documentation": "<p>\n            A list of event categories for a source type (<code>SourceType</code>) that you want to subscribe to. \n            You can see a list of the categories for a given source type \n            in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Events.html\">Events</a> in the <i>Amazon RDS User Guide</i> \n            or by using the <code>DescribeEventCategories</code> operation.\n        </p>"
                     }
                 },
                 "SnsTopicArn": {
@@ -12734,7 +12758,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. If this value isn't specified, all events are returned.</p>\n         <p>Valid values: db-instance | db-parameter-group | db-security-group | db-snapshot</p>"
+                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. If this value isn't specified, all events are returned.</p>\n         <p>Valid values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code> \n         </p>"
                     }
                 },
                 "SubscriptionName": {
@@ -14648,6 +14672,21 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.rds#ReplicaMode": {
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "name": "OPEN_READ_ONLY",
+                        "value": "open-read-only"
+                    },
+                    {
+                        "name": "MOUNTED",
+                        "value": "mounted"
+                    }
+                ]
+            },
+            "type": "string"
+        },
         "com.amazonaws.rds#ReservedDBInstance": {
             "members": {
                 "CurrencyCode": {
@@ -15109,7 +15148,7 @@
                 "target": "com.amazonaws.rds#RestoreDBClusterFromS3Result"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Aurora DB cluster from data stored in an Amazon S3 bucket. Amazon RDS must be\n        authorized to access the Amazon S3 bucket and the data must be created using the Percona XtraBackup utility as \n        described in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.html\">\n            Migrating Data to an Amazon Aurora MySQL DB Cluster</a> in the <i>Amazon Aurora User Guide</i>.</p>\n        <note>\n              <p>This action only restores the DB cluster, not the DB instances for that DB\n                  cluster. You must invoke the <code>CreateDBInstance</code> action to create DB\n                  instances for the restored DB cluster, specifying the identifier of the restored DB\n                  cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after\n                  the <code>RestoreDBClusterFromS3</code> action has completed and the DB\n                  cluster is available.</p>\n        </note>\n        <p>For more information on Amazon Aurora, see  \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">\n                What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i>\n        </p>\n        <note>\n            <p>This action only applies to Aurora DB clusters.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Creates an Amazon Aurora DB cluster from MySQL data stored in an Amazon S3 bucket.\n            Amazon RDS must be authorized to access the Amazon S3 bucket and the data must be\n            created using the Percona XtraBackup utility as described in <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Migrating.ExtMySQL.html#AuroraMySQL.Migrating.ExtMySQL.S3\"> Migrating Data from MySQL by Using an Amazon S3 Bucket</a> in the\n                <i>Amazon Aurora User Guide</i>.</p>\n        <note>\n              <p>This action only restores the DB cluster, not the DB instances for that DB\n                  cluster. You must invoke the <code>CreateDBInstance</code> action to create DB\n                  instances for the restored DB cluster, specifying the identifier of the restored DB\n                  cluster in <code>DBClusterIdentifier</code>. You can create DB instances only after\n                  the <code>RestoreDBClusterFromS3</code> action has completed and the DB\n                  cluster is available.</p>\n        </note>\n        <p>For more information on Amazon Aurora, see  \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html\">\n                What Is Amazon Aurora?</a> in the <i>Amazon Aurora User Guide.</i>\n        </p>\n        <note>\n            <p>This action only applies to Aurora DB clusters. The source DB engine must be\n                MySQL.</p>\n        </note>"
             },
             "type": "operation"
         },
@@ -15203,7 +15242,7 @@
                 "Engine": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the database engine to be used for the restored DB cluster.</p>\n        <p>Valid Values: <code>aurora</code>, <code>aurora-postgresql</code>\n        </p>",
+                        "smithy.api#documentation": "<p>The name of the database engine to be used for this DB cluster.</p>\n        <p>Valid Values: <code>aurora</code> (for MySQL 5.6-compatible Aurora), <code>aurora-mysql</code> (for MySQL 5.7-compatible Aurora), and <code>aurora-postgresql</code> \n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15287,7 +15326,7 @@
                 "SourceEngineVersion": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the database that the backup files were created from.</p>\n        <p>MySQL versions 5.5, 5.6, and 5.7 are supported.\n        </p>\n        <p>Example: <code>5.6.40</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The version of the database that the backup files were created from.</p>\n        <p>MySQL versions 5.5, 5.6, and 5.7 are supported.\n        </p>\n        <p>Example: <code>5.6.40</code>, <code>5.7.28</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -15436,7 +15475,7 @@
                 "Domain": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Active Directory directory ID to restore the DB cluster in.\n           The domain must be created prior to this operation.\n       </p>"
+                        "smithy.api#documentation": "<p>Specify the Active Directory directory ID to restore the DB cluster in.\n           The domain must be created prior to this operation. Currently, only MySQL, Microsoft SQL \n           Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html\">\n            Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.\n       </p>"
                     }
                 },
                 "DomainIAMRoleName": {
@@ -15871,7 +15910,7 @@
                 "Domain": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Active Directory directory ID to restore the DB instance in.\n           The domain must be created prior to this operation. Currently, only Microsoft SQL Server and \n           Oracle DB instances can be created in an Active Directory Domain.\n       </p>\n         <p>For Microsoft SQL Server DB instances, Amazon RDS can use \n           Windows Authentication to authenticate users that connect to the DB instance. For more\n           information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\">\n               Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the \n           <i>Amazon RDS User Guide</i>.</p>\n         <p>For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. \n           For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\">\n               Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specify the Active Directory directory ID to restore the DB instance in.\n           The domain must be created prior to this operation. Currently, only MySQL, Microsoft SQL \n           Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html\">\n           Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "DomainIAMRoleName": {
@@ -16463,7 +16502,7 @@
                 "Domain": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify the Active Directory directory ID to restore the DB instance in.\n          The domain must be created prior to this operation. Currently, only Microsoft SQL Server and  \n          Oracle DB instances can be created in an Active Directory Domain.\n      </p>\n         <p>For Microsoft SQL Server DB instances, Amazon RDS can use \n          Windows Authentication to authenticate users that connect to the DB instance. For more\n          information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_SQLServerWinAuth.html\">\n              Using Windows Authentication with an Amazon RDS DB Instance Running Microsoft SQL Server</a> in the \n          <i>Amazon RDS User Guide</i>.</p>\n         <p>For Oracle DB instances, Amazon RDS can use Kerberos authentication to authenticate users that connect to the DB instance. \n          For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/oracle-kerberos.html\">\n              Using Kerberos Authentication with Amazon RDS for Oracle</a> in the <i>Amazon RDS User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specify the Active Directory directory ID to restore the DB instance in.\n          The domain must be created prior to this operation. Currently, only MySQL, Microsoft SQL \n          Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/kerberos-authentication.html\">\n          Kerberos Authentication</a> in the <i>Amazon RDS User Guide</i>.</p>"
                     }
                 },
                 "DomainIAMRoleName": {
@@ -17218,7 +17257,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS KMS key to use to encrypt the snapshot exported to Amazon S3. The\n            KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key\n            alias for the KMS encryption key. The IAM role used for the snapshot export must have\n            encryption and decryption permissions to use this KMS key. </p>",
+                        "smithy.api#documentation": "<p>The ID of the AWS KMS key to use to encrypt the snapshot exported to Amazon S3. The\n            KMS key ID is the Amazon Resource Name (ARN), the KMS key identifier, or the KMS key\n            alias for the KMS encryption key. The caller of this operation must be authorized to \n            execute the following operations. These can be set in the KMS key policy: </p>\n        <ul>\n            <li>\n               <p>GrantOperation.Encrypt</p>\n            </li>\n            <li>\n               <p>GrantOperation.Decrypt</p>\n            </li>\n            <li>\n               <p>GrantOperation.GenerateDataKey</p>\n            </li>\n            <li>\n               <p>GrantOperation.GenerateDataKeyWithoutPlaintext</p>\n            </li>\n            <li>\n               <p>GrantOperation.ReEncryptFrom</p>\n            </li>\n            <li>\n               <p>GrantOperation.ReEncryptTo</p>\n            </li>\n            <li>\n               <p>GrantOperation.CreateGrant</p>\n            </li>\n            <li>\n               <p>GrantOperation.DescribeKey</p>\n            </li>\n            <li>\n               <p>GrantOperation.RetireGrant</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },

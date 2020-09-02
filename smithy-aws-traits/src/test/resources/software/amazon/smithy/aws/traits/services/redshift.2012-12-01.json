@@ -4263,7 +4263,13 @@
                 "target": "com.amazonaws.redshift#DescribeDefaultClusterParametersResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of parameter settings for the specified parameter group\n            family.</p>\n        <p>\nFor more information about parameters and parameter groups, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Returns a list of parameter settings for the specified parameter group\n            family.</p>\n        <p>\nFor more information about parameters and parameter groups, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "Marker",
+                    "items": "DefaultClusterParameters.Parameters",
+                    "outputToken": "DefaultClusterParameters.Marker",
+                    "pageSize": "MaxRecords"
+                }
             },
             "type": "operation"
         },
@@ -7147,7 +7153,7 @@
                 "Encrypted": {
                     "target": "com.amazonaws.redshift#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you\n            provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster\n            with the provided <code>KmsKeyId</code>. If you don't provide a <code>KmsKeyId</code>,\n            we encrypt with the default key. In the China region we use legacy encryption\n            if you specify that the cluster is encrypted.</p>\n            <p>If the value is not encrypted (false), then the cluster is decrypted. </p>"
+                        "smithy.api#documentation": "<p>Indicates whether the cluster is encrypted. If the value is encrypted (true) and you\n            provide a value for the <code>KmsKeyId</code> parameter, we encrypt the cluster\n            with the provided <code>KmsKeyId</code>. If you don't provide a <code>KmsKeyId</code>,\n            we encrypt with the default key. </p>\n            <p>If the value is not encrypted (false), then the cluster is decrypted. </p>"
                     }
                 },
                 "EnhancedVpcRouting": {
@@ -7272,7 +7278,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Describes a modify cluster parameter group operation. </p>"
             },
             "type": "structure"
         },
@@ -8150,6 +8156,9 @@
                     }
                 }
             },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a pause cluster operation. For example, a scheduled action to run the <code>PauseCluster</code> API operation. </p>"
+            },
             "type": "structure"
         },
         "com.amazonaws.redshift#PauseClusterResult": {
@@ -8195,7 +8204,7 @@
                 "EncryptionType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption type for a cluster. Possible values are: KMS and None. For the China\n            region the possible values are None, and Legacy. </p>"
+                        "smithy.api#documentation": "<p>The encryption type for a cluster. Possible values are: KMS and None. </p>"
                     }
                 },
                 "EnhancedVpcRouting": {
@@ -9034,7 +9043,7 @@
                 "target": "com.amazonaws.redshift#ResizeClusterResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the\n            number or type of nodes. The default behavior is to use the elastic resize method. With\n            an elastic resize, your cluster is available for read and write operations more quickly\n            than with the classic resize method. </p>\n        <p>Elastic resize operations have the following restrictions:</p>\n        <ul>\n            <li>\n                <p>You can only resize clusters of the following types:</p>\n                <ul>\n                  <li>\n                        <p>dc2.large</p>\n                    </li>\n                  <li>\n                        <p>dc2.8xlarge</p>\n                    </li>\n                  <li>\n                        <p>ds2.xlarge</p>\n                    </li>\n                  <li>\n                        <p>ds2.8xlarge</p>\n                    </li>\n                  <li>\n                        <p>ra3.4xlarge</p>\n                    </li>\n                  <li>\n                        <p>ra3.16xlarge</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>The type of nodes that you add must match the node type for the\n                    cluster.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Changes the size of the cluster. You can change the cluster's type, or change the\n            number or type of nodes. The default behavior is to use the elastic resize method. With\n            an elastic resize, your cluster is available for read and write operations more quickly\n            than with the classic resize method. </p>\n        <p>Elastic resize operations have the following restrictions:</p>\n        <ul>\n            <li>\n                <p>You can only resize clusters of the following types:</p>\n                <ul>\n                  <li>\n                        <p>dc1.large (if your cluster is in a VPC)</p>\n                    </li>\n                  <li>\n                        <p>dc1.8xlarge (if your cluster is in a VPC)</p>\n                    </li>\n                  <li>\n                        <p>dc2.large</p>\n                    </li>\n                  <li>\n                        <p>dc2.8xlarge</p>\n                    </li>\n                  <li>\n                        <p>ds2.xlarge</p>\n                    </li>\n                  <li>\n                        <p>ds2.8xlarge</p>\n                    </li>\n                  <li>\n                        <p>ra3.4xlarge</p>\n                    </li>\n                  <li>\n                        <p>ra3.16xlarge</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>The type of nodes that you add must match the node type for the\n                    cluster.</p>\n            </li>\n         </ul>"
             },
             "type": "operation"
         },
@@ -9068,9 +9077,12 @@
                 "NumberOfNodes": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new number of nodes for the cluster.</p>"
+                        "smithy.api#documentation": "<p>The new number of nodes for the cluster. If not specified, the cluster's current number of nodes is used.</p>"
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a resize cluster operation. For example, a scheduled action to run the <code>ResizeCluster</code> API operation. </p>"
             },
             "type": "structure"
         },
@@ -9192,7 +9204,7 @@
                 "TargetEncryptionType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of encryption for the cluster after the resize is complete.</p>\n        <p>Possible values are <code>KMS</code> and <code>None</code>. In the China region\n            possible values are: <code>Legacy</code> and <code>None</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of encryption for the cluster after the resize is complete.</p>\n        <p>Possible values are <code>KMS</code> and <code>None</code>. </p>"
                     }
                 },
                 "TargetNodeType": {
@@ -9681,6 +9693,9 @@
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a resume cluster operation. For example, a scheduled action to run the <code>ResumeCluster</code> API operation. </p>"
             },
             "type": "structure"
         },

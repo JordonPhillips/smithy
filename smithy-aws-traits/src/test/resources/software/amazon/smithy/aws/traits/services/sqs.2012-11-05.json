@@ -168,7 +168,7 @@
                     "name": "sqs"
                 },
                 "aws.protocols#awsQuery": {},
-                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Simple Queue Service API Reference</i>.</p>\n        <p>Amazon Simple Queue Service (Amazon SQS) is a reliable, highly-scalable hosted queue for storing messages as they travel between applications or microservices. Amazon SQS moves data between distributed application components and helps you decouple these components.</p>\n        <p>You can use <a href=\"http://aws.amazon.com/tools/#sdk\">AWS SDKs</a> to access Amazon SQS using your favorite programming language. The SDKs perform tasks such as the following automatically:</p>\n        <ul>\n            <li>\n                <p>Cryptographically sign your service requests</p>\n            </li>\n            <li>\n                <p>Retry requests</p>\n            </li>\n            <li>\n                <p>Handle error responses</p>\n            </li>\n         </ul>\n        \n        <p>\n            <b>Additional Information</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                    <a href=\"http://aws.amazon.com/sqs/\">Amazon SQS Product Page</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <i>Amazon Simple Queue Service Developer Guide</i>\n               </p>\n                <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html\">Making API Requests</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">Amazon SQS Dead-Letter Queues</a>\n                     </p> \n                  </li>\n               </ul>\n            </li>\n            <li>\n                <p>\n                  <a href=\"http://docs.aws.amazon.com/cli/latest/reference/sqs/index.html\">Amazon SQS in the <i>AWS CLI Command Reference</i>\n                  </a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <i>Amazon Web Services General Reference</i>\n               </p>\n                <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region\">Regions and Endpoints</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Simple Queue Service API Reference</i>.</p>\n        <p>Amazon Simple Queue Service (Amazon SQS) is a reliable, highly-scalable hosted queue for storing messages as they travel between applications or microservices. Amazon SQS moves data between distributed application components and helps you decouple these components.</p>\n        <p>For information on the permissions you need to use this API, see\n            <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-authentication-and-access-control.html\">Identity and\n            access management</a> in the <i>Amazon Simple Queue Service Developer Guide.</i>\n         </p>  \n        <p>You can use <a href=\"http://aws.amazon.com/tools/#sdk\">AWS SDKs</a> to access Amazon SQS using your favorite programming language. The SDKs perform tasks such as the following automatically:</p>\n        <ul>\n            <li>\n                <p>Cryptographically sign your service requests</p>\n            </li>\n            <li>\n                <p>Retry requests</p>\n            </li>\n            <li>\n                <p>Handle error responses</p>\n            </li>\n         </ul>\n        \n        <p>\n            <b>Additional Information</b>\n         </p>\n        <ul>\n            <li>\n                <p>\n                    <a href=\"http://aws.amazon.com/sqs/\">Amazon SQS Product Page</a>\n                </p>\n            </li>\n            <li>\n                <p>\n                  <i>Amazon Simple Queue Service Developer Guide</i>\n               </p>\n                <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-making-api-requests.html\">Making API Requests</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">Amazon SQS Dead-Letter Queues</a>\n                     </p> \n                  </li>\n               </ul>\n            </li>\n            <li>\n                <p>\n                  <a href=\"http://docs.aws.amazon.com/cli/latest/reference/sqs/index.html\">Amazon SQS in the <i>AWS CLI Command Reference</i>\n                  </a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <i>Amazon Web Services General Reference</i>\n               </p>\n                <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#sqs_region\">Regions and Endpoints</a>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon Simple Queue Service",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://queue.amazonaws.com/doc/2012-11-05/"
@@ -430,7 +430,7 @@
                 "VisibilityTimeout": {
                     "target": "com.amazonaws.sqs#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new value for the message's visibility timeout (in seconds). Values values: <code>0</code> to <code>43200</code>. Maximum: 12 hours.</p>",
+                        "smithy.api#documentation": "<p>The new value for the message's visibility timeout (in seconds). Values range: <code>0</code> to <code>43200</code>. Maximum: 12 hours.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -856,7 +856,7 @@
                 "target": "com.amazonaws.sqs#ListDeadLetterSourceQueuesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of your queues that have the <code>RedrivePolicy</code> queue attribute configured with a dead-letter queue.</p>\n    \n      \n         <p>For more information about using dead-letter queues, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">Using Amazon SQS Dead-Letter Queues</a> \n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of your queues that have the <code>RedrivePolicy</code> queue attribute configured with a dead-letter queue.</p>   \n         <p> The <code>ListDeadLetterSourceQueues</code> methods supports\n          pagination. Set parameter <code>MaxResults</code> in the request to specify the maximum number of\n          results to be returned in the response. If you do not set <code>MaxResults</code>,\n          the response includes a maximum of 1,000 results. If you set <code>MaxResults</code> and there are additional results to\n          display, the response includes a value for <code>NextToken</code>. Use\n          <code>NextToken</code> as a parameter in your next request to\n          <code>ListDeadLetterSourceQueues</code> to receive the next page of results.   </p> \n      \n         <p>For more information about using dead-letter queues, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html\">Using Amazon SQS Dead-Letter Queues</a> \n          in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "items": "queueUrls",
@@ -871,7 +871,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sqs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of results to include in the response.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of results to include in the response. Value range is 1 to 1000. \n          You must set <code>MaxResults</code> to receive a value for <code>NextToken</code> in the response.</p>"
                     }
                 },
                 "NextToken": {
@@ -898,7 +898,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sqs#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token to include in the next request.</p>"
+                        "smithy.api#documentation": "<p>Pagination token to include in the next request. Token value is <code>null</code> if there are no additional\n          results to request, or if you did not set <code>MaxResults</code> in the request.</p>"
                     }
                 },
                 "queueUrls": {
@@ -961,7 +961,13 @@
                 "target": "com.amazonaws.sqs#ListQueuesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of your queues. The maximum number of queues that can be returned is 1,000. If you specify a value for the optional \n          <code>QueueNamePrefix</code> parameter, only queues with a name that begins with the specified value are returned.</p>\n         <note>\n            <p>Cross-account permissions don't apply to this action. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name\">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Returns a list of your queues in the current region. The response includes a maximum of 1,000 results. If you specify a value for the optional \n          <code>QueueNamePrefix</code> parameter, only queues with a name that begins with the specified value are returned.</p>\n         <p> The <code>listQueues</code> methods supports\n          pagination. Set parameter <code>MaxResults</code> in the request to specify the maximum number of\n          results to be returned in the response. If you do not set <code>MaxResults</code>,\n          the response includes a maximum of 1,000 results. If you set <code>MaxResults</code> and there are additional results to\n          display, the response includes a value for <code>NextToken</code>. Use\n          <code>NextToken</code> as a parameter in your next request to\n          <code>listQueues</code> to receive the next page of results.  </p>\n         <note>\n            <p>Cross-account permissions don't apply to this action. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name\">Grant Cross-Account Permissions to a Role and a User Name</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>\n         </note>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "QueueUrls",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -970,7 +976,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.sqs#BoxedInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>Maximum number of results to include in the response.</p>"
+                        "smithy.api#documentation": "<p>Maximum number of results to include in the response. Value range is 1 to 1000. \n          You must set <code>MaxResults</code> to receive a value for <code>NextToken</code> in the response.</p>"
                     }
                 },
                 "NextToken": {
@@ -996,7 +1002,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.sqs#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p>Pagination token to include in the next request.</p>"
+                        "smithy.api#documentation": "<p>Pagination token to include in the next request. Token value is <code>null</code> if there are no additional\n        results to request, or if you did not set <code>MaxResults</code> in the request.</p>"
                     }
                 },
                 "QueueUrls": {
@@ -1044,7 +1050,7 @@
                 "MessageAttributes": {
                     "target": "com.amazonaws.sqs#MessageBodyAttributeMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
                         "smithy.api#xmlFlattened": {},
                         "smithy.api#xmlName": "MessageAttribute"
                     }
@@ -1095,7 +1101,7 @@
                 "DataType": {
                     "target": "com.amazonaws.sqs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon SQS supports the following logical data types: <code>String</code>, <code>Number</code>, and <code>Binary</code>. For the <code>Number</code> data type, you must use <code>StringValue</code>.</p>\n         <p>You can also append custom labels. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Amazon SQS supports the following logical data types: <code>String</code>, <code>Number</code>, and <code>Binary</code>. For the <code>Number</code> data type, you must use <code>StringValue</code>.</p>\n         <p>You can also append custom labels. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1239,7 +1245,7 @@
                 "DataType": {
                     "target": "com.amazonaws.sqs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Amazon SQS supports the following logical data types: <code>String</code>, <code>Number</code>, and <code>Binary</code>. For the <code>Number</code> data type, you must use <code>StringValue</code>.</p>\n         <p>You can also append custom labels. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Amazon SQS supports the following logical data types: <code>String</code>, <code>Number</code>, and <code>Binary</code>. For the <code>Number</code> data type, you must use <code>StringValue</code>.</p>\n         <p>You can also append custom labels. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1643,7 +1649,7 @@
                 "MessageAttributes": {
                     "target": "com.amazonaws.sqs#MessageBodyAttributeMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
                         "smithy.api#xmlFlattened": {},
                         "smithy.api#xmlName": "MessageAttribute"
                     }
@@ -1777,7 +1783,7 @@
                 "MessageAttributes": {
                     "target": "com.amazonaws.sqs#MessageBodyAttributeMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>Each message attribute consists of a <code>Name</code>, <code>Type</code>, and <code>Value</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-metadata.html#sqs-message-attributes\">Amazon SQS Message Attributes</a> in the <i>Amazon Simple Queue Service Developer Guide</i>.</p>",
                         "smithy.api#xmlFlattened": {},
                         "smithy.api#xmlName": "MessageAttribute"
                     }
@@ -1785,7 +1791,7 @@
                 "MessageBody": {
                     "target": "com.amazonaws.sqs#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The message to send. The maximum string size is 256 KB.</p>\n         <important>\n           <p>A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:</p>\n           <p>\n               <code>#x9</code> | <code>#xA</code> | <code>#xD</code> | <code>#x20</code> to <code>#xD7FF</code> | <code>#xE000</code> to <code>#xFFFD</code> | <code>#x10000</code> to <code>#x10FFFF</code>\n            </p>\n\t           <p>Any characters not included in this list will be rejected. For more information, see the <a href=\"http://www.w3.org/TR/REC-xml/#charsets\">W3C specification for characters</a>.</p>\n         </important>",
+                        "smithy.api#documentation": "<p>The message to send. The minimum size is one character. The maximum size is 256 KB.</p>\n         <important>\n           <p>A message can include only XML, JSON, and unformatted text. The following Unicode characters are allowed:</p>\n           <p>\n               <code>#x9</code> | <code>#xA</code> | <code>#xD</code> | <code>#x20</code> to <code>#xD7FF</code> | <code>#xE000</code> to <code>#xFFFD</code> | <code>#x10000</code> to <code>#x10FFFF</code>\n            </p>\n\t           <p>Any characters not included in this list will be rejected. For more information, see the <a href=\"http://www.w3.org/TR/REC-xml/#charsets\">W3C specification for characters</a>.</p>\n         </important>",
                         "smithy.api#required": {}
                     }
                 },

@@ -3490,7 +3490,13 @@
                 "target": "com.amazonaws.cloudformation#ListStackInstancesOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns summary information about stack instances that are associated with the\n         specified stack set. You can filter for stack instances that are associated with a specific\n         AWS account name or Region, or that have a specific status.</p>"
+                "smithy.api#documentation": "<p>Returns summary information about stack instances that are associated with the\n         specified stack set. You can filter for stack instances that are associated with a specific\n         AWS account name or Region, or that have a specific status.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Summaries",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -3627,7 +3633,13 @@
                 "target": "com.amazonaws.cloudformation#ListStackSetOperationResultsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns summary information about the results of a stack set operation. </p>"
+                "smithy.api#documentation": "<p>Returns summary information about the results of a stack set operation. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Summaries",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -3692,7 +3704,13 @@
                 "target": "com.amazonaws.cloudformation#ListStackSetOperationsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns summary information about operations performed on a stack set. </p>"
+                "smithy.api#documentation": "<p>Returns summary information about operations performed on a stack set. </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Summaries",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },
@@ -3745,7 +3763,13 @@
                 "target": "com.amazonaws.cloudformation#ListStackSetsOutput"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns summary information about stack sets that are associated with the\n         user.</p>"
+                "smithy.api#documentation": "<p>Returns summary information about stack sets that are associated with the\n         user.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Summaries",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },

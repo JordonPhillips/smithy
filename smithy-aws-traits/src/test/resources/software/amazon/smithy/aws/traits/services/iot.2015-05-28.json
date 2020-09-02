@@ -76,6 +76,9 @@
                     "target": "com.amazonaws.iot#ConfirmTopicRuleDestination"
                 },
                 {
+                    "target": "com.amazonaws.iot#CreateAuditSuppression"
+                },
+                {
                     "target": "com.amazonaws.iot#CreateAuthorizer"
                 },
                 {
@@ -149,6 +152,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#DeleteAccountAuditConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.iot#DeleteAuditSuppression"
                 },
                 {
                     "target": "com.amazonaws.iot#DeleteAuthorizer"
@@ -239,6 +245,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#DescribeAuditMitigationActionsTask"
+                },
+                {
+                    "target": "com.amazonaws.iot#DescribeAuditSuppression"
                 },
                 {
                     "target": "com.amazonaws.iot#DescribeAuditTask"
@@ -386,6 +395,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#ListAuditMitigationActionsTasks"
+                },
+                {
+                    "target": "com.amazonaws.iot#ListAuditSuppressions"
                 },
                 {
                     "target": "com.amazonaws.iot#ListAuditTasks"
@@ -587,6 +599,9 @@
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateAccountAuditConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.iot#UpdateAuditSuppression"
                 },
                 {
                     "target": "com.amazonaws.iot#UpdateAuthorizer"
@@ -1881,6 +1896,12 @@
                         "smithy.api#documentation": "<p>The number of resources that were found noncompliant during the check.</p>"
                     }
                 },
+                "suppressedNonCompliantResourcesCount": {
+                    "target": "com.amazonaws.iot#SuppressedNonCompliantResourcesCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Describes how many of the non-compliant resources created during the evaluation of an audit check were marked as suppressed.\n        </p>"
+                    }
+                },
                 "totalResourcesCount": {
                     "target": "com.amazonaws.iot#TotalResourcesCount",
                     "traits": {
@@ -1948,6 +1969,16 @@
                 "target": "com.amazonaws.iot#ReasonForNonComplianceCodes"
             }
         },
+        "com.amazonaws.iot#AuditDescription": {
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1000,
+                    "min": 0
+                },
+                "smithy.api#pattern": "[\\p{Graph}\\x20]*"
+            },
+            "type": "string"
+        },
         "com.amazonaws.iot#AuditDetails": {
             "key": {
                 "target": "com.amazonaws.iot#AuditCheckName"
@@ -1975,6 +2006,12 @@
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time the result (finding) was discovered.</p>"
+                    }
+                },
+                "isSuppressed": {
+                    "target": "com.amazonaws.iot#IsSuppressed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether the audit finding was suppressed or not during reporting.\n        </p>"
                     }
                 },
                 "nonCompliantResource": {
@@ -2321,6 +2358,50 @@
                 ]
             },
             "type": "string"
+        },
+        "com.amazonaws.iot#AuditSuppression": {
+            "members": {
+                "checkName": {
+                    "target": "com.amazonaws.iot#AuditCheckName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#AuditDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The description of the audit suppression.\n        </p>"
+                    }
+                },
+                "expirationDate": {
+                    "target": "com.amazonaws.iot#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to.\n        </p>"
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.iot#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "suppressIndefinitely": {
+                    "target": "com.amazonaws.iot#SuppressIndefinitely",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            Indicates whether a suppression should exist indefinitely or not.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            Filters out specific findings of a Device Defender audit.\n        </p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.iot#AuditSuppressionList": {
+            "member": {
+                "target": "com.amazonaws.iot#AuditSuppression"
+            },
+            "type": "list"
         },
         "com.amazonaws.iot#AuditTaskId": {
             "traits": {
@@ -4319,6 +4400,87 @@
         "com.amazonaws.iot#Count": {
             "type": "integer"
         },
+        "com.amazonaws.iot#CreateAuditSuppression": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.iot#CreateAuditSuppressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#CreateAuditSuppressionResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Creates a Device Defender audit suppression.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/audit/suppressions/create"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.iot#CreateAuditSuppressionRequest": {
+            "members": {
+                "checkName": {
+                    "target": "com.amazonaws.iot#AuditCheckName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.iot#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The epoch timestamp in seconds at which this suppression expires.\n    </p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#AuditDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the audit suppression.\n    </p>"
+                    }
+                },
+                "expirationDate": {
+                    "target": "com.amazonaws.iot#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The epoch timestamp in seconds at which this suppression expires.\n    </p>"
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.iot#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "suppressIndefinitely": {
+                    "target": "com.amazonaws.iot#SuppressIndefinitely",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Indicates whether a suppression should exist indefinitely or not.\n    </p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.iot#CreateAuditSuppressionResponse": {
+            "members": {},
+            "type": "structure"
+        },
         "com.amazonaws.iot#CreateAuthorizer": {
             "errors": [
                 {
@@ -5153,7 +5315,7 @@
                 "target": "com.amazonaws.iot#CreateMitigationActionResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Each mitigation action can apply only one type of change.</p>",
+                "smithy.api#documentation": "<p>Defines an action that can be applied to audit findings by using StartAuditMitigationActionsTask. Only certain types of mitigation actions can be applied to specific check names. For more information, see <a href=\"https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-mitigation-actions.html\">Mitigation actions</a>. Each mitigation action can apply only one type of change.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -6810,6 +6972,55 @@
         },
         "com.amazonaws.iot#DeleteAlertTargets": {
             "type": "boolean"
+        },
+        "com.amazonaws.iot#DeleteAuditSuppression": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.iot#DeleteAuditSuppressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DeleteAuditSuppressionResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Deletes a Device Defender audit suppression.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/audit/suppressions/delete"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.iot#DeleteAuditSuppressionRequest": {
+            "members": {
+                "checkName": {
+                    "target": "com.amazonaws.iot#AuditCheckName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.iot#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.iot#DeleteAuditSuppressionResponse": {
+            "members": {},
+            "type": "structure"
         },
         "com.amazonaws.iot#DeleteAuthorizer": {
             "errors": [
@@ -8568,6 +8779,83 @@
                     "target": "com.amazonaws.iot#AuditMitigationActionsTaskStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The current status of the task.</p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.iot#DescribeAuditSuppression": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.iot#DescribeAuditSuppressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#DescribeAuditSuppressionResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Gets information about a Device Defender audit suppression.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/audit/suppressions/describe"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.iot#DescribeAuditSuppressionRequest": {
+            "members": {
+                "checkName": {
+                    "target": "com.amazonaws.iot#AuditCheckName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.iot#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.iot#DescribeAuditSuppressionResponse": {
+            "members": {
+                "checkName": {
+                    "target": "com.amazonaws.iot#AuditCheckName"
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#AuditDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the audit suppression.\n    </p>"
+                    }
+                },
+                "expirationDate": {
+                    "target": "com.amazonaws.iot#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The epoch timestamp in seconds at which this suppression expires.\n    </p>"
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.iot#ResourceIdentifier"
+                },
+                "suppressIndefinitely": {
+                    "target": "com.amazonaws.iot#SuppressIndefinitely",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Indicates whether a suppression should exist indefinitely or not.\n    </p>"
                     }
                 }
             },
@@ -10664,7 +10952,7 @@
                 "principal": {
                     "target": "com.amazonaws.iot#Principal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principal.</p>\n         <p>If the principal is a certificate, specify the certificate ARN. If the principal is\n         an Amazon Cognito identity, specify the identity ID.</p>",
+                        "smithy.api#documentation": "<p>The principal.</p>\n         <p>Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>",
                         "smithy.api#httpHeader": "x-amzn-iot-principal",
                         "smithy.api#required": {}
                     }
@@ -11855,7 +12143,7 @@
                 "principal": {
                     "target": "com.amazonaws.iot#Principal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principal.</p>"
+                        "smithy.api#documentation": "<p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>"
                     }
                 },
                 "thingName": {
@@ -13265,6 +13553,12 @@
             },
             "type": "boolean"
         },
+        "com.amazonaws.iot#IsSuppressed": {
+            "traits": {
+                "smithy.api#box": {}
+            },
+            "type": "boolean"
+        },
         "com.amazonaws.iot#Job": {
             "members": {
                 "abortConfig": {
@@ -13978,6 +14272,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/active-violations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "activeViolations",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -14068,6 +14368,12 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/attached-policies/{target}"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "policies",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -14098,7 +14404,7 @@
                 "target": {
                     "target": "com.amazonaws.iot#PolicyTarget",
                     "traits": {
-                        "smithy.api#documentation": "<p>The group or principal for which the policies will be listed.</p>",
+                        "smithy.api#documentation": "<p>The group or principal for which the policies will be listed. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -14147,6 +14453,12 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/audit/findings"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "findings",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -14163,6 +14475,12 @@
                     "target": "com.amazonaws.iot#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>A filter to limit results to those found before the specified time. You must\n            specify either the startTime and endTime or the taskId, but not both.</p>"
+                    }
+                },
+                "listSuppressedFindings": {
+                    "target": "com.amazonaws.iot#ListSuppressedFindings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Boolean flag indicating whether only the suppressed findings or the unsuppressed findings should be listed. If this parameter isn't provided, the response will list both suppressed and unsuppressed findings.\n    </p>"
                     }
                 },
                 "maxResults": {
@@ -14239,6 +14557,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/audit/mitigationactions/executions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "actionsExecutions",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -14326,6 +14650,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/audit/mitigationactions/tasks"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "tasks",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -14403,6 +14733,86 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.iot#ListAuditSuppressions": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.iot#ListAuditSuppressionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#ListAuditSuppressionsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Lists your Device Defender audit listings.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/audit/suppressions/list"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "suppressions",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.iot#ListAuditSuppressionsRequest": {
+            "members": {
+                "ascendingOrder": {
+                    "target": "com.amazonaws.iot#AscendingOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Determines whether suppressions are listed in ascending order by expiration date or not. If parameter isn't provided, <code>ascendingOrder=true</code>.\n    </p>"
+                    }
+                },
+                "checkName": {
+                    "target": "com.amazonaws.iot#AuditCheckName"
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.iot#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum number of results to return at one time. The default is 25.\n    </p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token for the next set of results.\n    </p>"
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.iot#ResourceIdentifier"
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.iot#ListAuditSuppressionsResponse": {
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.iot#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A token that can be used to retrieve the next set of results, or <code>null</code> if there are no additional results.\n    </p>"
+                    }
+                },
+                "suppressions": {
+                    "target": "com.amazonaws.iot#AuditSuppressionList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      List of audit suppressions.\n    </p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
         "com.amazonaws.iot#ListAuditTasks": {
             "errors": [
                 {
@@ -14427,6 +14837,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/audit/tasks"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "tasks",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -14527,6 +14943,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/authorizers"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "authorizers",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -14608,6 +15030,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/billing-groups"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "billingGroups",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -14685,6 +15113,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/cacertificates"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "certificates",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -14768,6 +15202,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/certificates"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "certificates",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -14802,6 +15242,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/certificates-by-ca/{caCertificateId}"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "certificates",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -14936,6 +15382,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/dimensions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "dimensionNames",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -15006,6 +15458,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/domainConfigurations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "domainConfigurations",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -15083,6 +15541,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/indices"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "indexNames",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -15150,6 +15614,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/jobs/{jobId}/things"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "executionSummaries",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -15232,6 +15702,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/things/{thingName}/jobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "executionSummaries",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -15314,6 +15790,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/jobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "jobs",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -15406,6 +15888,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/mitigationactions/actions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "actionIdentifiers",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -15483,6 +15971,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/otaUpdates"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "otaUpdates",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -15560,6 +16054,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/certificates-out-going"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "outgoingCertificates",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -15643,6 +16143,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/policies"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "policies",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -15730,6 +16236,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/policy-principals"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "principals",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -15892,6 +16404,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/principal-policies"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "policies",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -15922,7 +16440,7 @@
                 "principal": {
                     "target": "com.amazonaws.iot#Principal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principal.</p>",
+                        "smithy.api#documentation": "<p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>",
                         "smithy.api#httpHeader": "x-amzn-iot-principal",
                         "smithy.api#required": {}
                     }
@@ -15986,6 +16504,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/principals/things"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "things",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16070,6 +16594,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/provisioning-templates/{templateName}/versions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "versions",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16145,6 +16675,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/provisioning-templates"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "templates",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16215,6 +16751,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/role-aliases"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "roleAliases",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -16286,6 +16828,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/audit/scheduledaudits"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "scheduledAudits",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16353,6 +16901,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/security-profiles"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "securityProfileIdentifiers",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16384,6 +16938,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/security-profiles-for-target"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "securityProfileTargetMappings",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16512,6 +17072,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/streams"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "streams",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16559,6 +17125,9 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.iot#ListSuppressedFindings": {
+            "type": "boolean"
+        },
         "com.amazonaws.iot#ListTagsForResource": {
             "errors": [
                 {
@@ -16586,6 +17155,11 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/tags"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "tags",
+                    "outputToken": "nextToken"
                 }
             },
             "type": "operation"
@@ -16663,6 +17237,12 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/policy-targets/{policyName}"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "marker",
+                    "items": "targets",
+                    "outputToken": "nextMarker",
+                    "pageSize": "pageSize"
                 }
             },
             "type": "operation"
@@ -16738,6 +17318,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/security-profiles/{securityProfileName}/targets"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "securityProfileTargets",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16810,6 +17396,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/thing-groups"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "thingGroups",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16838,6 +17430,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/things/{thingName}/thing-groups"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "thingGroups",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -16931,7 +17529,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>The token used to get the next set of results. Will not be returned if operation has returned all results.</p>"
                     }
                 },
                 "thingGroups": {
@@ -17037,6 +17635,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/thing-registration-tasks/{taskId}/reports"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "resourceLinks",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -17126,6 +17730,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/thing-registration-tasks"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "taskIds",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -17203,6 +17813,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/thing-types"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "thingTypes",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -17241,7 +17857,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token for the next set of results, or <b>null</b> if\n\t\t\tthere are no additional results.</p>"
+                        "smithy.api#documentation": "<p>The token for the next set of results. Will not be returned if operation has returned all results.</p>"
                     }
                 },
                 "thingTypes": {
@@ -17281,11 +17897,17 @@
                 "target": "com.amazonaws.iot#ListThingsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Lists your things. Use the <b>attributeName</b> and\n\t\t\t\t<b>attributeValue</b> parameters to filter your things.\n\t\t\tFor example, calling <code>ListThings</code> with attributeName=Color and\n\t\t\tattributeValue=Red retrieves all things in the registry that contain an attribute\n\t\t\t\t<b>Color</b> with the value <b>Red</b>. </p>",
+                "smithy.api#documentation": "<p>Lists your things. Use the <b>attributeName</b> and\n\t\t\t\t<b>attributeValue</b> parameters to filter your things.\n\t\t\tFor example, calling <code>ListThings</code> with attributeName=Color and\n\t\t\tattributeValue=Red retrieves all things in the registry that contain an attribute\n\t\t\t\t<b>Color</b> with the value <b>Red</b>. </p>\n\t\t       <note>\n\t\t\t         <p>You will not be charged for calling this API if an <code>Access denied</code> error is returned. You will also not be charged if no attributes or pagination token was provided in request and no pagination token and no results were returned.</p>\n\t\t       </note>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "GET",
                     "uri": "/things"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "things",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -17317,6 +17939,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/billing-groups/{billingGroupName}/things"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "things",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -17353,7 +17981,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>The token used to get the next set of results. Will not be returned if operation has returned all results.</p>"
                     }
                 },
                 "things": {
@@ -17389,6 +18017,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/thing-groups/{thingGroupName}/things"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "things",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -17492,7 +18126,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.iot#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token used to get the next set of results, or <b>null</b> if there are no additional results.</p>"
+                        "smithy.api#documentation": "<p>The token used to get the next set of results. Will not be returned if operation has returned all results.</p>"
                     }
                 },
                 "things": {
@@ -17534,6 +18168,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/destinations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "destinationSummaries",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -17598,6 +18238,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/rules"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "rules",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -17685,6 +18331,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v2LoggingLevel"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "logTargetConfigurations",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -17756,6 +18408,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/violation-events"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "violationEvents",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -22068,6 +22726,18 @@
         "com.amazonaws.iot#SumOfSquares": {
             "type": "double"
         },
+        "com.amazonaws.iot#SuppressIndefinitely": {
+            "traits": {
+                "smithy.api#box": {}
+            },
+            "type": "boolean"
+        },
+        "com.amazonaws.iot#SuppressedNonCompliantResourcesCount": {
+            "traits": {
+                "smithy.api#box": {}
+            },
+            "type": "long"
+        },
         "com.amazonaws.iot#TableName": {
             "type": "string"
         },
@@ -22449,7 +23119,7 @@
                 "principal": {
                     "target": "com.amazonaws.iot#Principal",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principal.</p>"
+                        "smithy.api#documentation": "<p>The principal. Valid principals are CertificateArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:cert/<i>certificateId</i>), thingGroupArn (arn:aws:iot:<i>region</i>:<i>accountId</i>:thinggroup/<i>groupName</i>) and CognitoId (<i>region</i>:<i>id</i>).</p>"
                     }
                 }
             },
@@ -23771,6 +24441,76 @@
             "members": {},
             "type": "structure"
         },
+        "com.amazonaws.iot#UpdateAuditSuppression": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.iot#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.iot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.iot#ThrottlingException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.iot#UpdateAuditSuppressionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.iot#UpdateAuditSuppressionResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Updates a Device Defender audit suppression.\n    </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PATCH",
+                    "uri": "/audit/suppressions/update"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.iot#UpdateAuditSuppressionRequest": {
+            "members": {
+                "checkName": {
+                    "target": "com.amazonaws.iot#AuditCheckName",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.iot#AuditDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The description of the audit suppression.\n    </p>"
+                    }
+                },
+                "expirationDate": {
+                    "target": "com.amazonaws.iot#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The expiration date (epoch timestamp in seconds) that you want the suppression to adhere to.\n    </p>"
+                    }
+                },
+                "resourceIdentifier": {
+                    "target": "com.amazonaws.iot#ResourceIdentifier",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "suppressIndefinitely": {
+                    "target": "com.amazonaws.iot#SuppressIndefinitely",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      Indicates whether a suppression should exist indefinitely or not.\n    </p>"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.iot#UpdateAuditSuppressionResponse": {
+            "members": {},
+            "type": "structure"
+        },
         "com.amazonaws.iot#UpdateAuthorizer": {
             "errors": [
                 {
@@ -24055,7 +24795,7 @@
                 "target": "com.amazonaws.iot#UpdateCertificateRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Updates the status of the specified certificate. This operation is\n         idempotent.</p>\n         <p>Moving a certificate from the ACTIVE state (including REVOKED) will not disconnect\n         currently connected devices, but these devices will be unable to reconnect.</p>\n         <p>The ACTIVE state is required to authenticate devices connecting to AWS IoT using a\n         certificate.</p>",
+                "smithy.api#documentation": "<p>Updates the status of the specified certificate. This operation is\n         idempotent.</p>\n         <p>Certificates must be in the ACTIVE state to authenticate devices that use\n         a certificate to connect to AWS IoT.</p>\n         <p>Within a few minutes of updating a certificate from the ACTIVE state to any other\n         state, AWS IoT disconnects all devices that used that certificate to connect. Devices cannot\n         use a certificate that is not in the ACTIVE state to reconnect.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "PUT",

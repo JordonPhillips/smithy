@@ -8580,7 +8580,13 @@
                 "target": "com.amazonaws.glue#GetSecurityConfigurationsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of all security configurations.</p>"
+                "smithy.api#documentation": "<p>Retrieves a list of all security configurations.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "SecurityConfigurations",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
             },
             "type": "operation"
         },

@@ -634,6 +634,14 @@
                         "smithy.api#jsonName": "name",
                         "smithy.api#required": {}
                     }
+                },
+                "State": {
+                    "target": "com.amazonaws.kafka#ConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
+                        "smithy.api#jsonName": "state",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
@@ -695,6 +703,26 @@
                 "smithy.api#documentation": "<p>Describes a configuration revision.</p>"
             },
             "type": "structure"
+        },
+        "com.amazonaws.kafka#ConfigurationState": {
+            "traits": {
+                "smithy.api#documentation": "<p>The state of a configuration.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "ACTIVE",
+                        "value": "ACTIVE"
+                    },
+                    {
+                        "name": "DELETING",
+                        "value": "DELETING"
+                    },
+                    {
+                        "name": "DELETE_FAILED",
+                        "value": "DELETE_FAILED"
+                    }
+                ]
+            },
+            "type": "string"
         },
         "com.amazonaws.kafka#ConflictException": {
             "members": {
@@ -975,6 +1003,13 @@
                         "smithy.api#documentation": "<p>The name of the configuration.</p>",
                         "smithy.api#jsonName": "name"
                     }
+                },
+                "State": {
+                    "target": "com.amazonaws.kafka#ConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
+                        "smithy.api#jsonName": "state"
+                    }
                 }
             },
             "type": "structure"
@@ -1043,6 +1078,69 @@
                     "target": "com.amazonaws.kafka#ClusterState",
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the cluster. The possible states are CREATING, ACTIVE, and FAILED.</p>",
+                        "smithy.api#jsonName": "state"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.kafka#DeleteConfiguration": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.kafka#DeleteConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#DeleteConfigurationResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an MSK Configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "DELETE",
+                    "uri": "/v1/configurations/{Arn}"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.kafka#DeleteConfigurationRequest": {
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.kafka#DeleteConfigurationResponse": {
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that uniquely identifies an MSK configuration.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.kafka#ConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
                         "smithy.api#jsonName": "state"
                     }
                 }
@@ -1259,6 +1357,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the configuration.</p>",
                         "smithy.api#jsonName": "name"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.kafka#ConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the configuration. The possible states are ACTIVE, DELETING, and DELETE_FAILED. </p>",
+                        "smithy.api#jsonName": "state"
                     }
                 }
             },
@@ -1719,6 +1824,9 @@
                     "target": "com.amazonaws.kafka#DeleteCluster"
                 },
                 {
+                    "target": "com.amazonaws.kafka#DeleteConfiguration"
+                },
+                {
                     "target": "com.amazonaws.kafka#DescribeCluster"
                 },
                 {
@@ -1777,6 +1885,9 @@
                 },
                 {
                     "target": "com.amazonaws.kafka#UpdateClusterKafkaVersion"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UpdateConfiguration"
                 },
                 {
                     "target": "com.amazonaws.kafka#UpdateMonitoring"
@@ -3264,6 +3375,90 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster operation.</p>",
                         "smithy.api#jsonName": "clusterOperationArn"
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.kafka#UpdateConfiguration": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.kafka#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#InternalServerErrorException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.kafka#UnauthorizedException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.kafka#UpdateConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.kafka#UpdateConfigurationResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an MSK configuration.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "PUT",
+                    "uri": "/v1/configurations/{Arn}"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.kafka#UpdateConfigurationRequest": {
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the configuration revision.</p>",
+                        "smithy.api#jsonName": "description"
+                    }
+                },
+                "ServerProperties": {
+                    "target": "com.amazonaws.kafka#__blob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contents of the <filename>server.properties</filename> file. When using the API, you must ensure that the contents of the file are base64 encoded. \n               When using the AWS Management Console, the SDK, or the AWS CLI, the contents of <filename>server.properties</filename> can be in plaintext.</p>",
+                        "smithy.api#jsonName": "serverProperties",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.kafka#UpdateConfigurationResponse": {
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.kafka#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration.</p>",
+                        "smithy.api#jsonName": "arn"
+                    }
+                },
+                "LatestRevision": {
+                    "target": "com.amazonaws.kafka#ConfigurationRevision",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Latest revision of the configuration.</p>",
+                        "smithy.api#jsonName": "latestRevision"
                     }
                 }
             },

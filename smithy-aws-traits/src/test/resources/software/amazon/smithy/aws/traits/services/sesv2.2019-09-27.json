@@ -1148,6 +1148,70 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.sesv2#CreateImportJob": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.sesv2#CreateImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#CreateImportJobResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an import job for a data destination.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/v2/email/import-jobs"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.sesv2#CreateImportJobRequest": {
+            "members": {
+                "ImportDataSource": {
+                    "target": "com.amazonaws.sesv2#ImportDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source for the import job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ImportDestination": {
+                    "target": "com.amazonaws.sesv2#ImportDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination for the import job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to create an import job from a data source for a data\n            destination.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.sesv2#CreateImportJobResponse": {
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.sesv2#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that represents the import job ID.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+            },
+            "type": "structure"
+        },
         "com.amazonaws.sesv2#CustomRedirectDomain": {
             "traits": {
                 "smithy.api#documentation": "<p>The domain that you want to use for tracking open and click events.</p>"
@@ -1232,6 +1296,22 @@
                 "target": "com.amazonaws.sesv2#DailyVolume"
             },
             "type": "list"
+        },
+        "com.amazonaws.sesv2#DataFormat": {
+            "traits": {
+                "smithy.api#documentation": "<p>The data format of the import job's data source.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "CSV",
+                        "value": "CSV"
+                    },
+                    {
+                        "name": "JSON",
+                        "value": "JSON"
+                    }
+                ]
+            },
+            "type": "string"
         },
         "com.amazonaws.sesv2#DedicatedIp": {
             "members": {
@@ -2475,6 +2555,35 @@
             },
             "type": "list"
         },
+        "com.amazonaws.sesv2#FailedRecordsCount": {
+            "traits": {
+                "smithy.api#box": {}
+            },
+            "type": "integer"
+        },
+        "com.amazonaws.sesv2#FailedRecordsS3Url": {
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#FailureInfo": {
+            "members": {
+                "ErrorMessage": {
+                    "target": "com.amazonaws.sesv2#ErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message about why the import job failed.</p>"
+                    }
+                },
+                "FailedRecordsS3Url": {
+                    "target": "com.amazonaws.sesv2#FailedRecordsS3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon S3 presigned URL that contains all the failed records and related\n            information.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains the failure details about an import job.</p>"
+            },
+            "type": "structure"
+        },
         "com.amazonaws.sesv2#FailureRedirectionURL": {
             "traits": {
                 "smithy.api#documentation": "<p>The URL that the recipient of the verification email is sent to if his or her address\n            is not successfully verified.</p>"
@@ -3526,6 +3635,112 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.sesv2#GetImportJob": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.sesv2#GetImportJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#GetImportJobResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information about an import job.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/email/import-jobs/{JobId}"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.sesv2#GetImportJobRequest": {
+            "members": {
+                "JobId": {
+                    "target": "com.amazonaws.sesv2#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the import job.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request for information about an import job using the import job\n            ID.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.sesv2#GetImportJobResponse": {
+            "members": {
+                "CompletedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the import job was completed.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time stamp of when the import job was created.</p>"
+                    }
+                },
+                "FailedRecordsCount": {
+                    "target": "com.amazonaws.sesv2#FailedRecordsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records that failed processing because of invalid input or other\n            reasons.</p>"
+                    }
+                },
+                "FailureInfo": {
+                    "target": "com.amazonaws.sesv2#FailureInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The failure details about an import job.</p>"
+                    }
+                },
+                "ImportDataSource": {
+                    "target": "com.amazonaws.sesv2#ImportDataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data source of the import job.</p>"
+                    }
+                },
+                "ImportDestination": {
+                    "target": "com.amazonaws.sesv2#ImportDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination of the import job.</p>"
+                    }
+                },
+                "JobId": {
+                    "target": "com.amazonaws.sesv2#JobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that represents the import job ID.</p>"
+                    }
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.sesv2#JobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the import job.</p>"
+                    }
+                },
+                "ProcessedRecordsCount": {
+                    "target": "com.amazonaws.sesv2#ProcessedRecordsCount",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current number of records processed.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+            },
+            "type": "structure"
+        },
         "com.amazonaws.sesv2#GetSuppressedDestination": {
             "errors": [
                 {
@@ -3648,6 +3863,84 @@
         "com.amazonaws.sesv2#ImageUrl": {
             "type": "string"
         },
+        "com.amazonaws.sesv2#ImportDataSource": {
+            "members": {
+                "DataFormat": {
+                    "target": "com.amazonaws.sesv2#DataFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data format of the import job's data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3Url": {
+                    "target": "com.amazonaws.sesv2#S3Url",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon S3 URL in the format\n                s3://<i><bucket_name></i>/<i><object></i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about the data source of the import job.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.sesv2#ImportDestination": {
+            "members": {
+                "SuppressionListDestination": {
+                    "target": "com.amazonaws.sesv2#SuppressionListDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the action of the import job towards suppression list.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about the resource destination the import job is going\n            to target.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.sesv2#ImportDestinationType": {
+            "traits": {
+                "smithy.api#documentation": "<p>The destination of the import job, which can be used to list import jobs that have a\n            certain <code>ImportDestinationType</code>.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "SUPPRESSION_LIST",
+                        "value": "SUPPRESSION_LIST"
+                    }
+                ]
+            },
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#ImportJobSummary": {
+            "members": {
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.sesv2#Timestamp"
+                },
+                "ImportDestination": {
+                    "target": "com.amazonaws.sesv2#ImportDestination"
+                },
+                "JobId": {
+                    "target": "com.amazonaws.sesv2#JobId"
+                },
+                "JobStatus": {
+                    "target": "com.amazonaws.sesv2#JobStatus"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the import job.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.sesv2#ImportJobSummaryList": {
+            "member": {
+                "target": "com.amazonaws.sesv2#ImportJobSummary"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of the import job summaries.</p>"
+            },
+            "type": "list"
+        },
         "com.amazonaws.sesv2#InboxPlacementTrackingOption": {
             "members": {
                 "Global": {
@@ -3730,6 +4023,39 @@
                 "target": "com.amazonaws.sesv2#IspPlacement"
             },
             "type": "list"
+        },
+        "com.amazonaws.sesv2#JobId": {
+            "traits": {
+                "smithy.api#documentation": "<p>A string that represents the import job ID.</p>",
+                "smithy.api#length": {
+                    "min": 1
+                }
+            },
+            "type": "string"
+        },
+        "com.amazonaws.sesv2#JobStatus": {
+            "traits": {
+                "smithy.api#documentation": "<p>The status of the import job.</p>",
+                "smithy.api#enum": [
+                    {
+                        "name": "CREATED",
+                        "value": "CREATED"
+                    },
+                    {
+                        "name": "PROCESSING",
+                        "value": "PROCESSING"
+                    },
+                    {
+                        "name": "COMPLETED",
+                        "value": "COMPLETED"
+                    },
+                    {
+                        "name": "FAILED",
+                        "value": "FAILED"
+                    }
+                ]
+            },
+            "type": "string"
         },
         "com.amazonaws.sesv2#KinesisFirehoseDestination": {
             "members": {
@@ -4308,6 +4634,84 @@
             },
             "type": "structure"
         },
+        "com.amazonaws.sesv2#ListImportJobs": {
+            "errors": [
+                {
+                    "target": "com.amazonaws.sesv2#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#TooManyRequestsException"
+                }
+            ],
+            "input": {
+                "target": "com.amazonaws.sesv2#ListImportJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.sesv2#ListImportJobsResponse"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of the import jobs.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "GET",
+                    "uri": "/v2/email/import-jobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "PageSize"
+                }
+            },
+            "type": "operation"
+        },
+        "com.amazonaws.sesv2#ListImportJobsRequest": {
+            "members": {
+                "ImportDestinationType": {
+                    "target": "com.amazonaws.sesv2#ImportDestinationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination of the import job, which can be used to list import jobs that have a\n            certain <code>ImportDestinationType</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string token indicating that there might be additional import jobs available to be\n            listed. Copy this token to a subsequent call to <code>ListImportJobs</code> with the\n            same parameters to retrieve the next page of import jobs.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "PageSize": {
+                    "target": "com.amazonaws.sesv2#MaxItems",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of import jobs to return at once. Use this parameter to paginate\n            results. If additional import jobs exist beyond the specified limit, the\n                <code>NextToken</code> element is sent in the response. Use the\n                <code>NextToken</code> value in subsequent requests to retrieve additional\n            addresses.</p>",
+                        "smithy.api#httpQuery": "PageSize"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a request to list all of the import jobs for a data destination within the\n            specified maximum number of import jobs.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.sesv2#ListImportJobsResponse": {
+            "members": {
+                "ImportJobs": {
+                    "target": "com.amazonaws.sesv2#ImportJobSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the import job summaries.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.sesv2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string token indicating that there might be additional import jobs available to be\n            listed. Copy this token to a subsequent call to <code>ListImportJobs</code> with the\n            same parameters to retrieve the next page of import jobs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An HTTP 200 response if the request succeeds, or an error message if the request\n            fails.</p>"
+            },
+            "type": "structure"
+        },
         "com.amazonaws.sesv2#ListOfDedicatedIpPools": {
             "member": {
                 "target": "com.amazonaws.sesv2#PoolName"
@@ -4809,6 +5213,12 @@
                 "smithy.api#sensitive": {}
             },
             "type": "string"
+        },
+        "com.amazonaws.sesv2#ProcessedRecordsCount": {
+            "traits": {
+                "smithy.api#box": {}
+            },
+            "type": "integer"
         },
         "com.amazonaws.sesv2#PutAccountDedicatedIpWarmupAttributes": {
             "errors": [
@@ -5943,6 +6353,13 @@
             },
             "type": "string"
         },
+        "com.amazonaws.sesv2#S3Url": {
+            "traits": {
+                "smithy.api#documentation": "<p>An Amazon S3 URL in the format\n                s3://<i><bucket_name></i>/<i><object></i>.</p>",
+                "smithy.api#pattern": "^s3:\\/\\/([^\\/]+)\\/(.*?([^\\/]+)\\/?)$"
+            },
+            "type": "string"
+        },
         "com.amazonaws.sesv2#Selector": {
             "traits": {
                 "smithy.api#length": {
@@ -6365,6 +6782,9 @@
                     "target": "com.amazonaws.sesv2#CreateEmailTemplate"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#CreateImportJob"
+                },
+                {
                     "target": "com.amazonaws.sesv2#DeleteConfigurationSet"
                 },
                 {
@@ -6431,6 +6851,9 @@
                     "target": "com.amazonaws.sesv2#GetEmailTemplate"
                 },
                 {
+                    "target": "com.amazonaws.sesv2#GetImportJob"
+                },
+                {
                     "target": "com.amazonaws.sesv2#GetSuppressedDestination"
                 },
                 {
@@ -6453,6 +6876,9 @@
                 },
                 {
                     "target": "com.amazonaws.sesv2#ListEmailTemplates"
+                },
+                {
+                    "target": "com.amazonaws.sesv2#ListImportJobs"
                 },
                 {
                     "target": "com.amazonaws.sesv2#ListSuppressedDestinations"
@@ -6686,6 +7112,37 @@
                 "smithy.api#documentation": "<p>An object that contains information about the email address suppression preferences\n            for your account in the current AWS Region.</p>"
             },
             "type": "structure"
+        },
+        "com.amazonaws.sesv2#SuppressionListDestination": {
+            "members": {
+                "SuppressionListImportAction": {
+                    "target": "com.amazonaws.sesv2#SuppressionListImportAction",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of action that you want to perform on the address. Acceptable values:</p>\n        <ul>\n            <li>\n                <p>PUT: add the addresses to the suppression list. If the record already exists,\n                    it will override it with the new value.</p>\n            </li>\n            <li>\n                <p>DELETE: remove the addresses from the suppression list.</p>\n            </li>\n         </ul>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains details about the action of suppression list.</p>"
+            },
+            "type": "structure"
+        },
+        "com.amazonaws.sesv2#SuppressionListImportAction": {
+            "traits": {
+                "smithy.api#documentation": "<p>The type of action that you want to perform on the address. Acceptable values:</p>\n        <ul>\n            <li>\n                <p>PUT: add the addresses to the suppression list.</p>\n            </li>\n            <li>\n                <p>DELETE: remove the address from the suppression list.</p>\n            </li>\n         </ul>",
+                "smithy.api#enum": [
+                    {
+                        "name": "DELETE",
+                        "value": "DELETE"
+                    },
+                    {
+                        "name": "PUT",
+                        "value": "PUT"
+                    }
+                ]
+            },
+            "type": "string"
         },
         "com.amazonaws.sesv2#SuppressionListReason": {
             "traits": {
