@@ -2036,6 +2036,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/data-sets/{DataSetId}/revisions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Revisions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -2111,6 +2117,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/data-sets"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "DataSets",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -2185,6 +2197,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/jobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Jobs",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -2320,6 +2338,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/data-sets/{DataSetId}/revisions/{RevisionId}/assets"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Assets",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"

@@ -1337,6 +1337,11 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/applications/{ApplicationId}/dependencies"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxItems"
                 }
             },
             "type": "operation"
@@ -1424,6 +1429,11 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/applications/{ApplicationId}/versions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxItems"
                 }
             },
             "type": "operation"
@@ -1501,6 +1511,11 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/applications"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxItems"
                 }
             },
             "type": "operation"

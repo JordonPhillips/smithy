@@ -4922,6 +4922,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/prod/channels/{ChannelId}/schedule"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "ScheduleActions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10351,6 +10357,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/prod/channels"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Channels",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10428,6 +10440,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/prod/inputDevices"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "InputDevices",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10507,6 +10525,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/prod/inputSecurityGroups"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "InputSecurityGroups",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10585,6 +10609,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/prod/inputs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Inputs",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10665,6 +10695,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/prod/multiplexes/{MultiplexId}/programs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "MultiplexPrograms",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10754,6 +10790,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/prod/multiplexes"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Multiplexes",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10835,6 +10877,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/prod/offerings"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Offerings",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10984,6 +11032,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/prod/reservations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Reservations",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"

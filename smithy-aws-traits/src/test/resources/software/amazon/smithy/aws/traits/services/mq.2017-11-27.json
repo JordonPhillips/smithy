@@ -2149,6 +2149,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/brokers"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "BrokerSummaries",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"

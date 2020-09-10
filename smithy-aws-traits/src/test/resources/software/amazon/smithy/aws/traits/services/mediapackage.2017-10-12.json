@@ -1809,6 +1809,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/channels"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Channels",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -1884,6 +1890,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/harvest_jobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "HarvestJobs",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -1973,6 +1985,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/origin_endpoints"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "OriginEndpoints",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"

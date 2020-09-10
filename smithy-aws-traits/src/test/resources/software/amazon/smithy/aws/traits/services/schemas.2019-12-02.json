@@ -1455,6 +1455,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/discoverers"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Discoverers",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
                 }
             },
             "type": "operation"
@@ -1538,6 +1544,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/registries"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Registries",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
                 }
             },
             "type": "operation"
@@ -1624,6 +1636,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/registries/name/{RegistryName}/schemas/name/{SchemaName}/versions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "SchemaVersions",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
                 }
             },
             "type": "operation"
@@ -1709,6 +1727,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/registries/name/{RegistryName}/schemas"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Schemas",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
                 }
             },
             "type": "operation"
@@ -2216,6 +2240,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/registries/name/{RegistryName}/schemas/search"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Schemas",
+                    "outputToken": "NextToken",
+                    "pageSize": "Limit"
                 }
             },
             "type": "operation"

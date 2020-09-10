@@ -2172,6 +2172,12 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/datasources/s3"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "buckets",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -4243,6 +4249,12 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/usage/statistics"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "records",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -4890,6 +4902,12 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/jobs/list"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "items",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -4982,6 +5000,12 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/custom-data-identifiers/list"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "items",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -5060,6 +5084,12 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/findings"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "findingIds",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -5100,6 +5130,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/findingsfilters"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "findingsFilterListItems",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -5230,6 +5266,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/invitations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "invitations",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -5429,6 +5471,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/members"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "members",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"
@@ -5514,6 +5562,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/admin"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "items": "adminAccounts",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults"
                 }
             },
             "type": "operation"

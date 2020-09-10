@@ -3957,6 +3957,12 @@
                     "code": 200,
                     "method": "POST",
                     "uri": "/2017-08-29/endpoints"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Endpoints",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10245,6 +10251,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/2017-08-29/jobTemplates"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "JobTemplates",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10341,6 +10353,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/2017-08-29/jobs"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Jobs",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10437,6 +10455,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/2017-08-29/presets"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Presets",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -10533,6 +10557,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/2017-08-29/queues"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Queues",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"

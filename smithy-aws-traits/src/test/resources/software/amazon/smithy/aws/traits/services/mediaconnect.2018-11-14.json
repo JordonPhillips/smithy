@@ -1182,6 +1182,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/entitlements"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Entitlements",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -1251,6 +1257,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/flows"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Flows",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"

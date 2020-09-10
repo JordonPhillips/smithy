@@ -1969,6 +1969,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/clusters/{ClusterArn}/operations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "ClusterOperationInfoList",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -2046,6 +2052,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/clusters"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "ClusterInfoList",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -2128,6 +2140,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/configurations/{Arn}/revisions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Revisions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -2208,6 +2226,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/configurations"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "Configurations",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -2277,6 +2301,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/kafka-versions"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "KafkaVersions",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
@@ -2344,6 +2374,12 @@
                     "code": 200,
                     "method": "GET",
                     "uri": "/v1/clusters/{ClusterArn}/nodes"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "items": "NodeInfoList",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
                 }
             },
             "type": "operation"
