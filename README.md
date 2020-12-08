@@ -1,5 +1,7 @@
 # Smithy
-[![Build Status](https://github.com/awslabs/smithy/workflows/ci/badge.svg)](https://github.com/awslabs/smithy/workflows/ci)
+Build status yes
+asdfasdklf
+dfd
 
 Smithy defines and generates clients, services, and documentation for
 any protocol.
