@@ -20,6 +20,21 @@ def amend(
     push: bool = False,
 ) -> None:
     commit = commit or push
+
+    if not pr_number:
+        pr_number = os.environ.get("GITHUB_REF_NAME")
+        if pr_number is None:
+            raise ValueError(
+                """\
+                The pr number to amend onto entries MUST be set. This can be done as \
+                an argument to the command, or via the GITHUB_REF_NAME environment \
+                varaible as set by GitHub actions."""
+            )
+
+        # The GitHub environment variable is in the form "<pr_number>/merge", but
+        # we only want the pr number.
+        pr_number = pr_number.split("/")[0]
+
     pr_ref = get_pr_ref(pr_number=pr_number, repository=repository)
 
     amended_files = False
@@ -51,20 +66,6 @@ def amend(
 
 def get_pr_ref(pr_number: str | None, repository: str | None):
     repository = repository or os.environ.get("GITHUB_REPOSITORY", "smithy-lang/smithy")
-
-    if not pr_number:
-        pr_number = os.environ.get("GITHUB_REF_NAME")
-        if pr_number is None:
-            raise ValueError(
-                """\
-                The pr number to amend onto entries MUST be set. This can be done as \
-                an argument to the command, or via the GITHUB_REF_NAME environment \
-                varaible as set by GitHub actions."""
-            )
-
-        # The GitHub environment variable is in the form "<pr_number>/merge", but
-        # we only want the pr number.
-        pr_number = pr_number.split("/")[0]
 
     base_url = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
     return f"[#{pr_number}]({base_url}/{repository}/pull/{pr_number})"

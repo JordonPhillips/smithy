@@ -21,7 +21,6 @@ def main() -> None:
     parser.add_argument(
         "-n",
         "--pull-request-number",
-        type=int,
         help="""\
             The numeric identifier for the pull request. This is provided by GitHub \
             in the GITHUB_REF_NAME environment variable in the form \
@@ -30,7 +29,6 @@ def main() -> None:
     parser.add_argument(
         "-r",
         "--repository",
-        type=str,
         help="""\
             The name of the repository, defaulting to 'smithy-lang/smithy'. This is \
             provided by GitHub in the GITHUB_REPOSITORY environment variable.""",
@@ -38,7 +36,6 @@ def main() -> None:
     parser.add_argument(
         "-b",
         "--base",
-        type=str,
         help="""\
             The name of the base branch to diff against, defaulting to 'main'. This \
             is provided by GitHub in the GITHUB_BASE_REF environment variable.""",
