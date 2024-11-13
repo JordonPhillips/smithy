@@ -1,9 +1,7 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
-import json
 import os
 import subprocess
-from dataclasses import asdict
 from pathlib import Path
 
 from . import CHANGES_DIR, Change
@@ -42,9 +40,7 @@ def amend(
         if not change.pull_requests:
             print(f"Amending changelog entry without associated prs: {change_file}")
             change.pull_requests = [pr_ref]
-            change_file.write_text(
-                json.dumps(asdict(change), indent=2, default=str) + "\n"
-            )
+            change.write(change_file)
 
             amended_files = True
             if commit:
@@ -87,5 +83,5 @@ def get_new_changes(base: str | None) -> dict[Path, Change]:
         if stripped.startswith(".changes/next-release") and stripped.endswith(".json"):
             file = REPO_ROOT / stripped
             print(f"Discovered newly staged changelog entry: {file}")
-            new_changes[file] = Change.from_json(json.loads(file.read_text()))
+            new_changes[file] = Change.read(file)
     return new_changes

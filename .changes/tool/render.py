@@ -1,7 +1,5 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
-import json
-
 from . import RELEASES_DIR, Change, Release
 
 TITLE = "Smithy Changelog"
@@ -31,5 +29,5 @@ def render_change(change: Change) -> str:
 def get_releases() -> list[Release]:
     releases: list[Release] = []
     for release_file in RELEASES_DIR.glob("*.json"):
-        releases.append(Release.from_json(json.loads(release_file.read_text())))
+        releases.append(Release.read(release_file))
     return sorted(releases)

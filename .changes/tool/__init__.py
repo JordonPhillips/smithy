@@ -1,7 +1,8 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 import datetime
-from dataclasses import dataclass, field
+import json
+from dataclasses import asdict, dataclass, field
 from enum import Enum
 from pathlib import Path
 from typing import Any, Self
@@ -36,6 +37,16 @@ class Change:
             pull_requests=data.get("pull_requests") or [],
         )
 
+    @classmethod
+    def read(cls, file: Path) -> Self:
+        return cls.from_json(json.loads(file.read_text()))
+
+    def write(self, file: Path | None = None) -> str:
+        contents = json.dumps(asdict(self), indent=2, default=str) + "\n"
+        if file is not None:
+            file.write_text(contents)
+        return contents
+
 
 def _today() -> str:
     return datetime.date.today().isoformat()
@@ -62,6 +73,16 @@ class Release:
             changes=[Change.from_json(c) for c in data["changes"]],
             date=data["date"],
         )
+
+    @classmethod
+    def read(cls, file: Path) -> Self:
+        return cls.from_json(json.loads(file.read_text()))
+
+    def write(self, file: Path | None = None) -> str:
+        contents = json.dumps(asdict(self), indent=2, default=str) + "\n"
+        if file is not None:
+            file.write_text(contents)
+        return contents
 
     def __lt__(self, other: Self) -> bool:
         return self.date < other.date

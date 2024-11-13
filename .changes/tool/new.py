@@ -1,7 +1,6 @@
 # Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 # SPDX-License-Identifier: Apache-2.0
 import hashlib
-import json
 import os
 import re
 import string
@@ -94,12 +93,12 @@ def write_new_change(change: Change):
     if not NEXT_RELEASE_DIR.is_dir():
         os.makedirs(NEXT_RELEASE_DIR)
 
-    contents = json.dumps(change, indent=2, default=str) + "\n"
+    contents = change.write()
     contents_digest = hashlib.sha1(contents.encode("utf-8")).hexdigest()
     filename = f"{change.type.name.lower()}-{contents_digest}.json"
 
-    with open(NEXT_RELEASE_DIR / filename, "w") as f:
-        f.write(contents)
+    file = NEXT_RELEASE_DIR / filename
+    file.write_text(contents)
 
 
 def parse_filled_in_contents(contents: str) -> Change | None:
