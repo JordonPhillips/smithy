@@ -1,4 +1,7 @@
 {
   "type": "documentation",
-  "description": "Added a tool to generate stageable, non-conflicting changelog entries and render a changelog based on staged entries."
+  "description": "Added a tool to generate stageable, non-conflicting changelog entries and render a changelog based on staged entries.",
+  "pull_requests": [
+    "[#7](https://github.com/JordonPhillips/smithy/pull/7)"
+  ]
 }
