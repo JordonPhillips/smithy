@@ -30,9 +30,19 @@ def main() -> None:
         nargs="*",
         help="The pull request that implements the change.",
     )
+    parser.add_argument(
+        "-r",
+        "--repository",
+        help="The name of the repository, defaulting to 'smithy-lang/smithy'.",
+    )
 
     args = parser.parse_args()
-    new_change(ChangeType[args.type.upper()], args.description, args.pull_requests)
+    new_change(
+        change_type=ChangeType[args.type.upper()],
+        description=args.description,
+        pull_requests=args.pull_requests,
+        repository=args.repository,
+    )
 
 
 if __name__ == "__main__":

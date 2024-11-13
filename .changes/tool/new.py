@@ -27,28 +27,31 @@ type: {change_type}
 pull request: {pull_requests}
 
 # A brief description of the change. You can use GitHub style references to issues such
-# as "fixes #489", "boto/boto3#100", etc. These will get automatically replaced with
-# the correct link.
+# as "fixes #489", "smithy-lang/smithy#100", etc. These will get automatically replaced
+# with the correct link.
 description: {description}
 """
 
 
 def new_change(
-    change_type: ChangeType | None,
-    description: str | None,
-    pull_requests: list[str] | None,
+    change_type: ChangeType | None = None,
+    description: str | None = None,
+    pull_requests: list[str] | None = None,
+    repository: str | None = None,
 ):
     if change_type is not None and description is not None:
         change = Change(type=change_type, description=description)
         if pull_requests:
             change.pull_requests = pull_requests
     else:
+        print("Missing required parameters, prompting for what remains")
         parsed = get_values_from_editor(change_type, description, pull_requests)
         if not parsed:
             return
         change = parsed
 
-    write_new_change(change)
+    repository = repository or "smithy-lang/smithy"
+    write_new_change(change, repository)
 
 
 def get_values_from_editor(
@@ -89,9 +92,11 @@ def replace_issue_references(change: Change, repo_name: str):
         ]
 
 
-def write_new_change(change: Change):
+def write_new_change(change: Change, repo_name: str):
     if not NEXT_RELEASE_DIR.is_dir():
         os.makedirs(NEXT_RELEASE_DIR)
+
+    replace_issue_references(change, repo_name)
 
     contents = change.write()
     contents_digest = hashlib.sha1(contents.encode("utf-8")).hexdigest()
@@ -102,7 +107,6 @@ def write_new_change(change: Change):
 
 
 def parse_filled_in_contents(contents: str) -> Change | None:
-    """Parse filled in file contents and returns parsed dict."""
     if not contents.strip():
         return
 

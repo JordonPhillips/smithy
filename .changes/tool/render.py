@@ -2,7 +2,7 @@
 # SPDX-License-Identifier: Apache-2.0
 from . import RELEASES_DIR, Change, Release
 
-TITLE = "Smithy Changelog"
+TITLE = "Changelog"
 
 
 def render() -> None:

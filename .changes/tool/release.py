@@ -7,20 +7,26 @@ from . import NEXT_RELEASE_DIR, RELEASES_DIR, Change, Release
 
 
 def release(version: str, release_date: str | None) -> None:
+    print("Gathering staged changes for release")
     release_date = release_date or date.today().isoformat()
-    entries: list[Change] = []
+    changes: list[Change] = []
     for entry in NEXT_RELEASE_DIR.glob("*.json"):
-        entries.append(Change.read(entry))
+        print(f"Found staged changelog entry: {entry}")
+        changes.append(Change.read(entry))
         entry.unlink()
 
-    if not entries:
+    if not changes:
         raise ValueError(
-            "To conduct a release, there must be at least one changelog entry."
+            """\
+            To conduct a release, there must be at least one staged changelog entry \
+            in the next-release folder."""
         )
 
-    result = Release(version=version, date=release_date, changes=entries)
+    result = Release(version=version, date=release_date, changes=changes)
 
     if not RELEASES_DIR.is_dir():
         os.makedirs(RELEASES_DIR)
 
-    result.write(RELEASES_DIR / f"{version}.json")
+    release_file = RELEASES_DIR / f"{version}.json"
+    print(f"Writing combined release to {release_file}")
+    result.write(release_file)
