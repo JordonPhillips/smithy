@@ -7,6 +7,7 @@ from . import NEXT_RELEASE_DIR, RELEASES_DIR, Change, Release
 
 
 def release(version: str, release_date: str | None) -> None:
+    version = version.strip()
     print("Gathering staged changes for release")
     release_date = release_date or date.today().isoformat()
     changes: list[Change] = []
@@ -23,7 +24,7 @@ def release(version: str, release_date: str | None) -> None:
             in the next-release folder."""
         )
 
-    result = Release(version=version, date=release_date, changes=changes)
+    result = Release(version=version, date=release_date.strip(), changes=changes)
 
     if not RELEASES_DIR.is_dir():
         os.makedirs(RELEASES_DIR)
