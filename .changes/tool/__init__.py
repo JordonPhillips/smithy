@@ -13,14 +13,21 @@ RELEASES_DIR = CHANGES_DIR / "releases"
 
 
 class ChangeType(Enum):
-    FEATURE = "Features"
-    BUGFIX = "Bug Fixes"
-    DOCUMENTATION = "Documentation"
-    BREAK = "Breaking Changes"
-    OTHER = "Other"
+    FEATURE = "Features", 1
+    BUGFIX = "Bug Fixes", 2
+    DOCUMENTATION = "Documentation", 3
+    BREAK = "Breaking Changes", 0
+    OTHER = "Other", 4
+
+    def __init__(self, section_title: str, order: int) -> None:
+        self.section_title = section_title
+        self.order = order
 
     def __str__(self) -> str:
         return self.name.lower()
+
+    def __lt__(self, other: Self) -> bool:
+        return self.order < other.order
 
 
 @dataclass
@@ -64,7 +71,7 @@ class Release:
             if change.type not in result:
                 result[change.type] = []
             result[change.type].append(change)
-        return result
+        return dict(sorted(result.items()))
 
     @classmethod
     def from_json(cls, data: dict[str, Any]) -> Self:

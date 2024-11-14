@@ -10,6 +10,7 @@ def release(version: str, release_date: str | None) -> None:
     print("Gathering staged changes for release")
     release_date = release_date or date.today().isoformat()
     changes: list[Change] = []
+
     for entry in NEXT_RELEASE_DIR.glob("*.json"):
         print(f"Found staged changelog entry: {entry}")
         changes.append(Change.read(entry))
