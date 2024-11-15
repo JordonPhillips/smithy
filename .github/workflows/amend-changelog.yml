@@ -1,0 +1,19 @@
+on: pull_request
+
+jobs:
+  amend:
+      name: "Add PR links to staged changelogs"
+      runs-on: ubuntu-latest
+      steps:
+          - uses: actions/checkout@v4
+            with:
+              ref: ${{ github.head_ref }}
+              fetch-depth: 2
+
+          - uses: actions/setup-python@v5
+            with:
+              python-version: "3.13"
+
+          - name: "Amend and push any staged changelogs"
+            run: |
+              git log
