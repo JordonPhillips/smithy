@@ -3,7 +3,6 @@ on: pull_request
 jobs:
   amend:
       name: "Add PR links to staged changelogs"
-      if: github.event.pull_request.merged == true
       runs-on: ubuntu-latest
       steps:
           - uses: actions/checkout@v4
