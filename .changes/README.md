@@ -57,7 +57,7 @@ due to a lack of dependencies, developers must make use of `uv` to lint and
 format code before committing.
 
 ```sh
-> uv sync
+> uv sync --all-groups
 > uv run ruff check --fix
 > uv run ruff format
 > uv run pyright
@@ -69,6 +69,6 @@ right versions of these tools is used.
 uv can also be used to run scripts:
 
 ```sh
-> uv sync
+> uv sync --all-groups
 > uv run render
 ```

@@ -21,6 +21,9 @@ lint = [
 typing = [
     "pyright>=1.1.403"
 ]
+github = [
+    "pygithub>=2.6.1,<2.7.0"
+]
 
 [build-system]
 requires = ["uv_build>=0.8.2,<0.9.0"]
@@ -50,4 +53,3 @@ ignore = [ "T201", "S602", "S324", "S310" ]
 
 [tool.ruff.format]
 docstring-code-format = true
-
