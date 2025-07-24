@@ -20,24 +20,35 @@ jobs:
           # comment is used so that a commitable suggestion may be posted.
           pull-requests: write
         steps:
+            - name: Pull main
+              uses: actions/checkout@v4
+              with:
+                ref: main
+                path: main
+                sparse-checkout: .changes
+
             - name: Pull the PR
               uses: actions/checkout@v4
               with:
+                path: pr
                 ref: ${{ github.head_ref }}
                 repository: ${{ github.event.pull_request.head.repo.full_name }}
+                sparse-checkout: .changes/next-release
 
             - name: Install Python
               uses: actions/setup-python@v5
               with:
-                python-version-file: ".changes/pyproject.toml"
+                python-version-file: "main/.changes/pyproject.toml"
 
             - name: Install uv
               uses: astral-sh/setup-uv@v6
               with:
-                version-file: ".changes/pyproject.toml"
+                version-file: "main/.changes/pyproject.toml"
 
             - name: Install changelog tool
-              run: cd .changes && uv sync --locked --all-extras --all-groups --dev
+              run: |
+                cd main/.changes
+                uv sync --locked --all-extras --all-groups --dev
 
             - name: Run validation script
               env:
@@ -46,5 +57,8 @@ jobs:
                 PR_TITLE: ${{ github.event.pull_request.title }}
               run: |
                 git fetch origin ${{ github.base_ref }}
-                cd .changes
-                uv run amend --review-comment -n ${{ github.event.pull_request.number }}
+                cd main/.changes
+                uv run amend \
+                  --review-comment \
+                  --pull-request-number ${{ github.event.pull_request.number }} \
+                  --repository-dir ${{ github.workspace }}/pr
