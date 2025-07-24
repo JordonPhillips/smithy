@@ -1,0 +1,50 @@
+name: changelog
+on: pull_request_target
+jobs:
+    amend:
+        name: "Validate staged changelogs"
+        runs-on: ubuntu-latest
+        permissions:
+          # Used to pull the PR and detect changes. This is needed to see
+          # whether the PR introduced a staged changelog entry or not as
+          # well as to suggest amending the changelog entry if necessary.
+          contents: read
+
+          # Used to write issue comments. This is done when there is no staged
+          # changelog at all. The comment will include instructions on how to
+          # create the changelog entry.
+          issues: write
+
+          # Used to write PR comments. This is done when there is a staged
+          # changelog introduced by the PR, but it lacks a PR link. A PR
+          # comment is used so that a commitable suggestion may be posted.
+          pull-requests: write
+        steps:
+            - name: Pull the PR
+              uses: actions/checkout@v4
+              with:
+                ref: ${{ github.head_ref }}
+                repository: ${{ github.event.pull_request.head.repo.full_name }}
+
+            - name: Install Python
+              uses: actions/setup-python@v5
+              with:
+                python-version-file: ".changes/pyproject.toml"
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v6
+              with:
+                version-file: ".changes/pyproject.toml"
+
+            - name: Install changelog tool
+              run: cd .changes && uv sync --locked --all-extras --all-groups --dev
+
+            - name: Run validation script
+              env:
+                GITHUB_TOKEN: ${{ github.token }}
+                TARGET_SHA: ${{ github.event.pull_request.head.sha }}
+                PR_TITLE: ${{ github.event.pull_request.title }}
+              run: |
+                git fetch origin ${{ github.base_ref }}
+                cd .changes
+                uv run amend --review-comment -n ${{ github.event.pull_request.number }}
