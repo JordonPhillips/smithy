@@ -81,7 +81,6 @@ def main() -> None:
     if HAS_PYGITHUB:
         enable_console_debug_logging()
 
-    print(f"YOU CAN'T STOP ME {args.github_token}")
     amend(
         base=args.base,
         repository=args.repository,
@@ -182,7 +181,7 @@ def post_review_comment(
     allow_duplicate: bool = False,
     github_token: str | None = None,
 ) -> None:
-    gh = _assert_pygithub()
+    gh = _assert_pygithub(github_token)
     print(f"Fetching repository: {repository}")
     repo = gh.get_repo(repository)
 
@@ -222,7 +221,7 @@ def post_comment(
     allow_duplicate: bool = False,
     github_token: str | None = None,
 ) -> None:
-    gh = _assert_pygithub()
+    gh = _assert_pygithub(github_token)
     print(f"Fetching repository: {repository}")
     repo = gh.get_repo(repository)
 
