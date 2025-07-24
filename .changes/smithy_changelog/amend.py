@@ -165,7 +165,10 @@ def post_review_comment(
     allow_duplicate: bool = False,
 ) -> None:
     gh = _assert_pygithub()
+    print(f"Fetching repository: {repository}")
     repo = gh.get_repo(repository)
+
+    print(f"Fetching pr: {pr_number}")
     pr = repo.get_pull(int(pr_number))
 
     commit_sha = os.environ.get("TARGET_SHA")
@@ -176,11 +179,13 @@ def post_review_comment(
 
     path = str(file.relative_to(REPO_ROOT))
     if not allow_duplicate:
+        print("Fetching existing review comments to check for duplicates.")
         for existing_comment in pr.get_review_comments():
             if existing_comment.body == comment and existing_comment.path == path:
                 print("Review comment already posted, skipping duplicate.")
                 return
 
+    print("Creating review comment.")
     pr.create_review_comment(
         body=comment,
         commit=repo.get_commit(sha=commit_sha),
@@ -190,7 +195,6 @@ def post_review_comment(
         side="RIGHT" if start_line is not None else NotSet,
         start_side="RIGHT" if end_line is not None else NotSet,
     )
-    pass
 
 
 def post_comment(
@@ -200,14 +204,19 @@ def post_comment(
     allow_duplicate: bool = False,
 ) -> None:
     gh = _assert_pygithub()
+    print(f"Fetching repository: {repository}")
     repo = gh.get_repo(repository)
+
+    print(f"Fetching pr as issue: {pr_number}")
     pr = repo.get_issue(int(pr_number))
     if not allow_duplicate:
+        print("Fetching existing comments to check for duplicates.")
         for existing_comment in pr.get_comments():
             if existing_comment.body == comment:
                 print("Comment already posted, skipping duplicate.")
                 return
 
+    print("Creating comment.")
     pr.create_comment(body=comment)
 
 
