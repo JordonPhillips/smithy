@@ -55,4 +55,7 @@ jobs:
               run: |
                 git fetch origin ${{ github.base_ref }}
                 cd .changes
-                uv run amend --review-comment -n ${{ github.event.pull_request.number }}
+                uv run amend \
+                  --review-comment \
+                  --pull-request-number ${{ github.event.pull_request.number }} \
+                  --github-token ${{ github.token }}

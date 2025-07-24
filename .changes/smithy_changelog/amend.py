@@ -67,6 +67,15 @@ def main() -> None:
             Instead of amending the local files on disk, post a review comment on the \
             PR. This will also post a normal comment if no changelog entry is found.""",
     )
+    parser.add_argument(
+        "-t",
+        "--github-token",
+        default=GITHUB_TOKEN,
+        help=(
+            "The GitHub token used to authenticate requests. Defaults to "
+            "the value of the GITHUB_TOKEN environment variable."
+        )
+    )
 
     args = parser.parse_args()
     if HAS_PYGITHUB:
@@ -76,6 +85,7 @@ def main() -> None:
         repository=args.repository,
         pr_number=args.pull_request_number,
         review_comment=args.review_comment,
+        github_token=args.github_token
     )
 
 
@@ -85,6 +95,7 @@ def amend(
     repository: str | None = None,
     base: str | None = None,
     review_comment: bool = False,
+    github_token: str | None = None,
 ) -> None:
     repository = repository or os.environ.get("GITHUB_REPOSITORY", DEFAULT_REPO)
     pr_ref = f"[#{pr_number}]({GITHUB_URL}/{repository}/pull/{pr_number})"
@@ -109,6 +120,7 @@ def amend(
             repository=repository,
             pr_number=pr_number,
             comment=comment,
+            github_token=github_token,
         )
 
     for change_file, change in changes.items():
@@ -131,6 +143,7 @@ def amend(
                     file=change_file,
                     start_line=1,
                     end_line=len(change_file.read_text().splitlines()),
+                    github_token=github_token,
                 )
             else:
                 print("Writing amended change to disk.")
@@ -165,6 +178,7 @@ def post_review_comment(
     start_line: int | None = None,
     end_line: int | None = None,
     allow_duplicate: bool = False,
+    github_token: str | None = None,
 ) -> None:
     gh = _assert_pygithub()
     print(f"Fetching repository: {repository}")
@@ -204,6 +218,7 @@ def post_comment(
     pr_number: str,
     comment: str,
     allow_duplicate: bool = False,
+    github_token: str | None = None,
 ) -> None:
     gh = _assert_pygithub()
     print(f"Fetching repository: {repository}")
@@ -222,7 +237,7 @@ def post_comment(
     pr.create_comment(body=comment)
 
 
-def _assert_pygithub() -> "Github":
+def _assert_pygithub(github_token: str | None = None) -> "Github":
     if not HAS_PYGITHUB:
         raise Exception(
             "PyGitHub is required to perform GitHub actions.Please install the "
@@ -230,7 +245,7 @@ def _assert_pygithub() -> "Github":
             "the dependency is available."
         )
 
-    if not GITHUB_TOKEN:
-        raise Exception("GITHUB_TOKEN environment variable was not set.")
+    if not github_token:
+        raise Exception("GitHub token was not set.")
 
-    return Github(auth=Auth.Token(GITHUB_TOKEN), base_url=GITHUB_URL)
+    return Github(auth=Auth.Token(github_token), base_url=GITHUB_URL)
