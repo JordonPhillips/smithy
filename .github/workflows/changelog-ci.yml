@@ -39,6 +39,14 @@ jobs:
             - name: Install changelog tool
               run: cd .changes && uv sync --locked --all-extras --all-groups --dev
 
+            - name: Test auth manual-like
+              run: |
+                curl -L \
+                  -H "Accept: application/vnd.github+json" \
+                  -H "Authorization: Bearer ${{ github.token }}" \
+                  -H "X-GitHub-Api-Version: 2022-11-28" \
+                  https://api.github.com/repos/JordonPhillips/smithy
+
             - name: Run validation script
               env:
                 GITHUB_TOKEN: ${{ github.token }}
