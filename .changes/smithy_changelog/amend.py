@@ -7,6 +7,8 @@ from pathlib import Path
 from typing import TYPE_CHECKING
 
 from . import REPO_ROOT, Change
+from .gh import post_comment as pc
+from .gh import post_review_comment as prc
 
 DEFAULT_REPO = "smithy-lang/smithy"
 GITHUB_URL = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
@@ -118,11 +120,11 @@ def amend(
             f"{GITHUB_URL}/{repository}/tree/main/.changes/README) or run "
             "`./.changes/new-change -h` for more information."
         )
-        post_comment(
+        pc(
             repository=repository,
             pr_number=pr_number,
             comment=comment,
-            github_token=github_token,
+            #github_token=github_token,
         )
 
     for change_file, change in changes.items():
@@ -138,14 +140,14 @@ def amend(
                     "with this PR.\n\n"
                     f"```suggestion\n{change.write().strip()}\n```"
                 )
-                post_review_comment(
+                prc(
                     repository=repository,
                     pr_number=pr_number,
                     comment=comment,
                     file=change_file,
                     start_line=1,
                     end_line=len(change_file.read_text().splitlines()),
-                    github_token=github_token,
+                    #github_token=github_token,
                 )
             else:
                 print("Writing amended change to disk.")
