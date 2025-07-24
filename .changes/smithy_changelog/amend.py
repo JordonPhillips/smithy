@@ -80,6 +80,8 @@ def main() -> None:
     args = parser.parse_args()
     if HAS_PYGITHUB:
         enable_console_debug_logging()
+
+    print(f"YOU CAN'T STOP ME {args.github_token}")
     amend(
         base=args.base,
         repository=args.repository,
