@@ -13,7 +13,7 @@ GITHUB_URL = os.environ.get("GITHUB_SERVER_URL", "https://github.com")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 
 try:
-    from github import Github, Auth
+    from github import Github, Auth, enable_console_debug_logging
     from github.GithubObject import NotSet
 
     HAS_PYGITHUB = True
@@ -69,6 +69,8 @@ def main() -> None:
     )
 
     args = parser.parse_args()
+    if HAS_PYGITHUB:
+        enable_console_debug_logging()
     amend(
         base=args.base,
         repository=args.repository,
