@@ -16,8 +16,6 @@ from typing import Literal, NotRequired, Required, Self, TypedDict
 from urllib import request
 from urllib.error import HTTPError
 
-from . import REPO_ROOT
-
 GITHUB_API_URL = os.environ.get("GITHUB_API_URL", "https://api.github.com")
 GITHUB_TOKEN = os.environ.get("GITHUB_TOKEN")
 NEXT_PAGE = re.compile(r'(?<=<)([\S]*)(?=>; rel="next")', flags=re.IGNORECASE)
@@ -30,6 +28,7 @@ def post_review_comment(
     pr_number: str,
     comment: str,
     file: Path,
+    repository_dir: Path,
     start_line: int | None = None,
     end_line: int | None = None,
     allow_duplicate: bool = False,
@@ -40,7 +39,7 @@ def post_review_comment(
             "The TARGET_SHA environment variable must be set to post review comments."
         )
 
-    path = str(file.relative_to(REPO_ROOT))
+    path = str(file.relative_to(repository_dir))
 
     if not allow_duplicate:
         for existing_comment in get_review_comments(repository, pr_number):

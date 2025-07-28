@@ -10,7 +10,6 @@ from typing import Any, Self
 CHANGES_DIR = Path(__file__).absolute().parent.parent
 NEXT_RELEASE_DIR = CHANGES_DIR / "next-release"
 RELEASES_DIR = CHANGES_DIR / "releases"
-REPO_ROOT = CHANGES_DIR.parent
 
 
 class ChangeType(Enum):

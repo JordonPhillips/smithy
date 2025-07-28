@@ -3,9 +3,10 @@
 import os
 import subprocess
 from argparse import ArgumentParser
+from contextlib import chdir
 from pathlib import Path
 
-from . import REPO_ROOT, Change
+from . import Change
 from .github import post_comment, post_review_comment
 
 DEFAULT_REPO = "smithy-lang/smithy"
@@ -22,7 +23,24 @@ def main() -> None:
 
             This only checks entries that have been staged in the current branch, \
             using git to get a list of newly introduced files. If the entry already \
-            has one or more associated pull requests, it is not amended.""",
+            has one or more associated pull requests, it is not amended. \
+
+            For the sake of security, this MUST NOT be invoked from a PR's branch. \
+            It MUST instead be run from the main branch and target a separately \
+            checked out copy of the PR's branch.""",
+    )
+    parser.add_argument(
+        "-d",
+        "--repository-dir",
+        type=lambda p: Path(p).absolute(),
+        required=True,
+        help=(
+            "The directory that contains the version of the repository to scan for "
+            "changes. This SHOULD NOT be the same directory that this command "
+            "is being run from because that implies the PR copy of this code is "
+            "being run, which would be a massive security issues. Instead, this "
+            "should target a seaparate directory that contains the PR copy."
+        ),
     )
     parser.add_argument(
         "-n",
@@ -57,6 +75,7 @@ def main() -> None:
     args = parser.parse_args()
     amend(
         base=args.base,
+        repository_dir=args.repository_dir,
         repository=args.repository,
         pr_number=args.pull_request_number,
         review_comment=args.review_comment,
@@ -66,6 +85,7 @@ def main() -> None:
 def amend(
     *,
     pr_number: str,
+    repository_dir: Path,
     repository: str | None = None,
     base: str | None = None,
     review_comment: bool = False,
@@ -73,7 +93,7 @@ def amend(
     repository = repository or os.environ.get("GITHUB_REPOSITORY", DEFAULT_REPO)
     pr_ref = f"[#{pr_number}]({GITHUB_URL}/{repository}/pull/{pr_number})"
 
-    changes = get_new_changes(base)
+    changes = get_new_changes(repository_dir=repository_dir, base=base)
     if not changes and review_comment:
         print("No changelog found, adding reminder comment.")
         description = os.environ.get("PR_TITLE", "Example description").replace(
@@ -110,6 +130,7 @@ def amend(
                 )
                 post_review_comment(
                     repository=repository,
+                    repository_dir=repository_dir,
                     pr_number=pr_number,
                     comment=comment,
                     file=change_file,
@@ -121,21 +142,25 @@ def amend(
                 change.write(change_file)
 
 
-def get_new_changes(base: str | None) -> dict[Path, Change]:
+def get_new_changes(*, repository_dir: Path, base: str | None) -> dict[Path, Change]:
     base = base or os.environ.get("GITHUB_BASE_REF", "main")
-    print(f"Running a diff against base branch: {base}")
-    result = subprocess.run(
-        f"git diff origin/{base} --name-only",
-        check=True,
-        shell=True,
-        capture_output=True,
-    )
+    print(f"Running a diff against base branch: {base} in directory {repository_dir}")
 
-    new_changes: dict[Path, Change] = {}
-    for changed_file in result.stdout.decode("utf-8").splitlines():
-        stripped = changed_file.strip()
-        if stripped.startswith(".changes/next-release") and stripped.endswith(".json"):
-            file = REPO_ROOT / stripped
-            print(f"Discovered newly staged changelog entry: {file}")
-            new_changes[file] = Change.read(file)
+    with chdir(repository_dir):
+        result = subprocess.run(
+            f"git diff origin/{base} --name-only",
+            check=True,
+            shell=True,
+            capture_output=True,
+        )
+
+        new_changes: dict[Path, Change] = {}
+        for changed_file in result.stdout.decode("utf-8").splitlines():
+            stripped = changed_file.strip()
+            if stripped.startswith(".changes/next-release") and stripped.endswith(
+                ".json"
+            ):
+                file = repository_dir / stripped
+                print(f"Discovered newly staged changelog entry: {file}")
+                new_changes[file] = Change.read(file)
     return new_changes
