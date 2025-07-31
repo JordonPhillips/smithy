@@ -141,7 +141,7 @@ class Version:
         The file name is expected to be in the form `major.minor.patch.extention`.
         """
         parts = path.name.split(".", 3)
-        if len(parts) != 3:
+        if len(parts) != 4:
             raise Exception(
                 f"Invalid version. Expected `major.minor.patch.extension` "
                 f"(e.g. `1.2.3.json`), but found: {path.name}"
