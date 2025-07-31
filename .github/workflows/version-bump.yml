@@ -60,5 +60,4 @@ jobs:
                 git switch -c "bump-$(cat VERSION)"
                 git add .changes/next-release .changes/releases VERSION CHANGELOG.md
                 git commit -m "Bump version to $(cat VERSION)"
-                git push origin "bump-$(cat VERSION)"
                 gh pr create --base main --title "Bump version to $(cat VERSION)"
