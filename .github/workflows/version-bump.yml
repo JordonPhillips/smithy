@@ -1,0 +1,62 @@
+name: version-bump
+on:
+    workflow_dispatch:
+        inputs:
+            bump_type:
+                description: The type of version bump to perform. The default type is
+                    based on the staged features.
+                type: choice
+                options:
+                    - minor
+                    - patch
+jobs:
+    # Bumps the Smithy version based on pending features and
+    # updates the changelog.
+    bump:
+        name: "Bump version and update changelog"
+        runs-on: ubuntu-latest
+        permissions:
+            # Used to create a pull request.
+            pull-requests: write
+        steps:
+            - name: Pull repository
+              uses: actions/checkout@v4
+
+            - name: Install Python
+              uses: actions/setup-python@v5
+              with:
+                python-version-file: ".changes/pyproject.toml"
+
+            - name: Install uv
+              uses: astral-sh/setup-uv@v6
+              with:
+                version-file: ".changes/pyproject.toml"
+
+            - name: Install changelog tool
+              run: |
+                cd .changes
+                uv sync --locked --all-extras --all-groups
+
+            - name: Update changelog and bump version with selected type
+              if: ${{ inputs.bump_type }}
+              run: |
+                cd .changes
+                uv run release -b ${{ inputs.bump_type }}
+
+            - name: Update changelog and bump version
+              if: ${{ ! inputs.bump_type }}
+              run: |
+                cd .changes
+                uv run release
+
+            - name: Push updates
+              env:
+                GITHUB_TOKEN: ${{ github.token }}
+              run: |
+                git config user.name 'smithy-automation'
+                git config user.email 'github-smithy-automation@amazon.com'
+                git switch -c "bump-$(cat VERSION)"
+                git add .changes/next-release .changes/releases VERSION CHANGELOG.md
+                git commit -m "Bump version to $(cat VERSION)"
+                git push origin "bump-$(cat VERSION)"
+                gh pr create --base main --title "Bump version to $(cat VERSION)"
