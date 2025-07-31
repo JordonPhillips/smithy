@@ -224,7 +224,12 @@ class Release:
 
         :returns: The JSON representation of the release as a string.
         """
-        contents = json.dumps(asdict(self), indent=2, default=str) + "\n"
+        dict_contents: dict[str, Any] = {
+            "version": str(self.version),
+            "date": self.date,
+            "changes": [asdict(c) for c in self.changes]
+        }
+        contents = json.dumps(dict_contents, indent=2, default=str) + "\n"
         if file is not None:
             file.write_text(contents)
         return contents
