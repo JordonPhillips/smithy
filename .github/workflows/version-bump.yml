@@ -40,13 +40,13 @@ jobs:
                 uv sync --locked --all-extras --all-groups
 
             - name: Update changelog and bump version with selected type
-              if: ${{ inputs.bump_type == 'default' }}
+              if: ${{ inputs.bump_type != 'default' }}
               run: |
                 cd .changes
                 uv run release -b ${{ inputs.bump_type }}
 
             - name: Update changelog and bump version
-              if: ${{ inputs.bump_type != 'default' }}
+              if: ${{ inputs.bump_type == 'default' }}
               run: |
                 cd .changes
                 uv run release
