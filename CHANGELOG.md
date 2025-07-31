@@ -1,5 +1,12 @@
 # Smithy Changelog
 
+## 1.62.0 (2025-07-31)
+
+### Features
+
+- feature ([#11](https://github.com/smithy-lang/smithy/issues/11))
+- feature ([#10](https://github.com/smithy-lang/smithy/issues/10))
+
 ## 1.61.0 (2025-07-23)
 
 ### Features
@@ -4020,4 +4027,3 @@ components of the documentation will have changed.
   ([#162](https://github.com/awslabs/smithy/pull/162))
 - Allow model assembling from symlink model files / directory
   ([#163](https://github.com/awslabs/smithy/pull/163))
-

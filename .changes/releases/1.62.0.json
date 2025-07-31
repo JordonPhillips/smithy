@@ -1,0 +1,20 @@
+{
+  "version": "1.62.0",
+  "date": "2025-07-31",
+  "changes": [
+    {
+      "type": "feature",
+      "description": "feature",
+      "pull_requests": [
+        "[#11](https://github.com/smithy-lang/smithy/issues/11)"
+      ]
+    },
+    {
+      "type": "feature",
+      "description": "feature",
+      "pull_requests": [
+        "[#10](https://github.com/smithy-lang/smithy/issues/10)"
+      ]
+    }
+  ]
+}
