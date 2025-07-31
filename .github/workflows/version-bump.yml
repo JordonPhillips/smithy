@@ -62,5 +62,5 @@ jobs:
                 git commit -m "Bump version to $(cat VERSION)"
                 gh pr create \
                     --base main \
-                    --title "Bump version to $(cat VERSION)"
+                    --title "Bump version to $(cat VERSION)" \
                     --body "Bump version to $(cat VERSION)"
